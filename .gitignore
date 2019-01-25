@@ -50,3 +50,19 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# Code::Blocks
+*.layout
+*.depend
+
+*.mk
+*.pp
+*.lst
+*.xml
+*.prefs
+
+# MCU projects
+Tiny2.X/*
+tiny2_e2studio_arm/*
+
+

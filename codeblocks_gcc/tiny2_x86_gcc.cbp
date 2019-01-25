@@ -1,0 +1,687 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="tiny2_x86_gcc" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/tiny2_x86_gcc" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option object_output="obj/Debug/" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/tiny2_x86_gcc" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option object_output="obj/Release/" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-D__TOOL_IS_GCC_ARM__" />
+			<Add directory="../private" />
+			<Add directory="../public" />
+			<Add directory="../GenericTypes" />
+			<Add directory="../arith_incl" />
+		</Compiler>
+		<Unit filename="../private/libs_support.h" />
+		<Unit filename="../private/txtfile_hide.h" />
+		<Unit filename="../public/actuator.h" />
+		<Unit filename="../public/bq.h" />
+		<Unit filename="../public/cal.h" />
+		<Unit filename="../public/calv.h" />
+		<Unit filename="../public/class.h" />
+		<Unit filename="../public/classes.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../public/common.h" />
+		<Unit filename="../public/commsq.h" />
+		<Unit filename="../public/errcode.h" />
+		<Unit filename="../public/flash_basic.h" />
+		<Unit filename="../public/flashblk.h" />
+		<Unit filename="../public/flashblock.h" />
+		<Unit filename="../public/hostcomms.h" />
+		<Unit filename="../public/inpin.h" />
+		<Unit filename="../public/lineedit.h" />
+		<Unit filename="../public/links.h" />
+		<Unit filename="../public/matrix_orbital_LK_lcd.h" />
+		<Unit filename="../public/nano_cal.h" />
+		<Unit filename="../public/nano_inpin.h" />
+		<Unit filename="../public/nano_outpin.h" />
+		<Unit filename="../public/nano_statem.h" />
+		<Unit filename="../public/outpin.h" />
+		<Unit filename="../public/outport.h" />
+		<Unit filename="../public/romstring.h" />
+		<Unit filename="../public/script.h" />
+		<Unit filename="../public/sensor.h" />
+		<Unit filename="../public/servo.h" />
+		<Unit filename="../public/std_nvaddr.h" />
+		<Unit filename="../public/svc.h" />
+		<Unit filename="../public/sysobj.h" />
+		<Unit filename="../public/systime.h" />
+		<Unit filename="../public/timers.h" />
+		<Unit filename="../public/tiny1util.h" />
+		<Unit filename="../public/tiny2_util.h" />
+		<Unit filename="../public/tiny_statem.h" />
+		<Unit filename="../public/tty_ui.h" />
+		<Unit filename="../public/txtfile.h" />
+		<Unit filename="../public/util.h" />
+		<Unit filename="../public/vec.h" />
+		<Unit filename="../public/wordlist.h" />
+		<Unit filename="../src/actuator/actuator_init.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/actuator/actuator_read.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/actuator/actuator_reset.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/actuator/actuator_wr_always.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/actuator/actuator_write.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/cal/cal_increment.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/cal/cal_init.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/cal/cal_read.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/cal/cal_read_stored.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/cal/cal_recall.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/cal/cal_store.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/cal/cal_to_default.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/cal/cal_write.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/cal/cal_write_no_link.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/class/classquery.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/class/get_class.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/class/get_class_name.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/class/obj_isascalar.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/class/obj_isavector.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/class/obj_iswritable.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/class/obj_iswritablescalar.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/class/obj_iswritablevector.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/classes/actuator.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/classes/cal.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/classes/calv.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/classes/inpin.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/classes/outpin.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/classes/outport.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/classes/readscalar.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/classes/scalar.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/classes/sensor.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/classes/servo.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/classes/svc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/classes/vector.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/classes/writescalar.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/comms/comms_printf_const_fmt.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/comms/comms_wrbuf.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/comms/comms_wrline.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/comms/comms_wrstr.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/comms/commsq.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/comms/commsq_txbytesfree.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/comms/printbuffer.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/flash_ram/flash_ram_read.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/flash_ram/flash_ram_write.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/flash_ram/flash_ram_write_all.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/flashblk/flashblk.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/flashblk/flashblk_bytesfree.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/flashblk/flashblk_delete.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/flashblk/flashblk_getfreehdl.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/flashblk/flashblk_matchvar.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/flashblk/flashblk_var_exists.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/flashblk/flashblk_varcnt.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/flashblk_neq/flashblk.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/flashblk_neq/flashblk_bytesfree.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/flashblk_neq/flashblk_delete.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/flashblk_neq/flashblk_getfreehdl.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/flashblk_neq/flashblk_matchvar.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/flashblk_neq/flashblk_var_exists.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/flashblk_neq/flashblk_varcnt.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/flashblk_tiny/flashblk_tiny.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/flashblock/flashblock_read.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/flashblock/flashblock_write.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/flashblock/flashblock_write_all.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/links/links.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/nano_cal/nano_cal_increment.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/nano_cal/nano_cal_iniside_limits.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/nano_cal/nano_cal_init.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/nano_cal/nano_cal_read.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/nano_cal/nano_cal_read_stored.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/nano_cal/nano_cal_recall.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/nano_cal/nano_cal_store.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/nano_cal/nano_cal_to_default.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/nano_cal/nano_cal_write.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/nano_inpin/nano_inpin.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/nano_outpin/nano_outpin_init.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/nano_outpin/nano_outpin_priv.h" />
+		<Unit filename="../src/nano_outpin/nano_outpin_private.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/nano_outpin/nano_outpin_read.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/nano_outpin/nano_outpin_read_int.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/nano_outpin/nano_outpin_reset.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/nano_outpin/nano_outpin_toggle.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/nano_outpin/nano_outpin_update.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/nano_outpin/nano_outpin_write.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/nano_outpin/nano_outpin_write_int.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/nano_statem/nano_statem_NumEvents.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/nano_statem/nano_statem_execute.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/nano_statem/nano_statem_get_state.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/nano_statem/nano_statem_getevent.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/nano_statem/nano_statem_getmode.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/nano_statem/nano_statem_init_list.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/nano_statem/nano_statem_restart.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/nano_statem/nano_statem_run_list.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/nano_statem/nano_statem_runstop.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/nano_statem/nano_statem_sendevent.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/nano_statem/nano_statem_setstate.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/nano_statem/nano_statem_updateTimers.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/nano_statem/nano_statem_zero_timers.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/queues/bq.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/queues/bq_free.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/queues/bq_write.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/statem/tiny_statem_execute.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/statem/tiny_statem_get_state.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/statem/tiny_statem_getevent.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/statem/tiny_statem_getmode.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/statem/tiny_statem_list.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/statem/tiny_statem_numevents.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/statem/tiny_statem_restart.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/statem/tiny_statem_runstop.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/statem/tiny_statem_sendevent.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/statem/tiny_statem_set_get_state.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/statem/tiny_statem_setstate.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/statem/tiny_statem_since_new_state.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/sysobj/get_obj_base.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/sysobj/get_obj_by_class.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/sysobj/get_obj_by_idx.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/sysobj/get_obj_io.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/sysobj/get_obj_io_c.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/sysobj/get_obj_name.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/sysobj/getobj.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/sysobj/getobj_c.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/sysobj/makeobjs.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/systime/systime.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/timers/timer_run.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/timers/timer_run_repeat.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/timers/timer_run_repeat_noparm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/timers/timer_run_short.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/trim_lcd/Matrix_Orbital_LK_LCD.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/trim_lcd/trim_menu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/txtfile/txtfile_GetS16_atIdx.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/txtfile/txtfile_LegalBank_msgifnot.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/txtfile/txtfile_com.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/txtfile/txtfile_getS16_atptr.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/txtfile/txtfile_isa_number_store.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/txtfile/txtfile_list.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/txtfile/txtfile_number_start.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/txtfile/txtfile_number_store_cnt.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/txtfile/txtfile_send_timeout.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/txtfile/txtfile_setup_script_write.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/txtfile/txtfile_setup_write.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/txtfile/txtfile_wrch.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/txtfile/txtfile_wrch_num.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/ui/Thread_ui.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/ui/actuator_ui.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/ui/cal_ui.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/ui/calv_ui.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/ui/compare/compare.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/ui/compare/compare_novec.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/ui/compare/compare_vec.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/ui/echo_ui.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/ui/expr.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/ui/flashblk_ui.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/ui/help_ui.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/ui/inpin_ui.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/ui/lineedit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/ui/listobj_ui.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/ui/outpin_ui.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/ui/outport_ui.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/ui/quiet_ui.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/ui/read_ui.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/ui/script.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/ui/sensor_ui.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/ui/servo_ui.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/ui/support/ui_getIntFromObj.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/ui/support/ui_getscalararg.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/ui/support/ui_printscalar.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/ui/support/ui_printvec.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/ui/support/ui_printvector.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/ui/support/ui_sprint_scalar.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/ui/support/ui_sprint_scalar_object.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/ui/support/ui_support.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/ui/svc_ui.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/ui/tty_printf.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/ui/tty_ui.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/ui/txtfile_num_ui.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/ui/txtfile_ui.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/ui/ui_getIntFromObj.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/ui/write_ui.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/wordlist/romstring.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/wordlist/romstring_b.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/wordlist/str_1st_word_has_char.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/wordlist/str_1st_words_match.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/wordlist/str_1st_words_match_vc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/wordlist/str_copy_nth_word.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/wordlist/str_delete.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/wordlist/str_end_of_word_list.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/wordlist/str_find_word.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/wordlist/str_find_word_cc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/wordlist/str_find_word_vc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/wordlist/str_get_end_word.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/wordlist/str_get_nth_word.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/wordlist/str_insert.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/wordlist/str_replace.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/wordlist/str_word_char_cnt.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/wordlist/str_word_cnt.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/wordlist/str_word_delimiter.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/wordlist/str_word_in_str.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/wordlist/str_words_in_str.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
