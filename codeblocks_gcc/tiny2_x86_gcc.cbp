@@ -614,66 +614,6 @@
 		<Unit filename="../src/ui/write_ui.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="../src/wordlist/romstring.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../src/wordlist/romstring_b.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../src/wordlist/str_1st_word_has_char.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../src/wordlist/str_1st_words_match.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../src/wordlist/str_1st_words_match_vc.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../src/wordlist/str_copy_nth_word.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../src/wordlist/str_delete.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../src/wordlist/str_end_of_word_list.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../src/wordlist/str_find_word.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../src/wordlist/str_find_word_cc.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../src/wordlist/str_find_word_vc.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../src/wordlist/str_get_end_word.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../src/wordlist/str_get_nth_word.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../src/wordlist/str_insert.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../src/wordlist/str_replace.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../src/wordlist/str_word_char_cnt.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../src/wordlist/str_word_cnt.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../src/wordlist/str_word_delimiter.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../src/wordlist/str_word_in_str.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../src/wordlist/str_words_in_str.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
