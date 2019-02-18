@@ -12,6 +12,8 @@
 #ifndef LIBS_SUPPORT_H
 #define LIBS_SUPPORT_H
 
+#include "GenericTypeDefs.h"		// Redirect to typedefs
+
 /* *************************** CONSTRUKSHUN ZONE ***************
 
     Right now the Tiny2_ lib is being built for Cortexm0+ only so build options below are
@@ -108,7 +110,7 @@
    #include <stdio.h>
 #endif
 
-/* ------------------------ Linker controls ------------------------------ 
+/* ------------------------ Linker controls ------------------------------
 
    For the library enable everything.
 */
