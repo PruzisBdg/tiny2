@@ -65,4 +65,8 @@ dkms.conf
 Tiny2.X/*
 tiny2_e2studio_arm/*
 
-
+# unit test coverage files.
+*.gcda
+*.gcno
+# gcovr results (for now)
+gcovr*.html
