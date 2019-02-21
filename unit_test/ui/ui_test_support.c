@@ -33,6 +33,7 @@ PUBLIC U8 const * OStream_Get(void)
 
 // =============================== ui needs these ==============================
 
+#if 0
 PUBLIC U8 Comms_PutChar( U8 ch ) {
    if(os.put < _OStreamBufSize-1) {
       os.buf[os.put++] = ch;
@@ -40,5 +41,11 @@ PUBLIC U8 Comms_PutChar( U8 ch ) {
    else {
       return 0; }
 }
+#else
+PUBLIC U8 Comms_PutChar( U8 ch ) {
+   printf("%c", ch);
+}
+
+#endif
 
 // ----------------------------------------- eof --------------------------------------------
