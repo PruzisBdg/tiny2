@@ -43,9 +43,17 @@
 				<Option output="tiny2_x86_gcc" prefix_auto="1" extension_auto="1" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Compiler>
+					<Add directory="../unit_test/ui" />
+				</Compiler>
 				<Linker>
 					<Add library="bin/Debug/libtiny2_x86_gcc.a" />
 				</Linker>
+			</Target>
+			<Target title="WinGUI">
+				<Option output="tiny2_x86_gcc_wingui" prefix_auto="1" extension_auto="1" />
+				<Option type="0" />
+				<Option compiler="gcc" />
 			</Target>
 		</Build>
 		<Compiler>
@@ -1159,6 +1167,9 @@
 			<envvars />
 			<debugger />
 			<lib_finder disable_auto="1" />
+			<wxsmith version="1">
+				<gui name="wxWidgets" src="" main="" init_handlers="necessary" language="CPP" />
+			</wxsmith>
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>
