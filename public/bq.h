@@ -34,14 +34,14 @@
       #define bq_rRAMSPACE IDATA          /* register version - for Z8                          */
       #define bq_IOSPACE   IDATA          /* to read and write to the queue                     */
    #else
-      #define bq_MEMSPACE            /* for the queue itself                               */
-      #define bq_RAMSPACE            /* for RAM used by the queue                          */
-      #define bq_rRAMSPACE          /* register version - for Z8                          */
-      #define bq_IOSPACE             /* to read and write to the queue                     */
+      #define bq_MEMSPACE                 /* for the queue itself                               */
+      #define bq_RAMSPACE                 /* for RAM used by the queue                          */
+      #define bq_rRAMSPACE                /* register version - for Z8                          */
+      #define bq_IOSPACE                  /* to read and write to the queue                     */
    #endif
 #endif
 
-typedef struct 
+typedef struct
 {
    bQ_T_MsgCnt        cnt;          /* number of messages in queue                        */
    bQ_T_MsgCnt        qSize;        /* in messages (from Cfg)                             */
@@ -53,30 +53,32 @@ typedef struct
 } bq_S;
 
 
-/* ------------------------------ Interface --------------------------------- 
+/* ------------------------------ Interface ---------------------------------
 
    Note that normally the creator/user of a bQ_ will known the queue block size so,
-   for bQ_Read(), there is no strict need to return the number of bytes read; a 
-   TRUE/FALSE would do. However the uint return is used to allow bQ_'s to be used 
+   for bQ_Read(), there is no strict need to return the number of bytes read; a
+   TRUE/FALSE would do. However the uint return is used to allow bQ_'s to be used
    interchangeably with variable length queues ( VQueues, vq.c ).
 */
 
 PUBLIC BOOLEAN      bQ_Init(  bq_S bq_MEMSPACE *bq, U8 bq_RAMSPACE *ram, U8 qSize, U8 dataSize );
 PUBLIC BOOLEAN      bQ_Flush( bq_S bq_MEMSPACE *q );
 PUBLIC BOOLEAN      bQ_Write( bq_S bq_MEMSPACE *q, U8 bq_IOSPACE *msg );
+PUBLIC BOOLEAN      bQ_Push( bq_S bq_MEMSPACE *q, U8 bq_IOSPACE *msg );
+PUBLIC bQ_T_MsgSize bQ_Peek( bq_S bq_MEMSPACE *q, U8 bq_IOSPACE *msg );
 PUBLIC bQ_T_MsgSize bQ_Read(  bq_S bq_MEMSPACE *q, U8 bq_IOSPACE *msg );
 #define             bQ_Count(q)  ((q)->cnt)
 PUBLIC bQ_T_MsgCnt  bQ_Free( bq_S bq_MEMSPACE *q );
 
-/* Inline version of bQ_Write(). bQ_ funtions are not reentrant so use this in 
+/* Inline version of bQ_Write(). bQ_ funtions are not reentrant so use this in
    interrupts.
-   
+
    For 8051 put the local variables for the block-copy into DATA, the fastest
    memory space. This copy will be used in interrupt so we want it as quick as
    possible. Cost is just 5 bytes.
 */
    #if _TOOL_IS == TOOL_RIDE_8051
-   
+
 #define _bQ_RWrite_INLINE_Decl         \
    U8 bq_RAMSPACE * DATA src;          \
    U8 bq_RAMSPACE * DATA dest;         \
@@ -121,7 +123,7 @@ PUBLIC bQ_T_MsgCnt  bQ_Free( bq_S bq_MEMSPACE *q );
                                        \
       (q).cnt--;                       \
    }
-   
+
    #else  // _TOOL_IS == TOOL_RIDE_8051
 
 #define _bQ_RWrite_INLINE_Decl    \
@@ -167,11 +169,11 @@ PUBLIC bQ_T_MsgCnt  bQ_Free( bq_S bq_MEMSPACE *q );
                                        \
       (q).cnt--;                       \
    }
-   
+
    #endif  // _TOOL_IS == TOOL_RIDE_8051
 
 // Inline functions for 16 bits systems
-// User must ensure that buffers are (half)word aligned. 
+// User must ensure that buffers are (half)word aligned.
 
 #define _bQ_RWrite_INLINE_ByWords_Decl    \
    U16 bq_RAMSPACE *src, *dest;           \

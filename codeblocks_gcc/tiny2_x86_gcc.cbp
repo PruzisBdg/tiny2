@@ -44,7 +44,10 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-Og" />
+					<Add option="-g" />
 					<Add directory="../unit_test/ui" />
+					<Add directory="../unit_test/ui/libtmt" />
 				</Compiler>
 				<Linker>
 					<Add library="bin/Debug/libtiny2_x86_gcc.a" />
@@ -1134,6 +1137,15 @@
 		</Unit>
 		<Unit filename="../unit_test/tiny2_common_pre.mak">
 			<Option target="Unity TDD" />
+		</Unit>
+		<Unit filename="../unit_test/ui/libtmt/tmt.c">
+			<Option compilerVar="CC" />
+			<Option target="Unity TDD" />
+			<Option target="Console" />
+		</Unit>
+		<Unit filename="../unit_test/ui/libtmt/tmt.h">
+			<Option target="Unity TDD" />
+			<Option target="Console" />
 		</Unit>
 		<Unit filename="../unit_test/ui/lineedit/linedit.mak">
 			<Option target="Unity TDD" />
