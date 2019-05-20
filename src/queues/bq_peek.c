@@ -9,29 +9,25 @@
 
 /* ---------------------------- bQ_Peek --------------------------------------
 
-   Copy head of 'q' into '*msg' without removing it. 'q->dataSize' bytes are written
-   into 'msg'.
+   Return a reference directly to 'q->get' i.e the head. Return NULL if queue
+   is empty.
 
-   Returns: the number of bytes copied into 'msg'.
-            0 if queue was empty OR queue was locked.
-
+   This call presumes that items on 'q' are stored as-is; not wrapped or transformed.
+   It's only call to presume that.  If this isn't a guarantee then use bQ_Copy() to
+   get the head with removing it.
 */
 
-extern void bQ_CopyBytes( U8 bq_RAMSPACE *src, U8 bq_RAMSPACE *dest, U8 cnt );
-
-PUBLIC bQ_T_MsgSize bQ_Peek( bq_S bq_MEMSPACE *q, U8 bq_IOSPACE *msg )
+PUBLIC U8 bq_RAMSPACE const * bQ_Peek( bq_S bq_MEMSPACE *q )
 {
    /* empty? */
    if( !q->cnt )
    {
-      return 0;
+      return NULL;
    }
-
    /* otherwise copy out the head item. */
    else
    {
-      bQ_CopyBytes( q->get, msg, q->dataSize);
-      return q->dataSize;
+      return q->get;
    }
 }
 

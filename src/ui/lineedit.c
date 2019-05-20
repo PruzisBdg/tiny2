@@ -266,6 +266,7 @@ PUBLIC void LineEdit_Init(void)
    U8 rIDATA c;
 
    clearLineBuffer(&lineEditor.edit);
+   refreshScreenLine();
 
    for( c = 0; c < RECORDS_IN(lineEditor.stored); c++ )
    {

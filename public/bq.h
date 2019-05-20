@@ -65,10 +65,11 @@ PUBLIC BOOLEAN      bQ_Init(  bq_S bq_MEMSPACE *bq, U8 bq_RAMSPACE *ram, U8 qSiz
 PUBLIC BOOLEAN      bQ_Flush( bq_S bq_MEMSPACE *q );
 PUBLIC BOOLEAN      bQ_Write( bq_S bq_MEMSPACE *q, U8 bq_IOSPACE *msg );
 PUBLIC BOOLEAN      bQ_Push( bq_S bq_MEMSPACE *q, U8 bq_IOSPACE *msg );
-PUBLIC bQ_T_MsgSize bQ_Peek( bq_S bq_MEMSPACE *q, U8 bq_IOSPACE *msg );
+PUBLIC bQ_T_MsgSize bQ_Copy( bq_S bq_MEMSPACE *q, U8 bq_IOSPACE *msg );
 PUBLIC bQ_T_MsgSize bQ_Read(  bq_S bq_MEMSPACE *q, U8 bq_IOSPACE *msg );
 #define             bQ_Count(q)  ((q)->cnt)
 PUBLIC bQ_T_MsgCnt  bQ_Free( bq_S bq_MEMSPACE *q );
+PUBLIC U8 bq_RAMSPACE const * bQ_Peek( bq_S bq_MEMSPACE *q );
 
 /* Inline version of bQ_Write(). bQ_ funtions are not reentrant so use this in
    interrupts.
