@@ -82,7 +82,13 @@ PUBLIC bQ_T_MsgSize bQ_Read( bq_S bq_MEMSPACE *q, U8 bq_IOSPACE *msg ) {
    /* otherwise read the next item. */
    else
    {
-      bQ_CopyBytes( q->get, msg, q->dataSize);
+      /* If there's a 'msg' to copy to then copy out 'get'. Otherwise just remove 'get'
+         from the queue (i.e Take())
+      */
+      if(msg != NULL)
+      {
+         bQ_CopyBytes( q->get, msg, q->dataSize);
+      }
 
       /* Bump get ptr and wrap? */
       q->get += q->dataSize;

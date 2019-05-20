@@ -67,6 +67,7 @@ PUBLIC BOOLEAN      bQ_Write( bq_S bq_MEMSPACE *q, U8 bq_IOSPACE *msg );
 PUBLIC BOOLEAN      bQ_Push( bq_S bq_MEMSPACE *q, U8 bq_IOSPACE *msg );
 PUBLIC bQ_T_MsgSize bQ_Copy( bq_S bq_MEMSPACE *q, U8 bq_IOSPACE *msg );
 PUBLIC bQ_T_MsgSize bQ_Read(  bq_S bq_MEMSPACE *q, U8 bq_IOSPACE *msg );
+#define             bQ_Take(q)  bQ_Read((q), NULL)    // Take() removes from queue with copying.
 #define             bQ_Count(q)  ((q)->cnt)
 PUBLIC bQ_T_MsgCnt  bQ_Free( bq_S bq_MEMSPACE *q );
 PUBLIC U8 bq_RAMSPACE const * bQ_Peek( bq_S bq_MEMSPACE *q );

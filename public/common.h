@@ -21,6 +21,7 @@
 
 /* ---------------------------- Bits / Flags ------------------------------------ */
 
+	#ifndef SETB
 /* To manipulate a bit at a given (bit) position */
 #define _BitM(bit) (1 << (bit))
 #define _notB(bit)  0
@@ -31,11 +32,12 @@
 
 #define BSET(reg,mask) ((reg) & (mask))
 #define BCLR(reg,mask) (!((reg) & (mask)))
-
+	#endif
+	
 #define ALL_SET(v,m) (((v)&(m))==(m))
 #define ANY_SET(v,m) (((v)&(m))!=0)
 #define NOT_SET(v,m) (((v)&(m))==0)
-
+	
 #define CLIP(n, min, max) (((n)<(min))?(min):(((n)>(max))?(max):(n)))
 
 #endif // COMMON_H
