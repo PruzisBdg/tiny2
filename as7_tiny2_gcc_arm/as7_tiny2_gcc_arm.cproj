@@ -38,7 +38,7 @@
   <documentation help="" />
   <offline-documentation help="" />
   <dependencies>
-    <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.25.0" />
+    <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.34.1" />
   </dependencies>
 </framework-data>
     </AsfFrameworkConfig>
@@ -149,6 +149,14 @@
     <Compile Include="..\src\queues\bq_free.c">
       <SubType>compile</SubType>
       <Link>src\queues\bq_free.c</Link>
+    </Compile>
+    <Compile Include="..\src\queues\bq_init.c">
+      <SubType>compile</SubType>
+      <Link>src\queues\bq_init.c</Link>
+    </Compile>
+    <Compile Include="..\src\queues\bq_init_align.c">
+      <SubType>compile</SubType>
+      <Link>src\queues\bq_init_align.c</Link>
     </Compile>
     <Compile Include="..\src\queues\bq_peek.c">
       <SubType>compile</SubType>

@@ -29,7 +29,7 @@ PUBLIC BOOLEAN bQ_Push( bq_S bq_MEMSPACE *q, U8 bq_IOSPACE *msg )
    else
    {
       /* This is a push() so first back up 'get'. */
-      q->get -= q->dataSize;
+      q->get -= q->blockStep;
 
       if( q->get < q->start )          // Before start of buffer?
       {

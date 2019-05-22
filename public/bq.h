@@ -46,6 +46,7 @@ typedef struct
    bQ_T_MsgCnt        cnt;          /* number of messages in queue                        */
    bQ_T_MsgCnt        qSize;        /* in messages (from Cfg)                             */
    bQ_T_MsgSize       dataSize;     /* bytes per message (from Cfg)                       */
+   bQ_T_MsgSize       blockStep;    /* (Aligned) bytes per block.                         */
    U8 bq_RAMSPACE     *put;         /* start of the next free slot for a message          */
    U8 bq_RAMSPACE     *get;         /* start of the oldest message                        */
    U8 bq_RAMSPACE     *start;       /* start of the 1st slot in the buffer for a message  */
@@ -62,6 +63,7 @@ typedef struct
 */
 
 PUBLIC BOOLEAN      bQ_Init(  bq_S bq_MEMSPACE *bq, U8 bq_RAMSPACE *ram, U8 qSize, U8 dataSize );
+PUBLIC BOOLEAN      bQ_Init_Align(  bq_S bq_MEMSPACE *bq, U8 bq_RAMSPACE *ram, U8 qSize, U8 dataSize, U8 align );
 PUBLIC BOOLEAN      bQ_Flush( bq_S bq_MEMSPACE *q );
 PUBLIC BOOLEAN      bQ_Write( bq_S bq_MEMSPACE *q, U8 bq_IOSPACE *msg );
 PUBLIC BOOLEAN      bQ_Push( bq_S bq_MEMSPACE *q, U8 bq_IOSPACE *msg );
