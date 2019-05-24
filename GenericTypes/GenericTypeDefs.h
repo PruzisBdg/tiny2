@@ -78,6 +78,7 @@ typedef char C8;
 #define HIGH_DWORD(n) ((U32)((n) >> 32))
 #define LOW_DWORD(n)  ((U32)((n) & 0xFFFFFFFF))
 
+typedef unsigned long long U64;
 
 /* 24-bit type only available on C18 */
 #if defined(__18CXX)
