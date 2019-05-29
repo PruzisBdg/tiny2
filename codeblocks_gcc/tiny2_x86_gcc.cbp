@@ -1147,6 +1147,11 @@
 			<Option target="Debug" />
 			<Option target="Release" />
 		</Unit>
+		<Unit filename="../src/ui/ui_add.c">
+			<Option compilerVar="CC" />
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
 		<Unit filename="../src/ui/ui_getIntFromObj.c">
 			<Option compilerVar="CC" />
 			<Option target="Debug" />
