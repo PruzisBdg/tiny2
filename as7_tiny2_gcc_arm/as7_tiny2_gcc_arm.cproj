@@ -107,6 +107,7 @@
       <Value>../../private</Value>
       <Value>../../public</Value>
       <Value>../../GenericTypes</Value>
+      <Value>%24(SPJ_SWR_LOC)\arith\public</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize (-O1)</armgcc.compiler.optimization.level>
@@ -138,6 +139,70 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\GenericTypes\GenericTypeDefs.h">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\GenericTypes\GenericTypeDefs.h</Link>
+    </Compile>
+    <Compile Include="..\private\libs_support.h">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\private\libs_support.h</Link>
+    </Compile>
+    <Compile Include="..\private\txtfile_hide.h">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\private\txtfile_hide.h</Link>
+    </Compile>
+    <Compile Include="..\src\classes\actuator.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\classes\actuator.c</Link>
+    </Compile>
+    <Compile Include="..\src\classes\cal.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\classes\cal.c</Link>
+    </Compile>
+    <Compile Include="..\src\classes\calv.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\classes\calv.c</Link>
+    </Compile>
+    <Compile Include="..\src\classes\inpin.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\classes\inpin.c</Link>
+    </Compile>
+    <Compile Include="..\src\classes\outpin.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\classes\outpin.c</Link>
+    </Compile>
+    <Compile Include="..\src\classes\outport.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\classes\outport.c</Link>
+    </Compile>
+    <Compile Include="..\src\classes\readscalar.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\classes\readscalar.c</Link>
+    </Compile>
+    <Compile Include="..\src\classes\scalar.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\classes\scalar.c</Link>
+    </Compile>
+    <Compile Include="..\src\classes\sensor.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\classes\sensor.c</Link>
+    </Compile>
+    <Compile Include="..\src\classes\servo.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\classes\servo.c</Link>
+    </Compile>
+    <Compile Include="..\src\classes\svc.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\classes\svc.c</Link>
+    </Compile>
+    <Compile Include="..\src\classes\vector.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\classes\vector.c</Link>
+    </Compile>
+    <Compile Include="..\src\classes\writescalar.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\classes\writescalar.c</Link>
+    </Compile>
     <Compile Include="..\src\queues\bq.c">
       <SubType>compile</SubType>
       <Link>src\queues\bq.c</Link>
@@ -170,10 +235,221 @@
       <SubType>compile</SubType>
       <Link>src\queues\bq_write.c</Link>
     </Compile>
+    <Compile Include="..\src\statem\tiny_statem_execute.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\statem\tiny_statem_execute.c</Link>
+    </Compile>
+    <Compile Include="..\src\statem\tiny_statem_getevent.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\statem\tiny_statem_getevent.c</Link>
+    </Compile>
+    <Compile Include="..\src\statem\tiny_statem_getmode.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\statem\tiny_statem_getmode.c</Link>
+    </Compile>
+    <Compile Include="..\src\statem\tiny_statem_get_state.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\statem\tiny_statem_get_state.c</Link>
+    </Compile>
+    <Compile Include="..\src\statem\tiny_statem_list.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\statem\tiny_statem_list.c</Link>
+    </Compile>
+    <Compile Include="..\src\statem\tiny_statem_numevents.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\statem\tiny_statem_numevents.c</Link>
+    </Compile>
+    <Compile Include="..\src\statem\tiny_statem_restart.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\statem\tiny_statem_restart.c</Link>
+    </Compile>
+    <Compile Include="..\src\statem\tiny_statem_runstop.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\statem\tiny_statem_runstop.c</Link>
+    </Compile>
+    <Compile Include="..\src\statem\tiny_statem_sendevent.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\statem\tiny_statem_sendevent.c</Link>
+    </Compile>
+    <Compile Include="..\src\statem\tiny_statem_setstate.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\statem\tiny_statem_setstate.c</Link>
+    </Compile>
+    <Compile Include="..\src\statem\tiny_statem_set_get_state.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\statem\tiny_statem_set_get_state.c</Link>
+    </Compile>
+    <Compile Include="..\src\statem\tiny_statem_since_new_state.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\statem\tiny_statem_since_new_state.c</Link>
+    </Compile>
+    <Compile Include="..\src\ui\actuator_ui.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\ui\compare\actuator_ui.c</Link>
+    </Compile>
+    <Compile Include="..\src\ui\calv_ui.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\ui\compare\calv_ui.c</Link>
+    </Compile>
+    <Compile Include="..\src\ui\cal_ui.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\ui\compare\cal_ui.c</Link>
+    </Compile>
+    <Compile Include="..\src\ui\compare\compare.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\ui\compare\compare.c</Link>
+    </Compile>
+    <Compile Include="..\src\ui\compare\compare_novec.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\ui\compare\compare_novec.c</Link>
+    </Compile>
+    <Compile Include="..\src\ui\compare\compare_vec.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\ui\compare\compare_vec.c</Link>
+    </Compile>
+    <Compile Include="..\src\ui\echo_ui.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\ui\compare\echo_ui.c</Link>
+    </Compile>
+    <Compile Include="..\src\ui\expr.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\ui\compare\expr.c</Link>
+    </Compile>
+    <Compile Include="..\src\ui\flashblk_ui.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\ui\compare\flashblk_ui.c</Link>
+    </Compile>
+    <Compile Include="..\src\ui\help_ui.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\ui\compare\help_ui.c</Link>
+    </Compile>
+    <Compile Include="..\src\ui\inpin_ui.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\ui\compare\inpin_ui.c</Link>
+    </Compile>
+    <Compile Include="..\src\ui\lineedit.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\ui\compare\lineedit.c</Link>
+    </Compile>
+    <Compile Include="..\src\ui\listobj_ui.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\ui\compare\listobj_ui.c</Link>
+    </Compile>
+    <Compile Include="..\src\ui\outpin_ui.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\ui\compare\outpin_ui.c</Link>
+    </Compile>
+    <Compile Include="..\src\ui\outport_ui.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\ui\compare\outport_ui.c</Link>
+    </Compile>
+    <Compile Include="..\src\ui\quiet_ui.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\ui\compare\quiet_ui.c</Link>
+    </Compile>
+    <Compile Include="..\src\ui\read_ui.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\ui\compare\read_ui.c</Link>
+    </Compile>
+    <Compile Include="..\src\ui\script.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\ui\compare\script.c</Link>
+    </Compile>
+    <Compile Include="..\src\ui\sensor_ui.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\ui\compare\sensor_ui.c</Link>
+    </Compile>
+    <Compile Include="..\src\ui\servo_ui.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\ui\compare\servo_ui.c</Link>
+    </Compile>
+    <Compile Include="..\src\ui\support\ui_getIntFromObj.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\ui\support\ui_getIntFromObj.c</Link>
+    </Compile>
+    <Compile Include="..\src\ui\support\ui_getscalararg.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\ui\support\ui_getscalararg.c</Link>
+    </Compile>
+    <Compile Include="..\src\ui\support\ui_printscalar.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\ui\support\ui_printscalar.c</Link>
+    </Compile>
+    <Compile Include="..\src\ui\support\ui_printvec.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\ui\support\ui_printvec.c</Link>
+    </Compile>
+    <Compile Include="..\src\ui\support\ui_printvector.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\ui\support\ui_printvector.c</Link>
+    </Compile>
+    <Compile Include="..\src\ui\support\ui_sprint_scalar.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\ui\support\ui_sprint_scalar.c</Link>
+    </Compile>
+    <Compile Include="..\src\ui\support\ui_sprint_scalar_object.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\ui\support\ui_sprint_scalar_object.c</Link>
+    </Compile>
+    <Compile Include="..\src\ui\support\ui_support.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\ui\support\ui_support.c</Link>
+    </Compile>
+    <Compile Include="..\src\ui\svc_ui.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\ui\compare\svc_ui.c</Link>
+    </Compile>
+    <Compile Include="..\src\ui\Thread_ui.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\ui\compare\Thread_ui.c</Link>
+    </Compile>
+    <Compile Include="..\src\ui\tty_printf.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\ui\compare\tty_printf.c</Link>
+    </Compile>
+    <Compile Include="..\src\ui\tty_ui.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\ui\compare\tty_ui.c</Link>
+    </Compile>
+    <Compile Include="..\src\ui\txtfile_num_ui.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\ui\compare\txtfile_num_ui.c</Link>
+    </Compile>
+    <Compile Include="..\src\ui\txtfile_ui.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\ui\compare\txtfile_ui.c</Link>
+    </Compile>
+    <Compile Include="..\src\ui\ui_add.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\ui\compare\ui_add.c</Link>
+    </Compile>
+    <Compile Include="..\src\ui\ui_getIntFromObj.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\ui\compare\ui_getIntFromObj.c</Link>
+    </Compile>
+    <Compile Include="..\src\ui\write_ui.c">
+      <SubType>compile</SubType>
+      <Link>as7_tiny2_gcc_arm\src\ui\compare\write_ui.c</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="as7_tiny2_gcc_arm\" />
+    <Folder Include="as7_tiny2_gcc_arm\GenericTypes\" />
+    <Folder Include="as7_tiny2_gcc_arm\private\" />
+    <Folder Include="as7_tiny2_gcc_arm\src\" />
+    <Folder Include="as7_tiny2_gcc_arm\src\classes\" />
+    <Folder Include="as7_tiny2_gcc_arm\src\statem\" />
+    <Folder Include="as7_tiny2_gcc_arm\src\ui\" />
+    <Folder Include="as7_tiny2_gcc_arm\src\ui\compare\" />
+    <Folder Include="as7_tiny2_gcc_arm\src\ui\support\" />
+    <Folder Include="GenericTypes" />
+    <Folder Include="private" />
     <Folder Include="src" />
+    <Folder Include="src\classes" />
+    <Folder Include="src\ui" />
     <Folder Include="src\queues" />
+    <Folder Include="src\ui\compare" />
+    <Folder Include="src\ui\support" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>

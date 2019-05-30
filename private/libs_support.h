@@ -143,6 +143,10 @@
 #define _HAS_LISTS      1     // Lists of objects
 #define _HAS_SERVO      1     // Servo links Sensor and Actuator
 
+// Tiny2_ has so many U8* to S8* pointer sign warning. Suppress these otherwise we're swamped.
+#pragma GCC diagnostic ignored "-Wpointer-sign"
+
+
 
 #endif // LIBS_SUPPORT_H
 

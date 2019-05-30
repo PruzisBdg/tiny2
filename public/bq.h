@@ -12,8 +12,8 @@
 |
 |  Storage for a 'BlockQueue' is allocated when the queue is created.
 |
-|  Queues are intelocked. Currently operation on a 'BlockQueue' are executed
-|  at the 'user' privelidge level of the parent 'Active' class.
+|  Queues are interlocked. Currently operation on a 'BlockQueue' are executed
+|  at the 'user' privilege level of the parent 'Active' class.
 |--------------------------------------------------------------------------*/
 
 #ifndef BQ_H
