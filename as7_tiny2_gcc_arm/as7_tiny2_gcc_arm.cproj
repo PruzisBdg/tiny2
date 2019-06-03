@@ -283,6 +283,10 @@
       <SubType>compile</SubType>
       <Link>as7_tiny2_gcc_arm\src\statem\tiny_statem_since_new_state.c</Link>
     </Compile>
+    <Compile Include="..\src\systime\systime.c">
+      <SubType>compile</SubType>
+      <Link>src\systime\systime.c</Link>
+    </Compile>
     <Compile Include="..\src\ui\actuator_ui.c">
       <SubType>compile</SubType>
       <Link>as7_tiny2_gcc_arm\src\ui\compare\actuator_ui.c</Link>
@@ -446,6 +450,7 @@
     <Folder Include="private" />
     <Folder Include="src" />
     <Folder Include="src\classes" />
+    <Folder Include="src\systime" />
     <Folder Include="src\ui" />
     <Folder Include="src\queues" />
     <Folder Include="src\ui\compare" />

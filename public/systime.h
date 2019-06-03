@@ -105,7 +105,7 @@ extern T_Time SysTime;     // Up to 10,000hrs at 10msecs.
     #elif _CPU_IS == _CPU_LPC824 || _CPU_IS == _CPU_CORTEXM0LPUS
 // Time stops at end-of-days. No rollover; otherwise all the bodies will start walking.
 #define _IncrementMasterTime() \
-{ if(SysTime < _EndOfDays) { SysTime++; } }
+    { if(SysTime < _EndOfDays) { SysTime++; } }
 
 #define _BlockSystemTimerInterrupt()    { }
 #define _AllowSystemTimerInterrupt()    { }
