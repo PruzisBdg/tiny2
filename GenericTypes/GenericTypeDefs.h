@@ -34,13 +34,12 @@ typedef signed short int S16;                      // Succinct versions of the a
 typedef signed long int S32;
 #define _S16(n)  ((S16)(n))
 
-/* MPLAB C Compiler for PIC18 does not support 64-bit integers */
-#if !defined(__18CXX)
-__EXTENSION typedef signed long long    INT64;
-#endif
-
 typedef unsigned char  U8;                      // Succinct versions of the above
 typedef unsigned short int U16;
+
+typedef unsigned long long  U64;
+typedef signed long long  S64;
+
 #define _U8(n)  ((U8)(n))
 #define _U16(n)  ((U16)(n))
 
