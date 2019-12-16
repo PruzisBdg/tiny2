@@ -21,6 +21,7 @@
 #ifndef SYSTIME_H
 #define SYSTIME_H
 
+#include "libs_support.h"
 #include "GenericTypeDefs.h"
 
 /* For an embedded target _CPU_IS and _COMPILER_IS should be defined (in
@@ -83,7 +84,7 @@ extern T_Time SysTime;     // Up to 10,000hrs at 10msecs.
 /* 'T_Time' is 32bit; the PIC24 platform is 16bit.. 'SysTime' could get diced if the master
     timer interrupt is preempted by another interrupt which uses Systime(). This isn't likely,
     Systime gets read at thread level and this read is guarded against a dice so ne need to
-    protect it here. 
+    protect it here.
 
     Time stops at end-of-days. No rollover; otherwise all the bodies will start walking.
 */
@@ -111,6 +112,9 @@ extern T_Time SysTime;     // Up to 10,000hrs at 10msecs.
 #define _AllowSystemTimerInterrupt()    { }
 
     #else
+#define _IncrementMasterTime() \
+    { if(SysTime < _EndOfDays) { SysTime++; } }
+
 #define _BlockSystemTimerInterrupt()    { }
 #define _AllowSystemTimerInterrupt()    { }
     #endif
