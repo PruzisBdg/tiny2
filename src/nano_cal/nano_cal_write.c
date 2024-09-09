@@ -6,7 +6,7 @@
 
 #include "common.h"
 #include "nano_cal.h"
-#include "arith.h"      // ClipInt()
+#include "arith.h"      // ClipS16()
 
 /*-----------------------------------------------------------------------------------
 |
@@ -18,7 +18,7 @@
 
 PUBLIC void nCal_Write( S_NanoCal CONST *cal, S16 n )
 {
-   *(cal->current) = ClipInt(n, cal->min, cal->max);
+   *(cal->current) = ClipS16(n, cal->min, cal->max);
 }
 
 

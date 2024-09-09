@@ -11,7 +11,7 @@
 #include "flashblk.h"
 #include "sysobj.h"     // T_ObjAddr, T_CodeAddr
 #include "links.h"      // Link_SenderChanged()
-#include "arith.h"      // ClipInt()
+#include "arith.h"      // ClipS16()
 
 /*-----------------------------------------------------------------------------------
 |

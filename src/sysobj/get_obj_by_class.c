@@ -17,7 +17,7 @@
 |
 ------------------------------------------------------------------------------------------*/
 
-PUBLIC S_Obj CONST * GetObjByClass( U8 GENERIC const *name, U8 theClass )
+PUBLIC S_Obj CONST * GetObjByClass( C8 GENERIC const *name, U8 theClass )
 {
    S_Obj   CONST * rIDATA obj;
 

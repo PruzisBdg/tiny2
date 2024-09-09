@@ -12,6 +12,31 @@
 #ifndef LIBS_SUPPORT_H
 #define LIBS_SUPPORT_H
 
+// ------------------------------------------ Tools ----------------------------------------------
+
+#define TOOL_Z8_ENCORE 1
+#define TOOL_RIDE_8051 2
+#define TOOL_CC430     3
+#define TOOL_GCC_ARM   4
+#define TOOL_MPLAB_X32 5
+
+#ifdef __TOOL_IS_GCC_ARM__
+   #define _TOOL_IS TOOL_GCC_ARM
+#else
+   #ifdef __TOOL_IS_MPLAB_XC32__
+      #define _TOOL_IS TOOL_MPLAB_X32
+   #else
+      #ifdef __TOOL_IS_CC430
+         #define _TOOL_IS TOOL_CC430
+      #endif
+   #endif
+#endif
+
+
+#ifndef _TOOL_IS
+   #error "_TOOL_IS must be defined"
+#endif
+
 #include "GenericTypeDefs.h"		// Redirect to typedefs
 
 /* *************************** CONSTRUKSHUN ZONE ***************
@@ -32,7 +57,12 @@
 
 #define DATA_SPACE_16BIT 1
 #define DATA_SPACE_32BIT 2
+
+   #if _TOOL_IS == TOOL_CC430
+#define DATA_SPACE_IS DATA_SPACE_16BIT
+   #else
 #define DATA_SPACE_IS DATA_SPACE_32BIT
+   #endif
 
 #define BOOLEAN BOOL
 
@@ -41,27 +71,6 @@
 #define _TARGET_LIB_XC32            3
 
 #define _TARGET_IS _TARGET_LIB_ARM
-
-// ------------------------------------------ Tools ----------------------------------------------
-
-#define TOOL_Z8_ENCORE 1
-#define TOOL_RIDE_8051 2
-#define TOOL_CC430     3
-#define TOOL_GCC_ARM   4
-#define TOOL_MPLAB_X32 5
-
-#ifdef __TOOL_IS_GCC_ARM__
-   #define _TOOL_IS TOOL_GCC_ARM
-#else
-    #ifdef __TOOL_IS_MPLAB_XC32__
-       #define _TOOL_IS TOOL_MPLAB_X32
-    #endif
-#endif
-
-
-#ifndef _TOOL_IS
-   #error "_TOOL_IS must be defined"
-#endif
 
 #define _HAS_TEXT_UI 1
 
@@ -144,7 +153,10 @@
 #define _HAS_SERVO      1     // Servo links Sensor and Actuator
 
 // Tiny2_ has so many U8* to S8* pointer sign warning. Suppress these otherwise we're swamped.
-#pragma GCC diagnostic ignored "-Wpointer-sign"
+#if _TOOL_IS == TOOL_CC430
+#else
+   #pragma GCC diagnostic ignored "-Wpointer-sign"
+#endif
 
 
 
