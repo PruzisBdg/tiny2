@@ -6,7 +6,7 @@
 
 #include "common.h"
 #include "nano_cal.h"
-#include "arith.h"      // ClipInt()
+#include "arith.h"      // ClipS16()
 
 /*-----------------------------------------------------------------------------------
 |
@@ -18,7 +18,7 @@
 
 PUBLIC BIT nCal_InsideLimits( S_NanoCal CONST *cal, S16 n )
 {
-   return InsideLimitsS16(n, cal->min, cal->max);
+   return Inside_S16(n, cal->min, cal->max);
 }
 
 

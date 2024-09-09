@@ -19,7 +19,7 @@ extern U8 Objs_NumObjs(void);             // Sizes of each list
 |
 ------------------------------------------------------------------------------------------*/
 
-PUBLIC U8 CONST * GetObjName( T_ObjAddr addr )
+PUBLIC C8 CONST * GetObjName( T_ObjAddr addr )
 {
    U8            rIDATA c;
    S_Obj CONST * rIDATA p;

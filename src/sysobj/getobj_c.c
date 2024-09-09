@@ -29,7 +29,7 @@ extern U8            Objs_Flags[];        // (RAM) flags for all system objects 
 
 extern BIT Str_DiceComposites;
 
-PUBLIC S_Obj CONST * GetObj_C( U8 CONST *name )
+PUBLIC S_Obj CONST * GetObj_C( C8 CONST *name )
 {
    U8            rIDATA c;
    S_Obj CONST * rIDATA p;

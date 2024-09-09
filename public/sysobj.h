@@ -95,10 +95,10 @@ typedef struct
 
 PUBLIC U8 MakeObjs(void);
 
-PUBLIC S_Obj CONST * GetObj( U8 GENERIC const *name );
-PUBLIC S_Obj CONST * GetObj_C( U8 CONST *name );
-PUBLIC S_Obj CONST * GetObjByClass( U8 GENERIC const *name, U8 theClass );
-PUBLIC U8 CONST * GetObjName( T_ObjAddr addr );
+PUBLIC S_Obj CONST * GetObj( C8 GENERIC const *name );
+PUBLIC S_Obj CONST * GetObj_C( C8 CONST *name );
+PUBLIC S_Obj CONST * GetObjByClass( C8 GENERIC const *name, U8 theClass );
+PUBLIC C8 CONST * GetObjName( T_ObjAddr addr );
 PUBLIC S_Obj CONST * GetObjBase( T_ObjAddr addr );
 PUBLIC S_Obj CONST * GetObjByIdx( U8 idx );
 
@@ -112,7 +112,7 @@ typedef struct
    float      outScale;    // to scale the vector for display
 } S_ObjIO;
 
-PUBLIC S_ObjIO CONST * GetObjIO( U8 GENERIC const *name );
+PUBLIC S_ObjIO CONST * GetObjIO( C8 GENERIC const *name );
 
    #endif // 
 

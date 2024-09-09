@@ -4,7 +4,7 @@
 
 #include "common.h"
 #include "nano_cal.h"
-#include "arith.h"      // ClipInt()
+#include "arith.h"      // ClipS16()
 
 PRIVATE S16 getCurrent(S_NanoCal CONST *cal) { return *(cal->current); }
 
@@ -18,7 +18,7 @@ PRIVATE S16 getCurrent(S_NanoCal CONST *cal) { return *(cal->current); }
 
 PUBLIC void nCal_Increment( S_NanoCal CONST *cal, S16 n )
 {
-   *(cal->current) = ClipInt(AddTwoS16(nCal_Read(cal), n), cal->min, cal->max);
+   *(cal->current) = ClipS16(AplusBS16(nCal_Read(cal), n), cal->min, cal->max);
 }
 
 // ------------------------------------- eof -------------------------------------------------

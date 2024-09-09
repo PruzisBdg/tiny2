@@ -22,7 +22,6 @@
 #undef FALSE
 
 typedef enum _BOOL { FALSE = 0, TRUE } BOOL;    /* Undefined size */
-typedef enum _BIT { CLEAR = 0, SET } BIT;
 
 #define _ToBool(n) ((n) == 0 ? FALSE : TRUE)
 
@@ -45,6 +44,13 @@ typedef signed long long  S64;
 
 typedef signed char S8;
 typedef char C8;
+
+   #if _TOOL_IS == TOOL_CC430
+typedef U8 BIT;
+   #else
+typedef enum _BIT { CLEAR = 0, SET } BIT;
+   #endif
+
 
 // Extrema
 #define MIN_U8 0
@@ -76,8 +82,6 @@ typedef char C8;
 
 #define HIGH_DWORD(n) ((U32)((n) >> 32))
 #define LOW_DWORD(n)  ((U32)((n) & 0xFFFFFFFF))
-
-typedef unsigned long long U64;
 
 /* 24-bit type only available on C18 */
 #if defined(__18CXX)

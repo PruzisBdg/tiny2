@@ -64,19 +64,19 @@ PUBLIC void compare_PrintNum( S16 n, S_Obj CONST * obj, U8 flags )
 #define _LimitError_Equal     4
 #define _LimitError_NotEqual  5
 
-PRIVATE U8 CONST e1[] = "outside limits  val = ";
-PRIVATE U8 CONST e2[] = "over limit  val = ";
-PRIVATE U8 CONST e3[] = "under limit  val = ";
-PRIVATE U8 CONST e4[] = "not equal  val = ";
-PRIVATE U8 CONST e5[] = "equal  val = ";
+PRIVATE C8 CONST e1[] = "outside limits  val = ";
+PRIVATE C8 CONST e2[] = "over limit  val = ";
+PRIVATE C8 CONST e3[] = "under limit  val = ";
+PRIVATE C8 CONST e4[] = "not equal  val = ";
+PRIVATE C8 CONST e5[] = "equal  val = ";
 
-PRIVATE U8 CONST * CONST msgs[] = {e1, e2, e3, e4, e5};
+PRIVATE C8 CONST * CONST msgs[] = {e1, e2, e3, e4, e5};
 
-PRIVATE U8 CONST e11[] = " min = ";
-PRIVATE U8 CONST e21[] = " max = ";
-PRIVATE U8 CONST e31[] = " compared with ";
+PRIVATE C8 CONST e11[] = " min = ";
+PRIVATE C8 CONST e21[] = " max = ";
+PRIVATE C8 CONST e31[] = " compared with ";
 
-PRIVATE U8 CONST * CONST msgs1[] = {e11, e21, e11, e31, e31};
+PRIVATE C8 CONST * CONST msgs1[] = {e11, e21, e11, e31, e31};
 
 PUBLIC void compare_PrintLimitError( S_Obj CONST * obj, S16 *nums, U8 errNum )
 {

@@ -27,9 +27,9 @@
 
 PUBLIC BIT Comms_WroteAStr;                           // Is set when a string is written
 
-PUBLIC U8 WrStr( U8 const GENERIC *str, U8 flags )
+PUBLIC U8 WrStr( C8 const GENERIC *str, U8 flags )
 {
-   U8 const GENERIC *p;
+   C8 const GENERIC *p;
    U8 ch;
    BIT wroteCR;
    
@@ -63,10 +63,10 @@ PUBLIC void Comms_WrStrConst( C8 CONST *str )
 PUBLIC void Comms_WrStrConst_Gated( C8 CONST *str )
    { WrStr(str, _WrStr_Gated); }
 
-PUBLIC U8 Comms_WrStr( U8 const GENERIC *str )
+PUBLIC U8 Comms_WrStr( C8 const GENERIC *str )
    { return WrStr(str,0); }
 
-PUBLIC U8 Comms_WrStr_Gated( U8 const GENERIC *str )
+PUBLIC U8 Comms_WrStr_Gated( C8 const GENERIC *str )
    { return WrStr(str,_WrStr_Gated); }
 
 

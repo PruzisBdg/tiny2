@@ -25,7 +25,7 @@ extern S_TinySM_Cfg CONST CommsIn_StateM_Cfg;
 
 #define _WrStr_AddLF _BitM(0)
 #define _WrStr_Gated _BitM(1)
-PUBLIC U8 WrStr( U8 GENERIC const *str, U8 flags );   // Write a line
+PUBLIC U8 WrStr( C8 GENERIC const *str, U8 flags );   // Write a line
 extern BIT Comms_WroteAStr;                           // Is set when a string is written
 
 #if _TOOL_IS == TOOL_RIDE_8051
@@ -36,8 +36,8 @@ extern BIT Comms_WroteAStr;                           // Is set when a string is
 
 PUBLIC U8   Comms_WrLine( U8 GENERIC const *str );    // Write a line; terminate with CR-LF
 
-PUBLIC U8 Comms_WrStr( U8 GENERIC const *str );       // Print a string to Host
-PUBLIC U8 Comms_WrStr_Gated( U8 GENERIC const *str ); // Print only if Host is not sending chars
+PUBLIC U8 Comms_WrStr( C8 GENERIC const *str );       // Print a string to Host
+PUBLIC U8 Comms_WrStr_Gated( C8 GENERIC const *str ); // Print only if Host is not sending chars
 
 PUBLIC void Comms_WrStrConst( C8 CONST *str );        // Same as Comms_WrStr but for CONST - saves code
 PUBLIC void Comms_WrStrConst_Gated( C8 CONST *str );  // and the 'gated' version
@@ -64,7 +64,7 @@ PUBLIC U8   Comms_TxBytesFree(void);                  // bytes free in the TX bu
 #elif _TOOL_IS == TOOL_CC430
 
    #define WrStrConst Comms_WrStrConst
-   #define WrStrLiteral(str)  Comms_WrStrConst((U8 const *)(str))
+   #define WrStrLiteral(str)  Comms_WrStrConst((C8 const *)(str))
 
 #else
    #define WrStrConst Comms_WrStrConst

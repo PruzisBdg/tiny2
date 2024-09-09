@@ -51,13 +51,13 @@ PRIVATE BIT servoMade(void)
 }
 
 // Utility functions - shrink the code
-PRIVATE U8 CONST * sensorName(void) { return ui->sensorObj->name; }  
-PRIVATE U8 CONST * actuatorName(void) { return ui->actuatorObj->name; }
+PRIVATE C8 CONST * sensorName(void) { return ui->sensorObj->name; }
+PRIVATE C8 CONST * actuatorName(void) { return ui->actuatorObj->name; }
 
 /* Get sensor and actuator output scales; used to scale the gains and input
    scales.
 */
-PRIVATE float getOutScale(U8 CONST * name) { return GetObjIO(_StrConst(name))->outScale; }
+PRIVATE float getOutScale(C8 CONST * name) { return GetObjIO(_StrConst(name))->outScale; }
 PRIVATE float getSensorScale(void) {return getOutScale(sensorName()); }
 PRIVATE float getActuatorScale(void) {return getOutScale(actuatorName()); }
 
@@ -266,7 +266,8 @@ PUBLIC U8 UI_Servo(U8 *args)
          }
       }
       return 1;
-   }   
+   }
+   return 1;
 }
 
 // ---------------------------------------- eof ----------------------------------------- 
