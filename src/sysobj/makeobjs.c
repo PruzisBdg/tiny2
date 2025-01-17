@@ -41,9 +41,9 @@ extern void PrintMakeObjErr(U8 CONST *objName);
 |  Run initialisation on all objects in Objs_List[]. The list is scanned repeatedly until
 |  either all objects are made or a pass through the list gives no new makes. This so all
 |  objects are made even if child objects are further down the list than thier parents.
-|  
 |
-|	DATE        AUTHOR            DESCRIPTION OF CHANGE 
+|
+|	DATE        AUTHOR            DESCRIPTION OF CHANGE
 |	--------		-------------		-------------------------------------
 |
 ------------------------------------------------------------------------------------------*/
@@ -60,7 +60,7 @@ PUBLIC U8 MakeObjs(void)
    U8(rIDATA *initFunc)(T_ObjAddr obj, T_CodeAddr init);
 
    // Clear all object flags
-   for( c = 0; c < Objs_NumObjs(); c++ ) 
+   for( c = 0; c < Objs_NumObjs(); c++ )
       { Objs_Flags[c] = 0; }
 
    leftToMake = Objs_NumObjs();
@@ -70,8 +70,8 @@ PUBLIC U8 MakeObjs(void)
    {
       madeObjThisPass = 0;                                     // until make an object on this pass of the list
 
-      for( c = 0,                                          
-           p = Objs_List; 
+      for( c = 0,
+           p = Objs_List;
            c < Objs_NumObjs();                                 // for each entry in the object list
            c++, p++ )
       {
@@ -79,16 +79,16 @@ PUBLIC U8 MakeObjs(void)
 
          if( BCLR(Objs_Flags[c], 0x01) )                       // object hasn't already been made?
          {
-            if( initFunc = GetClass(p->type)->initFunc )      // AND object has an init function?
+            if( NULL != (initFunc = GetClass(p->type)->initFunc) )      // AND object has an init function?
             {
                if( !(*initFunc)(p->addr, p->init) )            // then try to init!
                {
-                  if( passCnt > 0 )                            // failed AND not the 1st pass? 
+                  if( passCnt > 0 )                            // failed AND not the 1st pass?
                   {                                            // then send message
                      PrintMakeObjErr(_StrConst(p->name));
                   }
                }
-               else                                            // else init succeeded 
+               else                                            // else init succeeded
                {
                   Link_SendEvent(p->addr, _Link_Event_Created); // then post event to link list in case there are any dependencies
                   madeObj = 1;
@@ -111,8 +111,8 @@ PUBLIC U8 MakeObjs(void)
       }
       passCnt++;
    }
-   while( madeObjThisPass && leftToMake );                     // scan until all made or can't make any more. 
-   
+   while( madeObjThisPass && leftToMake );                     // scan until all made or can't make any more.
+
    return leftToMake;
 }
 

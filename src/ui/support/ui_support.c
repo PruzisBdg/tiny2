@@ -22,8 +22,8 @@
 |  Scanf_NoArgs()
 |
 |  ANSI is ambiguous about the return from scanf() when the source string is empty.
-|  Depending on vendor library; sscanf() may return either 0 or EOF if there are no args. 
-|  
+|  Depending on vendor library; sscanf() may return either 0 or EOF if there are no args.
+|
 |
 -----------------------------------------------------------------------------------*/
 
@@ -47,8 +47,8 @@ PUBLIC S_Obj CONST * UI_GetAnyObj_MsgIfFail(U8 *args)
 
    S_Obj CONST * obj;
    U8 firstArg[_MaxChars+1];
-   
-   if( obj = GetObj(args) )
+
+   if( NULL != (obj = GetObj(args)) )
    {
       return obj;
    }
@@ -75,8 +75,8 @@ PUBLIC S_Obj CONST * UI_GetObj_MsgIfFail(U8 *args, U8 classID)
 
    S_Obj CONST * obj;
    U8 firstArg[_MaxChars+1];
-   
-   if( obj = GetObjByClass(args, classID) )
+
+   if( NULL != (obj = GetObjByClass(args, classID)) )
    {
       return obj;
    }
@@ -110,7 +110,7 @@ PUBLIC U8 UI_GetAction_MsgIfFail(U8 *args, U8 CONST * actionList)
    {
       return action;
    }
-   
+
 }
 
 
@@ -128,20 +128,20 @@ PUBLIC void UI_PrintObject( S_Obj CONST *obj, U8 flags )
    S_ObjIO CONST * io;
    BIT  appendVecUnits;
 
-   if(BSET(flags, _UI_PrintObject_Raw)) 
+   if(BSET(flags, _UI_PrintObject_Raw))
       { io = 0; }
    else
       { io = GetObjIO(_StrConst(obj->name)); }
 
-   if(BSET(flags, _UI_PrintObject_PrependName)) 
+   if(BSET(flags, _UI_PrintObject_PrependName))
    {
       sprintf(PrintBuf.buf, "%s = ", _StrConst(obj->name));
       PrintBuffer();
    }
-   
+
    // Append units to a vector only if there's an IO spec AND flags are set to print units
    appendVecUnits = io && BSET(flags, _UI_PrintObject_AppendUnits);
-      
+
    switch(obj->type)
    {
       case _Class_Vec:
@@ -149,7 +149,7 @@ PUBLIC void UI_PrintObject( S_Obj CONST *obj, U8 flags )
          break;
 
       case _Class_CalVec:
-         UI_PrintVector( ((S_CalV *)obj->addr)->vec, io, appendVecUnits ); 
+         UI_PrintVector( ((S_CalV *)obj->addr)->vec, io, appendVecUnits );
          break;
 
       default:
@@ -227,7 +227,7 @@ PUBLIC U8 * skipUnaryPrefix(U8 * p)
 |
 |  GetArgIO()
 |
-|  If the 1st argument in args is a scalar object, returns the (IO) formatter of that object. 
+|  If the 1st argument in args is a scalar object, returns the (IO) formatter of that object.
 |  If the 1st arg isn't and object or doesn't have a scale, then returns 0
 |
 ------------------------------------------------------------------------------------------*/
@@ -249,7 +249,7 @@ PUBLIC S_ObjIO CONST * GetArgIO(U8 *args)
 |
 |  GetArgScale()
 |
-|  If the 1st argument in args is a scalar object, returns the (IO) scale of that object. 
+|  If the 1st argument in args is a scalar object, returns the (IO) scale of that object.
 |  If the 1st arg isn't and object or doesn't have a scale, then returns 1.0
 |
 ------------------------------------------------------------------------------------------*/
@@ -271,4 +271,4 @@ PUBLIC float GetArgScale(U8 *args)
 
 
 
-// ----------------------------- eof ----------------------------------------- 
+// ----------------------------- eof -----------------------------------------

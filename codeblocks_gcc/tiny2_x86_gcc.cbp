@@ -60,10 +60,11 @@
 			</Target>
 		</Build>
 		<Compiler>
-			<Add option="-D__TOOL_IS_GCC_ARM__" />
+			<Add option="-D__TOOL_IS_GCC_X86" />
 			<Add directory="../private" />
 			<Add directory="../public" />
-			<Add directory="../GenericTypes" />
+			<Add directory="../../libs_common/public" />
+			<Add directory="../../libs_common/libs_only" />
 			<Add directory="../arith_incl" />
 		</Compiler>
 		<Unit filename="../../unity_tdd/tdd_common.c">
@@ -1205,9 +1206,6 @@
 			<Option target="Console" />
 		</Unit>
 		<Extensions>
-			<code_completion />
-			<envvars />
-			<debugger />
 			<lib_finder disable_auto="1" />
 			<wxsmith version="1">
 				<gui name="wxWidgets" src="" main="" init_handlers="necessary" language="CPP" />

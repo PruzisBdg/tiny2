@@ -28,7 +28,7 @@ PRIVATE BIT gotCR;            // Last char was a CR.
 |  stripComments
 |
 |  Comments in a script are from any semicolon ';' to end-of-line. This filter strips
-|  comments and converts successive spaces to single spaces. Tabs are preserved but 
+|  comments and converts successive spaces to single spaces. Tabs are preserved but
 |  spaces after any tab will be deleted.
 |
 |  Return 0 if 'ch' is to be stripped, else return 'ch' itself.
@@ -47,7 +47,7 @@ PRIVATE U8 stripComments(U8 ch)
       else                                // else still inside a comment
       {
          return 0;                        // so 'ch' will be stripped
-      }  
+      }
    }
    else                                   // else not parsing a comment
    {
@@ -60,7 +60,7 @@ PRIVATE U8 stripComments(U8 ch)
       {
          if( ch == ' ' )                  // Space?
          {
-            if( !stripSpc )               // Prev char was not a Spc?              
+            if( !stripSpc )               // Prev char was not a Spc?
             {
                stripSpc = 1;              // Mark that this one is
                return ' ';                // but return it; if the next char is Spc it will be stripped
@@ -84,7 +84,7 @@ PRIVATE U8 stripComments(U8 ch)
 |  stripBlankLines
 |
 |  Drops all chars from a CRLF to the next char which isn't a CR,LF or Spc. This skips
-|  through blank lines and continues on through any leading whitespace to the next 
+|  through blank lines and continues on through any leading whitespace to the next
 |  visible char.
 |
 |  Return 0 if 'ch' is to be stripped, else return 'ch' itself.
@@ -96,7 +96,7 @@ PRIVATE U8 stripBlankLines( U8 ch )
    if( stripLine )                     // Stripping a line now?
    {
       if( ch != '\r' &&                // Anything other then CR,LF or Spc?
-          ch != '\n' && 
+          ch != '\n' &&
           ch != ' ')
       {
          stripLine = 0;                // then stop stripping
@@ -111,7 +111,7 @@ PRIVATE U8 stripBlankLines( U8 ch )
       {
          gotCR = 0;                    // clear flag
          stripLine = 1;                // strip future chars (until something printable arrrives)
-         
+
          if( ch == '\n' )              // Also got LF (after the CR)?
             { return ch; }             // then keep it
          else                          // else no LF; line break was just CR
@@ -123,7 +123,7 @@ PRIVATE U8 stripBlankLines( U8 ch )
             { gotCR = 1; }             // then set flag
          return ch;                    // Is either CR or printable, use it.
       }
-   } 
+   }
 }
 
 
@@ -137,7 +137,7 @@ PRIVATE U8 stripBlankLines( U8 ch )
 
 PUBLIC U8 File_StripScript(U8 ch)
 {
-   if( ch = stripComments(ch) )
+   if( (ch = stripComments(ch)) != 0 )
       return stripBlankLines(ch);
    else
       return ch;
@@ -148,7 +148,7 @@ PUBLIC U8 File_StripScript(U8 ch)
 |
 |  File_SetupScriptWrite()
 |
-|  Setup a file for writing a script. Comments and whitespace will be stripped 
+|  Setup a file for writing a script. Comments and whitespace will be stripped
 |  and the remaining text written to the file.
 |
 ------------------------------------------------------------------------------------------*/
@@ -164,4 +164,4 @@ PUBLIC void File_SetupScriptWrite(void)
 
 
 
-// ------------------------------ eof ------------------------------------------ 
+// ------------------------------ eof ------------------------------------------

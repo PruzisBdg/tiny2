@@ -26,7 +26,7 @@ extern U8 * skipUnaryPrefix(U8 * p);
 
 
 #ifdef PARSE_COMPOSITE_VECS
-      
+
 #include "class.h"
 #include "vec.h"              // S_Vec
 
@@ -57,8 +57,8 @@ PRIVATE S16 applyUnaryPrefix(S16 n, U8 prefix)
 |  Return the value of scalar specified at position 'idx' in argument list 'args'. The
 |  scalar may be a literal number or a scalar object.
 |
-|  If 'scale' <> 0 and the value is literal then the literal is read as a float and 
-|  divided by 'scale'. If 'scale' == 0 then literal is read as an integer, either 
+|  If 'scale' <> 0 and the value is literal then the literal is read as a float and
+|  divided by 'scale'. If 'scale' == 0 then literal is read as an integer, either
 |  decimal or hex.
 |
 |  Returns the value of the scalar. If the argument isn't a Scalar or an literal number
@@ -73,9 +73,9 @@ PUBLIC S16 UI_GetScalarArg(U8 *args, U8 idx, float scale )
    float    f;
    U8       *p;
    U16      n;
-   
+
    p = (U8*)Str_GetNthWord(args, idx);                            // Get the arg
-   
+
    if( Str_EndOfLineOrString(*p))                                 // no nth arg?
    {
       return 0;                                                   // so return 0
@@ -86,12 +86,12 @@ PUBLIC S16 UI_GetScalarArg(U8 *args, U8 idx, float scale )
          with a '-' (minus) or '!' (not) then skip past these to the start of
          the name proper.
       */
-      if( obj = GetObj((U8 GENERIC *)skipUnaryPrefix(p)) )        // Is an object of some kind?
+      if( NULL != (obj = GetObj((U8 GENERIC *)skipUnaryPrefix(p))) )        // Is an object of some kind?
       {
          return applyUnaryPrefix(UI_GetIntFromObject(obj, p), *p); // Get it's value, apply '-' or '!' if that prefix exists
       }
       else                                                        // else not an object... see if it's its a literal number
-      { 
+      {
          if( ReadDirtyBinaryWord((U8 const *)p, &n))              // Read e.g 0x1000_1100?
          {
             return n;                                             // then return that, no scale applied
@@ -104,7 +104,7 @@ PUBLIC S16 UI_GetScalarArg(U8 *args, U8 idx, float scale )
             }
             else                                                  // else got a number
             {           // return the number scaled, but if 'scale' == 0 then don't use 'scale'
-               return ClipFloatToInt(f/(scale == 0.0 ? 1.0 : scale));  
+               return ClipFloatToInt(f/(scale == 0.0 ? 1.0 : scale));
             }
          }
       }
@@ -119,9 +119,9 @@ PUBLIC S16 UI_GetScalarArg(U8 *args, U8 idx, float scale )
    S_Obj CONST * obj;
    float    f;
    U8       *p;
-   
+
    p = (U8*)Str_GetNthWord(args, idx);                            // Get the arg
-   
+
    if( Str_EndOfLineOrString(*p))                                 // no nth arg?
    {
       return 0;                                                   // so return 0
@@ -143,18 +143,18 @@ PUBLIC S16 UI_GetScalarArg(U8 *args, U8 idx, float scale )
                      : Obj_ReadScalar(obj));                      // else return value unmodified.
       }
       else                                                        // else not an object... see if it's its a literal number
-      {  
+      {
          if( !ReadASCIIToFloat((U8 const *)p, &f) )               // Try reading a number, failed?
          {
             return 0;
          }
          else                                                     // else got a number
          {           // return the number scaled, but if 'scale' == 0 then don;t use 'scale'
-            return ClipFloatToInt(f/(scale == 0.0 ? 1.0 : scale));  
+            return ClipFloatToInt(f/(scale == 0.0 ? 1.0 : scale));
          }
       }
    }
 }
 #endif // PARSE_COMPOSITE_VECS
 
-// ------------------------------------ eof ----------------------------------------------- 
+// ------------------------------------ eof -----------------------------------------------

@@ -35,7 +35,7 @@ PRIVATE U8 compareVecElement( S_Obj CONST * obj, S16 *nums, U8 compareType, U8 i
 {
    U8 errNum;
 
-   if( errNum = compare_Ints(nums, compareType))
+   if( 0 != (errNum = compare_Ints(nums, compareType)))
    {
       sprintf(PrintBuf.buf, "%s[%d]: ", obj->name, idx);
       PrintBuffer();
@@ -66,7 +66,7 @@ PRIVATE U8 compareVecElement( S_Obj CONST * obj, S16 *nums, U8 compareType, U8 i
 |  numbers, otherwise literals are scaled before being compared to the internal, integer,
 |  value of the Scalar. Examples:
 |
-|     compare scalar1 greater 33.2;   
+|     compare scalar1 greater 33.2;
 |        returns 1 if scalar1 > 33.2. '33.2' is scaled to the internal units for 'scalar1';
 |        e.g if scaling is x100 then 33.2 will be converted to 3320.
 |
@@ -93,21 +93,21 @@ PRIVATE U8 compareVecElement( S_Obj CONST * obj, S16 *nums, U8 compareType, U8 i
 |     compare vec1 less 100 raw
 |        Return 1 if every element of vec1 is < 100, read as a raw number.
 |
-|  
+|
 |  UI_Compare() prints an error message for each comparision which fails. The message
 |  show the value and the limits. For vectors the message names the element which failed.
 |
 |
 |
-|  RETURNS:  If arg list is well-formed and all comparisions are true (success) then 
+|  RETURNS:  If arg list is well-formed and all comparisions are true (success) then
 |            returns 1, else 0.
-|  
+|
 ------------------------------------------------------------------------------------------*/
 
 extern float GetArgScale(U8 *args);
 
 
-PUBLIC U8 CONST Compare_Vec_Help[] = 
+PUBLIC U8 CONST Compare_Vec_Help[] =
 "Usage:\r\n\
     <scalar type to compare> <comparision = 'greater''>' | 'less''<' | 'inside' |'equal''==' | 'notEqual' '!=' '<>'>...\r\n\
     <limit | lo limit> [hi limit] ['raw']\r\n\
@@ -123,11 +123,11 @@ PRIVATE void tellBad1stArg(void)
 }
 
 // *** Duplicated in compare.c
-typedef enum 
-{  compare_Inside, 
-   compare_Greater, compare_GreaterSym, 
-   compare_Less, compare_LessSym, 
-   compare_Equal, compare_EqualSym, 
+typedef enum
+{  compare_Inside,
+   compare_Greater, compare_GreaterSym,
+   compare_Less, compare_LessSym,
+   compare_Equal, compare_EqualSym,
    compare_NotEqual, compare_NotEqualSym, compare_NotEqualCSym
 } E_Compares;
 
@@ -135,8 +135,8 @@ typedef enum
 
 PUBLIC U8 UI_Compare_Vec(U8 *args)
 {
-   U8    c, 
-         numCompares, 
+   U8    c,
+         numCompares,
          numLimits,
          compareType,
          bad,
@@ -150,7 +150,7 @@ PUBLIC U8 UI_Compare_Vec(U8 *args)
    S_Obj CONST * obj1;
 
 
-   if( !(obj = GetObj(args)) ) 
+   if( !(obj = GetObj(args)) )
    {
       tellBad1stArg();
       return 0;
@@ -170,7 +170,7 @@ PUBLIC U8 UI_Compare_Vec(U8 *args)
       nums[1] = UI_GetScalarArg(args, 2, scale);            // and value of the next number (the 3rd arg)
       nums[2] = UI_GetScalarArg(args, 3, scale);            // and the 3rd number (4th arg), if it exists
 
-      if( errNum = compare_Ints(nums, compareType))          // compare 1st arg against limit(s), error?
+      if( 0 != (errNum = compare_Ints(nums, compareType))) // compare 1st arg against limit(s), error?
       {
          sprintf(PrintBuf.buf, "%s: ", obj->name);
          PrintBuffer();
@@ -184,7 +184,7 @@ PUBLIC U8 UI_Compare_Vec(U8 *args)
    }
    else if( obj->type == _Class_Vec )                       // else 1st arg is a Vector?
    {
-      v1 = (S_Vec *)obj->addr;                              
+      v1 = (S_Vec *)obj->addr;
       numCompares = Vec_Size(v1);                           // Will test each element in source vector
                                                             // (unless comparsion vector has fewer limits)
 
@@ -197,7 +197,7 @@ PUBLIC U8 UI_Compare_Vec(U8 *args)
             { numLimits /= 2; }                             // then have half as many ets of limits as vector elements
 
          numCompares = MinU8(numCompares, numLimits);       // compare no more elements than in the smaller vector
-               
+
          for( c = 0, bad = 0; c < numCompares; c++ )        // for each comparison to be done
          {
             nums[0] = v1->nums[c];                          // value to be checked against limits
@@ -235,4 +235,4 @@ PUBLIC U8 UI_Compare_Vec(U8 *args)
    return 0;
 }
 
-// ----------------------------------------- eof --------------------------------------- 
+// ----------------------------------------- eof ---------------------------------------

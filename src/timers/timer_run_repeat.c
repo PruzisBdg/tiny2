@@ -10,7 +10,7 @@
 |     Timer_RunShort()  - Same as timer_Run() but no parm for callback function
 |                         and delay time is T_STime (short time) only
 |     Timer_RunRepeat() - Execute callback() multiple times, separated by a repeat interval.
-|     Timer_RunRepeat_NoParm() 
+|     Timer_RunRepeat_NoParm()
 |
 |--------------------------------------------------------------------------*/
 
@@ -33,9 +33,9 @@ typedef struct
 
 /* This dummy variable prevents 'timers[]' from being linked into address 0 if this
    file (timers.obj) is the first on the link list. This is essential because, if
-   timers[] is linked to address 0, then getFreeTimer() will return 0 = 'fail' 
+   timers[] is linked to address 0, then getFreeTimer() will return 0 = 'fail'
    as the address of the 1st timer.
-*/   
+*/
 PRIVATE U8 DummyVariableTakesAddrZero;
 
 PRIVATE S_Timer timers[10];            // Block of timers, dynamically allocated
@@ -48,7 +48,7 @@ PRIVATE S_Timer timers[10];            // Block of timers, dynamically allocated
 |
 -----------------------------------------------------------------------------------*/
 
-PRIVATE S_Timer * getTimer(U8 c) 
+PRIVATE S_Timer * getTimer(U8 c)
 {
    return &timers[c];
 }
@@ -72,7 +72,7 @@ PRIVATE S_Timer * getFreeTimer(void)
          return getTimer(c);                 // then return this timer.
       }
    }
-   return 0;                                 // no free timers found  
+   return 0;                                 // no free timers found
 }
 
 
@@ -80,8 +80,8 @@ PRIVATE S_Timer * getFreeTimer(void)
 |
 |  Timer_RunRepeat()
 |
-|  Call 'callback('parm')' after 'delay'. Repeat 'repeatCnt' times. ;parm' and 
-|  the repeat count will be passed to the callback function each time it is run. 
+|  Call 'callback('parm')' after 'delay'. Repeat 'repeatCnt' times. ;parm' and
+|  the repeat count will be passed to the callback function each time it is run.
 |
 |  Returns 0 if no timer was free, else 1
 |
@@ -131,7 +131,7 @@ PRIVATE U8 initTimers(void)
 |
 |  runTimers()
 |
-|  Is triggered every (0.1sec) by a tick. Runs callback and frees any timers which 
+|  Is triggered every (0.1sec) by a tick. Runs callback and frees any timers which
 |  have timed out.
 |
 -----------------------------------------------------------------------------------*/
@@ -140,26 +140,26 @@ PRIVATE U8 runTimers(S_TinySM_EventList *events)
 {
    U8 c;
    S_Timer *t;
-   
+
    for( c = 0; c < RECORDS_IN(timers); c++ )          // for each timer in the list
    {
       t = getTimer(c);                                // get the timer
-      
+
       if( Timeout(t->t1) )                            // done?
       {
          if(t->repeatCnt != _Timer_NoRepeat)          // Do use repeats?
-         { 
+         {
             if(DecrU8_NowZero(&t->repeatCnt))         // Decrement. Last/only repeat?
                { t->t1 = _Never; }                    // then mark timer as free
             else                                      // else more repeats to do
-               { _SetDelay(t->t1, t->delay); }        // so will repeat after 'delay'                      
+               { _SetDelay(t->t1, t->delay); }        // so will repeat after 'delay'
          }
          else                                         // else no repeats
          {
             t->t1 = _Never;                           // so this will be the last time
          }
          if(t->callback)                              // There's a callback()? (there should be!)
-            { (*t->callback)(t->parm, t->repeatCnt); }// then run it, passing 'parm' and repeat count         
+            { (*t->callback)(t->parm, t->repeatCnt); }// then run it, passing 'parm' and repeat count
       }
    }
    return 1;
@@ -172,19 +172,19 @@ PRIVATE U8 runTimers(S_TinySM_EventList *events)
 */
 
 #if _TOOL_IS == TOOL_Z8_ENCORE
-PRIVATE U8(CONST_FP * stateFuncs[])(S_TinySM_EventList*) = 
+PRIVATE U8(CONST_FP * stateFuncs[])(S_TinySM_EventList*) =
 {
    0,             // no entry function
    runTimers      // and just one state
 };
-#elif _TOOL_IS == TOOL_CC430 || _TOOL_IS == TOOL_GCC_ARM
-PRIVATE U8(* const stateFuncs[])(S_TinySM_EventList*) = 
+#elif _TOOL_IS == TOOL_CC430 || _TOOL_IS == TOOL_GCC_ARM ||  _TOOL_IS == TOOL_GCC_X86
+PRIVATE U8(* const stateFuncs[])(S_TinySM_EventList*) =
 {
    0,             // no entry function
    runTimers      // and just one state
 };
 #elif _TOOL_IS == TOOL_RIDE_8051
-PRIVATE U8(CONST_FP * CODE stateFuncs[])(S_TinySM_EventList*) = 
+PRIVATE U8(CONST_FP * CODE stateFuncs[])(S_TinySM_EventList*) =
 {
    0,             // no entry function
    runTimers      // and just one state
@@ -194,7 +194,7 @@ PRIVATE U8(CONST_FP * CODE stateFuncs[])(S_TinySM_EventList*) =
 PUBLIC S_TinySM Timers_StateM;
 
 
-PUBLIC S_TinySM_Cfg CONST Timers_StateM_Cfg = 
+PUBLIC S_TinySM_Cfg CONST Timers_StateM_Cfg =
 {
    1,                   // 1 state (excluding entry function)
    0,                   // no flags - default behaviour
@@ -208,4 +208,4 @@ PUBLIC S_TinySM_Cfg CONST Timers_StateM_Cfg =
 
 
 
- 
+

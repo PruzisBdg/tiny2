@@ -1,7 +1,7 @@
 #ifndef COMMON_H
 #define COMMON_H
 
-#include "GenericTypeDefs.h"		// Redirect to Generac's typedefs
+#include "spj_stdint.h"		// Sized types.
 #include "libs_support.h"
 
 // ================== Add/remap pre-Generac stuff ============================
@@ -33,11 +33,11 @@
 #define BSET(reg,mask) ((reg) & (mask))
 #define BCLR(reg,mask) (!((reg) & (mask)))
 	#endif
-	
+
 #define ALL_SET(v,m) (((v)&(m))==(m))
 #define ANY_SET(v,m) (((v)&(m))!=0)
 #define NOT_SET(v,m) (((v)&(m))==0)
-	
+
 #define CLIP(n, min, max) (((n)<(min))?(min):(((n)>(max))?(max):(n)))
 
 #endif // COMMON_H

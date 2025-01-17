@@ -57,7 +57,7 @@ extern S16 EvalExpr(U8 *expr);
 // ============================== PRIVATE ============================================
 
 // Specifies a loop
-typedef struct    
+typedef struct
 {
    U8          cnt,        // number of loops so far
                limit;      // if a given number of loops specified, this is how many
@@ -102,8 +102,8 @@ typedef struct
    U8          paused,                 // Script execution paused.
                numSubs,                // the number of subroutines declared in the current script
                skipSub,                // When parsing. '1' = skip through subroutine lines without executing
-               stackCnt;               // The stack depth for subroutine calls 
-   S_Sub       subs[_MaxSubs];         // Subroutine contexts  
+               stackCnt;               // The stack depth for subroutine calls
+   S_Sub       subs[_MaxSubs];         // Subroutine contexts
 } S_ScriptEngine;
 
 PRIVATE S_ScriptEngine s;
@@ -141,7 +141,7 @@ PRIVATE BIT printMoreOnCurrentLine;
 PRIVATE T_LineNum getSub1stLine(U8 *name)
 {
    U8 c;
-   
+
    for( c = 0; c < s.numSubs; c++ )
    {
       if( Str_1stWordsMatch(s.subs[c].name, name) )
@@ -189,7 +189,7 @@ PRIVATE void popScriptContext(void)
       CopyBytesU8((U8*)&s.pushed2, (U8*)&s.pushed, sizeof(S_State));    // and 2nd down to 1st
       s.stackCnt--;                                            // and one less on the stack
    }
-   
+
 }
 
 /*-----------------------------------------------------------------------------------------
@@ -231,16 +231,16 @@ PRIVATE BIT evalCondition( U8 *expr )
    {
       case expr_LastFailed:                                       // 'lastFailed'?
          return BSET( s.curr.flags, _Flags_LastUserCmdFailed);    // then return true if that flag set
-              
+
       case expr_AnyFailed:                                        // 'anyFailed'?
          return BSET( s.curr.flags, _Flags_AnyUserCmdFailed);     // then return true if that flag set
-               
+
       case expr_NoneFailed:                                       // 'noneFailed'?
          return BCLR( s.curr.flags, _Flags_AnyUserCmdFailed);     // then return true if AnyFailed is clear
-               
+
       case expr_True:
          return 1;
-               
+
       case expr_False:
          return 0;
 
@@ -252,8 +252,8 @@ PRIVATE BIT evalCondition( U8 *expr )
 // List of script commands
 
 typedef enum
-{ 
-   cmd_Wait, 
+{
+   cmd_Wait,
    cmd_PrintRtn,           // prints a string and newline
    cmd_PrintDRtn,          // '$' = shortform for 'print' = cmd_PrintRtn
    cmd_PrintD,             // '$$' = print strng, no newline
@@ -265,17 +265,17 @@ typedef enum
    cmd_Wend,               // ends 'while'
    cmd_Break,              // break out of a loop
    cmd_Continue,           // goto top of loop
-   cmd_If, 
-   cmd_EndIf, 
-   cmd_Else, 
-   cmd_ElseIf, 
+   cmd_If,
+   cmd_EndIf,
+   cmd_Else,
+   cmd_ElseIf,
    cmd_Eval,               // evaluate an expression without printing the result; used for assignments
    cmd_Pause,              // pause until Ctr-R (resume) is pressed.
    cmd_Beep,
    cmd_WaitFor,            // wait until and expression is true
    cmd_ClrFail,            // Clear the last fail flag
    cmd_DoAt,               // Do something at a specified time. Continue with script in meantime
-   cmd_DoAfter,            // Do something after a delay. Continue with script in meantime 
+   cmd_DoAfter,            // Do something after a delay. Continue with script in meantime
    cmd_Sub,                // starts a subroutine definition
    cmd_EndSub,             // end a subroutine definition
    cmd_Call,               // call a subroutine
@@ -284,7 +284,7 @@ typedef enum
    cmd_DoOnQuit            // Actions on quit.
 } E_Actions;
 
-PRIVATE U8 CONST scriptCmds[] = 
+PRIVATE U8 CONST scriptCmds[] =
 "wait print $ $$ quit repeat endrepeat until while wend break continue "
 "if endif else elif < pause beep waitfor clrfail doat doafter sub endsub call return repeatIntvl doOnQuit";
 
@@ -300,7 +300,7 @@ PRIVATE BIT isConditionalCmd(U8 cmd)
 {
    switch(cmd)
    {
-      case cmd_PrintRtn: 
+      case cmd_PrintRtn:
       case cmd_PrintDRtn:
       case cmd_PrintD:
       case cmd_Quit:
@@ -312,7 +312,7 @@ PRIVATE BIT isConditionalCmd(U8 cmd)
       case cmd_ElseIf:
       case cmd_Pause:
          return 1;
-         
+
       default:
          return 0;
    }
@@ -351,7 +351,7 @@ PRIVATE BIT readInt(U8 *str, S16 *n)
 |  getTimeFromStr()
 |
 |  Return the system ticks corresponding to 'timeStr'. If 'timeStr' has 'minutes' appended
-|  then read as minutes, else read as seconds.  
+|  then read as minutes, else read as seconds.
 |
 |  'timeStr' must start with a number, no leading whitespace  e.g '10' or '10 minutes'
 |  If 'timeStr' did not start with a legal number, then return 0.
@@ -364,11 +364,11 @@ PRIVATE U8 CONST hourWords[]   = "hr hrs hour hours";
 PRIVATE T_LTime getTimeFromStr( U8 *timeStr )
 {
    float f;
-   
+
    return                              // Read 'timeStr', return as system ticks
       !readFloat(timeStr, &f)                         // Couldn't parse a float number?
          ? 0                                          // then return zero
-         : ClipFloatToLong(                           // else result is clipped from float of... 
+         : ClipFloatToLong(                           // else result is clipped from float of...
             TicksPerSec                               // TicksPerSec multiplied by
             * f                                       // the time number, multiplied by ...
             * (Str_WordsInStr(s.args, _StrConst(minuteWords)) != _Str_NoMatch    // If followed by 'minutes'?
@@ -378,7 +378,7 @@ PRIVATE T_LTime getTimeFromStr( U8 *timeStr )
                   : 1.0                                                          // else neither 'minutes' nor 'hours' so x1
                  )
               )
-           );           
+           );
 }
 
 
@@ -386,7 +386,7 @@ PRIVATE T_LTime getTimeFromStr( U8 *timeStr )
 |
 |  getDoAtArg()
 |
-|  For 'theLine' containing a 'doat' and 'doafter', return a pointer the the 'action'. E.g 
+|  For 'theLine' containing a 'doat' and 'doafter', return a pointer the the 'action'. E.g
 |
 |     "doat 2 minutes : quit"
 |
@@ -400,11 +400,11 @@ PRIVATE T_AnyAddr getDoAtArg( U8 CONST * theLine )
    T_AnyAddr p;
 
    File_EnterTextBank();
-   
+
    c = Str_FindWord(_StrConst(theLine), _U8Ptr(":"));    // Get index to ':'
    if( c < _Str_NoMatch ) c += 1;                        // Bump index to next word
    p = (T_AnyAddr)Str_GetNthWord(_StrConst(theLine), c);       // Use U16 so works with CONST and non-const pointers
-   
+
    File_LeaveTextBank();
    return p;
 }
@@ -415,7 +415,7 @@ PRIVATE T_AnyAddr getDoAtArg( U8 CONST * theLine )
 |  Beeper control
 |
 |  Do one or more beeps, 1 sec apart. Each beep is 0.2sec.
-|  
+|
 |  Beeps are done using the Timers callback.
 |
 ------------------------------------------------------------------------------------------*/
@@ -448,7 +448,7 @@ PRIVATE void doScriptLineUntil( U8 CONST *scriptLine, U8 cnt )
    doScriptLine(scriptLine);
 
    if(cnt == 0 && s.paused)
-      { TinySM_SendEvent(&Script_StateM, _Script_Event_Resume); }    
+      { TinySM_SendEvent(&Script_StateM, _Script_Event_Resume); }
 }
 
 
@@ -463,10 +463,10 @@ PRIVATE void doScriptLineUntil( U8 CONST *scriptLine, U8 cnt )
 |
 |     doat 10 minutes : $ execute e.g this line
 |
-|  ***** Note: To avoid recursion feed the action to the timer even if it's its due now. 
-|  doScriptLine()  calls the command interpreter doScriptCmd() to process the remainder 
-|  of the same script line. But doScriptCmd() already called this function, 
-|  sendScriptLineToTimer()!!! Avoid this recursion by always using the timer which 
+|  ***** Note: To avoid recursion feed the action to the timer even if it's its due now.
+|  doScriptLine()  calls the command interpreter doScriptCmd() to process the remainder
+|  of the same script line. But doScriptCmd() already called this function,
+|  sendScriptLineToTimer()!!! Avoid this recursion by always using the timer which
 |  runs in a seprate thread.
 |
 ------------------------------------------------------------------------------------------*/
@@ -475,7 +475,7 @@ PRIVATE void sendScriptLineToTimer(T_LTime delay)
 {
    Timer_Run(                       // Queue timer to run 'doScriptLine()'
       delay,                        //  after this delay
-      (void(*)(U16))doScriptLine,   // 'Timers' will execute this function 
+      (void(*)(U16))doScriptLine,   // 'Timers' will execute this function
       getDoAtArg(s.linePtr)) ;      // which parses this script line, retrieved from after the colon (:)
 }
 
@@ -485,7 +485,7 @@ PRIVATE void sendScriptLineToTimer(T_LTime delay)
 |
 |  If 'theLine' is a script command or it's 1st arg is a writeable system scalar
 |  then execute the line.
-|  
+|
 |  Returns:
 |     '_cmd_OK'      if script command executed successfully
 |     '_cmd_Error'   if it did not
@@ -510,16 +510,16 @@ PRIVATE U8 doScriptCmd( U8 *theLine, U8 autoAdvance )
    U8    cmdIdx,
          idx,
          argListLen;
-         
-   T_LineNum firstSubLine;         
-         
+
+   T_LineNum firstSubLine;
+
    T_LTime t;
-         
-   S16   n;         
+
+   S16   n;
    BIT   conditionTrue;
    BIT   gotCondition;
    BIT   branched;
-   
+
    if( (cmdIdx = Str_FindWord(_StrConst(scriptCmds), theLine)) == _Str_NoMatch &&
         !Obj_IsWritableScalar(GetObj(Str_GetNthWord(theLine, 0))) )
    {
@@ -546,18 +546,18 @@ PRIVATE U8 doScriptCmd( U8 *theLine, U8 autoAdvance )
          // If a conditional command, preevaluate the condition now - saves code
 
          s.args = (U8 *)Str_GetNthWord(theLine, 1);      // Get args, everything from 2nd word onward.
-         
+
          gotCondition = 0; conditionTrue = 0;            // unless set below
          if( Str_WordCnt(s.args) > 0 && isConditionalCmd(cmdIdx))  // are there args AND comamnd is a conditional?
          {
             gotCondition = 1;                            // then assume args are a conditional expression
             conditionTrue = evalCondition(s.args);       // and evaluate the expression
          }
-      
+
          switch( cmdIdx )
          {
             case cmd_Wait:
-               if( t = getTimeFromStr(s.args) )
+               if( (t = getTimeFromStr(s.args)) > 0 )
                {
                   _SetDelay(s.dlyTimer, t);
                   TinySM_SendEvent(&Script_StateM, _Script_Event_Delay);
@@ -568,7 +568,7 @@ PRIVATE U8 doScriptCmd( U8 *theLine, U8 autoAdvance )
                   return _cmd_Error;
                }
                break;
-   
+
             case cmd_PrintD:
             case cmd_PrintRtn:
             case cmd_PrintDRtn:
@@ -581,26 +581,26 @@ PRIVATE U8 doScriptCmd( U8 *theLine, U8 autoAdvance )
                   else
                      { break; }                                                     // else no printout, quit here
                }
-               
+
                if(cmdIdx == cmd_PrintD)
                   { printMoreOnCurrentLine = 1; }
                else
                   { printMoreOnCurrentLine = 0; }
-                  
+
                WrStrLiteral(cmdIdx == cmd_PrintD ? "  " : "\r\n");                  // wrote something; finish with spaces or CRLF.
                break;
-               
+
             case cmd_Quit:
                if( conditionTrue || !gotCondition )
                {
                   sprintf(PrintBuf.buf, "Quit script at line %d \"%s\"\r\n", (S16)s.curr.lineNum, s.args);
                   PrintBuffer();
-                  
+
                   while(1)
                   {
                      if( !fetchScriptLine(lineBuf, s.script, ++s.curr.lineNum) )
                         { return _cmd_Quit; }
-                  
+
                      if( Str_FindWord(lineBuf, "doOnQuit") != _Str_NoMatch )
                         { break; }
                   }
@@ -608,7 +608,7 @@ PRIVATE U8 doScriptCmd( U8 *theLine, U8 autoAdvance )
                }
                else
                   { break; }
-                  
+
             case cmd_DoOnQuit:                                 // Label 'doOnQuit'
                return _cmd_OK;                                 // Ignore the label, goto next line.
 
@@ -620,21 +620,21 @@ PRIVATE U8 doScriptCmd( U8 *theLine, U8 autoAdvance )
                else                                            // else 2nd arg was a number
                {
                   if( n > 100 )                                // too large? loop counter is a byte
-                     { _scriptErrorMsg( "Loop count was limited to 100 max" ); 
+                     { _scriptErrorMsg( "Loop count was limited to 100 max" );
                        s.curr.loop.limit = 100; }              // then limit to 100
                   else
-                     { s.curr.loop.limit = n; }                // else use the number given                     
+                     { s.curr.loop.limit = n; }                // else use the number given
                }
                s.curr.loop.start = s.curr.lineNum+1;           // loop starts at 1st line past 'repeat' statement
                break;
-               
+
             case cmd_EndRepeat:
                if( BSET(s.curr.flags, _Flags_Break) )          // broke inside the loop?
                {
                   CLRB(s.curr.flags, _Flags_Break);            // then clear flag and continue past the 'endrepeat'
                }
                else if( ++s.curr.loop.cnt < s.curr.loop.limit )// else not reached loop count?
-               { 
+               {
                   s.curr.lineNum = s.curr.loop.start;          // then loop back
                   branched = 1;                                // don't advance the line counter
                }
@@ -654,7 +654,7 @@ PRIVATE U8 doScriptCmd( U8 *theLine, U8 autoAdvance )
                   }
                }
                break;
-               
+
             case cmd_While:
                if( !conditionTrue )
                {
@@ -665,7 +665,7 @@ PRIVATE U8 doScriptCmd( U8 *theLine, U8 autoAdvance )
                   s.curr.loop.start = s.curr.lineNum;
                }
                break;
-               
+
             case cmd_Wend:
                if( BSET(s.curr.flags, _Flags_Break) )          // broke inside the loop?
                {
@@ -677,7 +677,7 @@ PRIVATE U8 doScriptCmd( U8 *theLine, U8 autoAdvance )
                   branched = 1;
                }
                break;
-               
+
             case cmd_Continue:
                if( conditionTrue || !gotCondition )
                {
@@ -685,75 +685,75 @@ PRIVATE U8 doScriptCmd( U8 *theLine, U8 autoAdvance )
                   branched = 1;
                }
                break;
-               
+
             case cmd_Break:
                if( conditionTrue || !gotCondition )
                {
                   SETB( s.curr.flags, _Flags_Break );
                }
                break;
-               
+
             // If-elseif-else starts with _Flags_DidAnIf and _Flags_Skip clear (0)
-               
+
             case cmd_If:
                if( conditionTrue )                             // condition true?
                   { SETB(s.curr.flags, _Flags_DidAnIf); }      // then mark that we executed this block
                else
                   { SETB(s.curr.flags, _Flags_Skip); }         // else skip this block - test / execute next one
                break;
-               
+
             case cmd_ElseIf:
                if( BSET(s.curr.flags, _Flags_DidAnIf) ||       // already executed an if clause?
                    !conditionTrue )                            // or this condition false
                   { SETB( s.curr.flags, _Flags_Skip ); }       // then skip this block - do else
                else
-               { 
+               {
                   CLRB( s.curr.flags, _Flags_Skip );           // else clear so this block will be executued
                   SETB(s.curr.flags, _Flags_DidAnIf)           // and mark that we executed a block
-               }       
+               }
                break;
 
-            case cmd_Else:                                     
+            case cmd_Else:
                if( BSET(s.curr.flags, _Flags_DidAnIf) )        // executed any if clause?
                   { SETB( s.curr.flags, _Flags_Skip ); }       // then must skip else
                else
                   { CLRB( s.curr.flags, _Flags_Skip ); }       // otherwise execute else clause
                break;
-               
-            case cmd_EndIf:                                    
+
+            case cmd_EndIf:
                CLRB( s.curr.flags, _Flags_Skip );              // reset these flags for the next conditional
                CLRB( s.curr.flags, _Flags_DidAnIf );
                break;
-               
+
             case cmd_Eval:                                     // Evaluate without printing
                EvalExpr(s.args);
                break;
-               
+
             case cmd_Pause:
                if( conditionTrue || !gotCondition )            // Unconditional pause? OR condtional and condition is true?
                {
                   s.paused = 1;                                // then set flags which tell engine we are paused.
                   sprintf(PrintBuf.buf, "paused script at line %d; Ctrl-R to resume\r\n", (S16)s.curr.lineNum);
                   PrintBuffer();
-                  
+
                   if( Str_WordInStr(s.args, _U8Ptr("beep")) )  // Beep too?
                      { doBeeps(3); }                           // then do 3 beeps
                }
                break;
-               
+
             case cmd_Beep:
                doBeeps(UI_GetScalarArg(s.args, 0, 0.0));       // Do the number of beeps specified in the 1st arg
-               break; 
-               
+               break;
+
             case cmd_WaitFor:
                s.dlyTimer = _Never;
-            
+
                if( (idx = Str_FindWord(s.args, _U8Ptr("upto"))) != _Str_NoMatch )   // Wait has a timeout?
                {
-                  if( t = getTimeFromStr( (U8*)Str_GetNthWord(s.args, idx+1)) )     // Read how long to wait before timeout?
+                  if( (t = getTimeFromStr( (U8*)Str_GetNthWord(s.args, idx+1))) > 0 ) // Read how long to wait before timeout?
                   {
                      _SetDelay(s.dlyTimer, t);                                      // then set dealy to that time
-                     
+
                      if( Str_WordInStr(s.args, _U8Ptr("quitIfTimeout")) )           // Quit if there's a timeout?
                      {
                         SETB(s.curr.flags, _Flags_QuitIfTimeout);                   // then set a flag for that
@@ -761,12 +761,12 @@ PRIVATE U8 doScriptCmd( U8 *theLine, U8 autoAdvance )
                   }
                }
                TinySM_SendEvent(&Script_StateM, _Script_Event_Wait);                // Send the script engine from 'run' to 'wait'
-               break; 
-               
+               break;
+
             case cmd_ClrFail:
                CLRB(s.curr.flags, _Flags_LastUserCmdFailed);
-               break; 
-               
+               break;
+
             case cmd_DoAt:
                t = getTimeFromStr(s.args) + s.started;         // calc time at which to excute
 
@@ -775,16 +775,16 @@ PRIVATE U8 doScriptCmd( U8 *theLine, U8 autoAdvance )
                      ? 0                              // then do right now
                      : t - _Now());                    // else do after 't' ticks
                break;
-               
+
             case cmd_DoAfter:
                sendScriptLineToTimer( getTimeFromStr(s.args));
                break;
-               
+
             case cmd_Sub:
                if( s.numSubs >= _MaxSubs )                              // Subroutine list already full?
                   { _scriptErrorMsg("Too many subs - can't log reference"); }
                else                                                     // else room for another sub
-               { 
+               {
                   if( Str_WordCharCnt(s.args) >= _SubNameMaxChars )
                      { _scriptErrorMsg("Subroutine name too long - 20 chars max"); }
                   else
@@ -802,29 +802,29 @@ PRIVATE U8 doScriptCmd( U8 *theLine, U8 autoAdvance )
                   { s.skipSub = 0; }                        // Now have left subroutine body so reeenable command line execution
                else                                         // else subroutine was being executed
                   { popScriptContext(); }                   // so pop context back to caller
-               break;  
-               
+               break;
+
             case cmd_Return:
                if( !s.skipSub )                             // Wasn't parsing past this subroutine? ....
                {                                            // so must have been executing it
                   popScriptContext();                       // Therefore, pop context back to caller
                }
-               break;          
+               break;
 
             case cmd_Call:
                if( !(firstSubLine = getSub1stLine(s.args)) )            // Subroutine not in the sub list?
                   { _scriptErrorMsg("Subroutine not found"); }
                else                                                     // else found subroutine in the sub list
                {
-                  /* The argument list is the first 1 to (4) words following 'call'. 
-                     Str_GetEndWord(str, n) returns the end of the nth word in 'lst' or, if 
+                  /* The argument list is the first 1 to (4) words following 'call'.
+                     Str_GetEndWord(str, n) returns the end of the nth word in 'lst' or, if
                      there are fewer than 'n' words', the end of the last word.
                   */
                   argListLen = Str_GetEndWord(s.args, _SubMaxArgs) - Str_GetNthWord(s.args, 1) + 1;
-               
+
                   if( argListLen > _MaxArgListChars )
                   {
-                     _scriptErrorMsg("Argument list must be < 40 chars");   
+                     _scriptErrorMsg("Argument list must be < 40 chars");
                   }
                   else
                   {
@@ -836,7 +836,7 @@ PRIVATE U8 doScriptCmd( U8 *theLine, U8 autoAdvance )
                   }
                }
                break;
-               
+
             case cmd_DoRepeat:
                if( readInt( s.args, &n) )                                  // Fetch the 1st arg; if it exists it should be an integer?
                {
@@ -844,7 +844,7 @@ PRIVATE U8 doScriptCmd( U8 *theLine, U8 autoAdvance )
                   {
                      if( (t = getTimeFromStr((U8*)Str_GetNthWord(theLine, 2))) == 0 )  // Fetch next arg(s), which should be a time?
                      {
-                        _scriptErrorMsg("2nd arg must be a time");         // Say we didn't get a legal time  
+                        _scriptErrorMsg("2nd arg must be a time");         // Say we didn't get a legal time
                      }
                      else                                                  // else got a legal loop count and time
                      {                                                     // So setup timer to repeat the rest of the script line
@@ -853,21 +853,21 @@ PRIVATE U8 doScriptCmd( U8 *theLine, U8 autoAdvance )
                            (void(*)(U16,U8))doScriptLineUntil,       // Run this function...
                            getDoAtArg(s.linePtr),                    // which will process whatever is after the ':' colon
                            n);                                       // Repeat this many times.
-                           
+
                         if( Str_WordInStr(s.args, _U8Ptr("wait")) )        // Got 'wait'
                         {
                            s.paused = 1;                                   // then pasue script, will be restarted by timer when done
-                        } 
+                        }
                      }
                      break;
                   }
                }
-               _scriptErrorMsg("1st arg must be count 1-254");             // Didn't get a legal loop count   
+               _scriptErrorMsg("1st arg must be count 1-254");             // Didn't get a legal loop count
                break;
-             
+
             default:
                /* If we got here it's because the 1st arg in the line was a writeable scalar
-                  (see the top of doScriptCmd() ). Try to eval this; it should be an 
+                  (see the top of doScriptCmd() ). Try to eval this; it should be an
                   assignment e.g 'Valve3 = 1'. If it isn't an assignment then it will
                   just have no effect.
                */
@@ -908,13 +908,13 @@ PRIVATE U8 doUserCmd( U8 *cmdLine )
          if( strcmp((C8 CONST*)_StrConst(cl->cmd), (C8*)cmd) == 0 )    // Found a matching command?
          {
             Comms_WroteAStr = 0;                            // Clear this; will be set if the command replies to terminal
-            
+
             if( Str_WordCnt(cmdLine) < cl->minArgs+1 )      // too few args?
             {
                _scriptErrorMsg("too few args");             // then message
                return _cmd_Error;
             }
-            else if( cl->handler )                          // else enough args AND command has a handler (it always should)? 
+            else if( cl->handler )                          // else enough args AND command has a handler (it always should)?
             {
                if( (*cl->handler)((U8 *)Str_GetNthWord(cmdLine,1)) == 0)      // handler returned fail
                {
@@ -952,8 +952,8 @@ PRIVATE U8 doUserCmd( U8 *cmdLine )
 |  Lines in 'txt' may be separated by CR,LF or both. A line starts with an alphanumeric char
 |  and continues until CR or LF. Leading non alphanumeric chars are ignored.
 |
-|  'nextScriptLine' skips lines which do not have 'legal' script content. Empty lines or lines 
-|  with comments only are not counted.  
+|  'nextScriptLine' skips lines which do not have 'legal' script content. Empty lines or lines
+|  with comments only are not counted.
 |
 |  Returns the start of the next script line, else 0.
 |
@@ -979,8 +979,8 @@ PRIVATE CONST U8 * nextScriptLine( U8 CONST *txt )
       ch = *txt;
       File_LeaveTextBank();
 
-      if( ch == '\0' )                             // end of source string? 
-      { 
+      if( ch == '\0' )                             // end of source string?
+      {
          if( state == _line )                      // parsing next script line now?
             { break; }                             // so break to return the line
          else                                      // else don't have next script line yet
@@ -1021,7 +1021,7 @@ PRIVATE CONST U8 * nextScriptLine( U8 CONST *txt )
       }
       txt++;                                       // advance through source string
    }
-   
+
    // Break.. so got a script line. Check length and return the start of the line
 
    if((U8)(txt - lineStart) > _MaxCmdLineChars)
@@ -1054,19 +1054,19 @@ PRIVATE void copyScriptLineToStr( U8 *str, U8 CONST *txt )
 {
    U8 ch, idx, firstSpace;
    BIT wasAlpha;
-   
+
    for( idx = 0, wasAlpha = 0, firstSpace = 0;; idx++ )
    {
       File_EnterTextBank();
       ch = txt[idx];
       File_LeaveTextBank();
-      
+
       if( idx > 100 )
       {
          str[0] = '\0';
          return;
       }
-      
+
       if( idx >= _MaxCmdLineChars ||         // line too long?
           ch == _CommentCh ||                // start of (trailing) comment?
           ch == '\r' || ch == '\n' ||        // OR end of line?
@@ -1110,7 +1110,7 @@ PRIVATE void copyScriptLineToStr( U8 *str, U8 CONST *txt )
 |  Comments start with ';' and continue until end-of-line. They are not copied to 'out'.
 |
 |  'lineNum' counts only lines with 'legal' content which to be copied to 'out'. Empty lines
-|  or lines with comments only are not counted.  
+|  or lines with comments only are not counted.
 |
 |  Return 1 if copied a line to out, else 0.
 |
@@ -1121,15 +1121,15 @@ PRIVATE BIT fetchScriptLine( U8 *out, U8 CONST *txt, T_LineNum lineNum )
    // For efficiency cache the number and addr of the last-fetched line. Otherwise the script
    // engine must parse from the start of the script for each new line. Very slow if the
    // script is long.
-   
-   static T_LineNum lineCnt = 0;            
-   
+
+   static T_LineNum lineCnt = 0;
+
    if(lineNum == 0 || lineNum < lineCnt)           // either just started or looped back?
    {
       lineCnt = 0;                                 // then must (re)parse from start of script
       s.linePtr = txt;
    }                                               // otherwise continue forward form the current position
-   
+
    for( ;; lineCnt++ )                             // for each script line, starting at 'txt'
    {
       if(lineCnt == lineNum)                       // is the line we want?
@@ -1179,7 +1179,7 @@ PRIVATE void doScriptLine( U8 CONST *theLine )
 PRIVATE void markCommandFailed(void)
 {
    s.curr.flags |= _Flags_LastUserCmdFailed | _Flags_AnyUserCmdFailed;
-}   
+}
 
 
 
@@ -1225,7 +1225,7 @@ PRIVATE void postScriptEvent(U8 event)
 
 PRIVATE void stopScript_PrintMsg(U8 CONST *msg)
 {
-   WrStrLiteral(msg);                     
+   WrStrLiteral(msg);
    Script_Running = 0;                    // First clear the public status flag.
    postScriptEvent(_Script_Event_Stop);   // then tell anyone who needs to know (and may read the flag)
 }
@@ -1335,7 +1335,7 @@ PRIVATE U8 stopFunc(S_TinySM_EventList *events)
 
 #define _MaxSubroutineArgs 6        // Must match argLabels[] below
 
-#if _TOOL_IS == TOOL_RIDE_8051 || _TOOL_IS == TOOL_Z8_ENCORE || _TOOL_IS == TOOL_CC430 || _TOOL_IS == TOOL_GCC_ARM
+#if _TOOL_IS == TOOL_RIDE_8051 || _TOOL_IS == TOOL_Z8_ENCORE || _TOOL_IS == TOOL_CC430 || _TOOL_IS == TOOL_GCC_ARM || _TOOL_IS == TOOL_GCC_X86
 PRIVATE U8 CONST * CONST argLabels[] = {"#1", "#2", "#3", "#4", "#5", "#6" };
 #endif
 
@@ -1363,8 +1363,8 @@ PRIVATE U8 runFunc(S_TinySM_EventList *events)
                      _scriptErrorMsg("Too few args in subroutine call");
                   }
                   else                                            // else there are enough args
-                  {   
-                     Str_Replace(lineBuf, argLabels[c], Str_GetNthWord(s.curr.callArgs, c), 1, 1); 
+                  {
+                     Str_Replace(lineBuf, argLabels[c], Str_GetNthWord(s.curr.callArgs, c), 1, 1);
                   }
                }
             }
@@ -1374,8 +1374,8 @@ PRIVATE U8 runFunc(S_TinySM_EventList *events)
          {
             if( ((s.curr.flags & (_Flags_Break|_Flags_Skip)) == 0) && !s.skipSub)  // and don't skip user commands?
             {
-               CLRB(s.curr.flags, _Flags_LastUserCmdFailed);      // Clear mark before trying user command    
-            
+               CLRB(s.curr.flags, _Flags_LastUserCmdFailed);      // Clear mark before trying user command
+
                if( doUserCmd(lineBuf) == _cmd_Error )             // then try to run it as a user command
                {
                   markCommandFailed();
@@ -1391,10 +1391,10 @@ PRIVATE U8 runFunc(S_TinySM_EventList *events)
             stopScript_PrintMsg("");                              // Already printed a 'quit' message with a line number
             return _sStop;
          }
-   
+
          /* Handle any events which may have been posted from script commands ( inside doScriptCmd()
-            or doUserCmd() ). Do this now as, by default, unhandled events are cleared upon exiting 
-            the state function. 
+            or doUserCmd() ). Do this now as, by default, unhandled events are cleared upon exiting
+            the state function.
          */
          if( TinySM_GetEvent(events, _Script_Event_Delay))        // got a delay command?
             { return _sDelay; }
@@ -1404,7 +1404,7 @@ PRIVATE U8 runFunc(S_TinySM_EventList *events)
             { return _sRun;  }
 
       }
-      else 
+      else
       {
          stopScript_PrintMsg("End of script\r\n");
          return _sStop;
@@ -1487,7 +1487,7 @@ PRIVATE U8 waitFunc(S_TinySM_EventList *events)
 }
 
 
-PRIVATE U8(* CODE stateFuncs[])(S_TinySM_EventList*) = 
+PRIVATE U8(* CODE stateFuncs[])(S_TinySM_EventList*) =
 {
    entryFunc,     // handles Quit command
    bootFunc,      // at startup
@@ -1500,7 +1500,7 @@ PRIVATE U8(* CODE stateFuncs[])(S_TinySM_EventList*) =
 
 PUBLIC S_TinySM Script_StateM;
 
-PUBLIC S_TinySM_Cfg CONST Script_StateM_Cfg = 
+PUBLIC S_TinySM_Cfg CONST Script_StateM_Cfg =
 {
    RECORDS_IN(stateFuncs) - 1,   // number of state functions (entry function is excluded)
    0,                            // see note below
@@ -1509,9 +1509,9 @@ PUBLIC S_TinySM_Cfg CONST Script_StateM_Cfg =
    0                             // no init
 };
 
-/* *** N.B The script command line interpreter (CLI) sends events to the script state 
-   machine. These events are processed the NEXT time the state engine runs. Since the 
-   CLI runs inside the state machine the state machine musn't clear events automatically 
+/* *** N.B The script command line interpreter (CLI) sends events to the script state
+   machine. These events are processed the NEXT time the state engine runs. Since the
+   CLI runs inside the state machine the state machine musn't clear events automatically
    upon exit otherwise it will wipe CLI events.
 */
 
@@ -1541,7 +1541,7 @@ Examples:  'script 1 run'   Run script in txtfile 1\r\n\
    Ctrl-P to pause; Ctrl-R to resume\r\n\
 \r\n\
 ";
-   #endif // INCLUDE_HELP_TEXT 
+   #endif // INCLUDE_HELP_TEXT
 
 extern void File_SetupWrite(void);
 extern S_TxtFile TxtF;
@@ -1550,7 +1550,7 @@ PUBLIC U8 UI_Script(U8 *args)
 {
    U8  action,
        scriptNum;
-       
+
    if( Str_WordInStr(args, (U8 CONST *)"ver"))
    {
       sprintf( PrintBuf.buf, "Script Engine Rev is %s\r\n", _ScriptEngineRev);
@@ -1580,13 +1580,13 @@ PUBLIC U8 UI_Script(U8 *args)
                return 0;
             }
             else                                         // else this file has text
-            {               
+            {
                switch( action )
                {
                   case action_Run:                       // Either try to run the text as a script. OR...
                      Script_Run(scriptNum);
                      break;
-                     
+
                   case action_List:
                      File_List();                        // List the contents to the terminal.
                      break;
@@ -1613,12 +1613,12 @@ PUBLIC BIT Script_Run(U8 scriptNum)
    {
       sprintf( PrintBuf.buf, "No script in File %d\r\n", scriptNum);
       PrintBuffer();
-      return 0;                                                // and return fail 
+      return 0;                                                // and return fail
    }
    else
    {
       if( Script_Running == 1 )                                // already running a script?
-      {        // this means the current script called a new one OR 
+      {        // this means the current script called a new one OR
                // the user switched scripts midstream using the keyboard
          sprintf( PrintBuf.buf, "Transfer to script %d\r\n", scriptNum);
          PrintBuffer();
@@ -1645,7 +1645,7 @@ PUBLIC BIT Script_Run(U8 scriptNum)
 
 PUBLIC void Script_MarkCmdFailed(void)
 {
-   SETB(s.curr.flags, _Flags_LastUserCmdFailed);   
+   SETB(s.curr.flags, _Flags_LastUserCmdFailed);
 }
 
 
@@ -1660,7 +1660,7 @@ PUBLIC BIT Script_HandleCtrlCh( U8 ch )
    #define CtrlP 0x010
    #define CtrlQ 0x011
    #define CtrlR 0x012
-   
+
    if( Script_Running )
    {
       switch( ch )
