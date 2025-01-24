@@ -65,7 +65,7 @@
 			<Add directory="../public" />
 			<Add directory="../../libs_common/public" />
 			<Add directory="../../libs_common/libs_only" />
-			<Add directory="../arith_incl" />
+			<Add directory="../../arith/public" />
 		</Compiler>
 		<Unit filename="../../unity_tdd/tdd_common.c">
 			<Option compilerVar="CC" />
