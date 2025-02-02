@@ -19,6 +19,7 @@
 #define TOOL_CC430     3
 #define TOOL_GCC_ARM   4
 #define TOOL_MPLAB_X32 5
+#define TOOL_GCC_X86   6
 
 #ifdef __TOOL_IS_GCC_ARM__
    #define _TOOL_IS TOOL_GCC_ARM
@@ -28,6 +29,12 @@
    #else
       #ifdef __TOOL_IS_CC430
          #define _TOOL_IS TOOL_CC430
+      #else
+         #ifdef __TOOL_IS_GCC_X86
+            #define _TOOL_IS TOOL_GCC_X86
+         #else
+            #error "_TOOL_IS must be defined"
+         #endif
       #endif
    #endif
 #endif
@@ -37,7 +44,7 @@
    #error "_TOOL_IS must be defined"
 #endif
 
-#include "GenericTypeDefs.h"		// Redirect to typedefs
+#include "spj_stdint.h"		// Redirect to typedefs
 
 /* *************************** CONSTRUKSHUN ZONE ***************
 
@@ -52,16 +59,33 @@
 
 #define _SystemTick_msec 10.0      		// Renesas Synergy ThreadX default SysTick.
 
-#define CODE_SPACE_20BIT 1
-#define CODE_SPACE_IS CODE_SPACE_20BIT
+#define CODE_SPACE_16BIT   1
+#define CODE_SPACE_20BIT   2
+#define CODE_SPACE_32BIT   3
+#define CODE_SPACE_STDPTR  4     // uintptr_t from <stdint>
 
-#define DATA_SPACE_16BIT 1
-#define DATA_SPACE_32BIT 2
+
+#define DATA_SPACE_16BIT   1
+#define DATA_SPACE_32BIT   2
+#define DATA_SPACE_STDPTR  3
 
    #if _TOOL_IS == TOOL_CC430
+// MSP430 has 20bit code addresses.
+#define CODE_SPACE_IS CODE_SPACE_20BIT
 #define DATA_SPACE_IS DATA_SPACE_16BIT
-   #else
+
+   #elif _TOOL_IS == TOOL_GCC_ARM
+// Embedded ARM, 32bit unified address/data.
+#define CODE_SPACE_IS CODE_SPACE_32BIT
 #define DATA_SPACE_IS DATA_SPACE_32BIT
+
+   #elif _TOOL_IS == TOOL_GCC_X86
+// For X86 i.e test Harnesses uses <stdint> pointer type.
+#define CODE_SPACE_IS CODE_SPACE_STDPTR
+#define DATA_SPACE_IS DATA_SPACE_STDPTR
+
+   #else
+#error "CODE_SPACE_IS and DATA_SPACE_IS must be defined"
    #endif
 
 #define BOOLEAN BOOL

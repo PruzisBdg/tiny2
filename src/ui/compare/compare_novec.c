@@ -24,7 +24,7 @@ extern U8 compare_Ints( S16 *nums, U8 compareType );
 extern void compare_PrintLimitError( S_Obj CONST * obj, S16 *nums, U8 errNum );
 
 
-PUBLIC U8 CONST Compare_NoVec_Help[] = 
+PUBLIC U8 CONST Compare_NoVec_Help[] =
 "Usage:\r\n\
     <scalar type to compare> <comparision = 'greater''>' | 'less''<' | 'inside' |'equal''==' | 'notEqual' '!=' '<>'>...\r\n\
     <limit | lo limit> [hi limit] ['raw']\r\n\
@@ -48,9 +48,9 @@ PUBLIC U8 UI_Compare_NoVec(U8 *args)
    float scale;
 
    S_Obj CONST * obj;
-   
-   
-   if( !(obj = GetObj(args)) ) 
+
+
+   if( !(obj = GetObj(args)) )
    {
       tellBad1stArg();
       return 0;
@@ -70,7 +70,7 @@ PUBLIC U8 UI_Compare_NoVec(U8 *args)
       nums[1] = UI_GetScalarArg(args, 2, scale);            // and value of the next number (the 3rd arg)
       nums[2] = UI_GetScalarArg(args, 3, scale);            // and the 3rd number (4th arg), if it exists
 
-      if( errNum = compare_Ints(nums, compareType))          // compare 1st arg against limit(s), error?
+      if( 0 != (errNum = compare_Ints(nums, compareType)))  // compare 1st arg against limit(s), error?
       {
          sprintf(PrintBuf.buf, "%s: ", obj->name);
          PrintBuffer();
@@ -89,4 +89,4 @@ PUBLIC U8 UI_Compare_NoVec(U8 *args)
    return 0;
 }
 
-// ------------------------------------ eof ----------------------------------------------- 
+// ------------------------------------ eof -----------------------------------------------

@@ -22,7 +22,7 @@
 #define SYSTIME_H
 
 #include "libs_support.h"
-#include "GenericTypeDefs.h"
+#include "spj_stdint.h"
 
 /* For an embedded target _CPU_IS and _COMPILER_IS should be defined (in
    'projname_defines.h'. However if they are not, e.g in a test stand, then

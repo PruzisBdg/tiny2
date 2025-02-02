@@ -14,8 +14,12 @@
    #error "CODE_SPACE_IS must be defined"
 #else
    #if CODE_SPACE_IS == CODE_SPACE_16BIT
-   #elif CODE_SPACE_IS == CODE_SPACE_20BIT
+      typedef U16 T_FlashAddr;
+   #elif CODE_SPACE_IS == CODE_SPACE_20BIT || CODE_SPACE_IS == CODE_SPACE_32BIT
       typedef U32 T_FlashAddr;
+   #elif CODE_SPACE_IS == CODE_SPACE_STDPTR
+      // For test Harnesses use the system pointer size.
+      typedef uintptr_t T_FlashAddr;
    #else
       #error "CODE_SPACE_IS must be one of these choices"
    #endif
@@ -53,7 +57,7 @@ typedef struct
 PUBLIC U8 CONST * File_Read( U8 fileNum );
 // Checks that a file has some content
 PUBLIC BIT File_NotEmpty(U8 fileNum);
-// Check that bank name / number is legal 
+// Check that bank name / number is legal
 PUBLIC BIT File_LegalBank_MsgIfNot(U8 *args, U8 *bank);
 
 // Operations on the currently open file, specified by the global 'TxtF.currentBank'.
@@ -79,7 +83,7 @@ PUBLIC S16         File_GetS16AtIdx(S16 CONST *fileStart, S16 idx);
 
 /* -------------- Specifying a Text File Store ----------------------------------
 
-   To set up the text stores, the following must be defined in the applications 
+   To set up the text stores, the following must be defined in the applications
    firmware file, usually 'firm.c'
 */
 
@@ -100,9 +104,9 @@ extern U8 File_GetFlashBank(void);
 // This must restores the original PSBANK settings (if PSBANK exists)
 extern void File_ResetBankSw(void);
 
-/* Called before reading from the from the Flash textfiles. If there is bank switching 
+/* Called before reading from the from the Flash textfiles. If there is bank switching
    then this call must disable interrupts and then switch to the text file bank.
-   
+
    Interrupts must be off because they may execute MOVC and read const data from the
    wrong bank.
 */

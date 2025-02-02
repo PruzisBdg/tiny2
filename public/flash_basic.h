@@ -15,8 +15,11 @@
 #ifndef CODE_SPACE_IS
    #error "CODE_SPACE_IS must be defined"
 #else
-    #if CODE_SPACE_IS == CODE_SPACE_20BIT
+    #if CODE_SPACE_IS == CODE_SPACE_20BIT || CODE_SPACE_IS == CODE_SPACE_32BIT
         typedef U32 T_FlashAddr;
+    #elif CODE_SPACE_IS == CODE_SPACE_STDPTR
+        // For Test Harnesses use the system pointer size.
+        typedef uintptr_t T_FlashAddr;
     #else
         #error "CODE_SPACE_IS must be defined to determine T_FlashAddr"
     #endif
@@ -37,9 +40,9 @@ PUBLIC BIT Scratchpad_Erase( void );
 /* Optional interlock to prevent another application from illegally writing Flash.
 
    To use this lock, link the 'lock' version of the flash_basic library then declare
-   
+
       'PUBLIC U8 IDATA Flash_Lock;'
-      
+
    in the Host application. Set to 'Flash_LockValid' to allow writes. Clear it to
    zero when done.
 */

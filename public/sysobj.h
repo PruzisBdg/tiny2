@@ -24,9 +24,12 @@
    #if CODE_SPACE_IS == CODE_SPACE_16BIT
       typedef U16 T_CodeAddr;
       typedef U16 T_AnyAddr;
-   #elif CODE_SPACE_IS == CODE_SPACE_20BIT
+   #elif CODE_SPACE_IS == CODE_SPACE_20BIT || CODE_SPACE_IS == CODE_SPACE_32BIT
       typedef U32 T_CodeAddr;
       typedef U32 T_AnyAddr;
+   #elif CODE_SPACE_IS == CODE_SPACE_STDPTR
+      typedef uintptr_t T_CodeAddr;
+      typedef uintptr_t T_AnyAddr;
    #else
       #error "CODE_SPACE_IS must be one of these choices"
    #endif
@@ -37,11 +40,13 @@
    #error "DATA_SPACE must be defined"
 #else
    #if DATA_SPACE_IS == DATA_SPACE_8BIT
-      typedef U8 T_ObjAddr; 
-#elif DATA_SPACE_IS == DATA_SPACE_16BIT
-   typedef U16 T_ObjAddr;
-#elif DATA_SPACE_IS == DATA_SPACE_32BIT
-   typedef U32 T_ObjAddr;
+      typedef U8 T_ObjAddr;
+   #elif DATA_SPACE_IS == DATA_SPACE_16BIT
+      typedef U16 T_ObjAddr;
+   #elif DATA_SPACE_IS == DATA_SPACE_32BIT
+      typedef U32 T_ObjAddr;
+   #elif DATA_SPACE_IS == DATA_SPACE_STDPTR
+      typedef uintptr_t T_ObjAddr;
    #else
       #error "DATA_SPACE must be one of these choices"
    #endif
@@ -67,7 +72,7 @@ PUBLIC S_Obj CONST * GetObj_Nano( U8 hdl );
 
 // For IO formatting of read/write objects
 
-typedef struct 
+typedef struct
 {
    U8         hdl;         // object handle
    U8 CONST * name;        // object name
@@ -104,7 +109,7 @@ PUBLIC S_Obj CONST * GetObjByIdx( U8 idx );
 
 // For IO formatting of read/write objects
 
-typedef struct 
+typedef struct
 {
    C8 CONST * name;        // object name
    C8 CONST * outFormat;   // format applied to each vector element by sprintf (usually a 'float' format)
@@ -114,7 +119,7 @@ typedef struct
 
 PUBLIC S_ObjIO CONST * GetObjIO( C8 GENERIC const *name );
 
-   #endif // 
+   #endif //
 
 
 
