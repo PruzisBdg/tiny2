@@ -205,8 +205,8 @@ PUBLIC void LkLcd_ShowItems(LkLcd_S_ItemDisplaySpec CONST *l, U8 listSize, U8 ro
 
    U8    c,
          row, col,                  // Coord for the current display item
-         itemType,                  // and type of the item
-         buf[_FormatBufSize];       // Buffer for formatting
+         itemType;                  // and type of the item
+   char  buf[_FormatBufSize];       // Buffer for formatting
 
    S_DisplayContext dc;                   // current list head, index etc
    LkLcd_S_ItemDisplaySpec CONST *ds;     // entire spec for the item to be displayed
@@ -333,20 +333,20 @@ PUBLIC void LkLcd_ShowItems(LkLcd_S_ItemDisplaySpec CONST *l, U8 listSize, U8 ro
                            break;
 
                         case E_GetStr:
-                           di.getStr(buf, ds->flags.asFieldWidth);
+                           di.getStr((U8*)buf, ds->flags.asFieldWidth);
                            break;
 
                         case E_GetROMStr:
-                           strcpy(buf, (di.getROMStr)() );
+                           strcpy(buf, (char const*)(di.getROMStr)() );
                            break;
 
                         case E_ObjID:
-                           UI_SPrintScalarObject(buf, GetObjByIdx(di.asWord), _UI_PrintObject_AppendUnits);
+                           UI_SPrintScalarObject((U8*)buf, GetObjByIdx(di.asWord), _UI_PrintObject_AppendUnits);
                            break;
 
                      }
                      buf[ds->flags.asFieldWidth] = '\0';         // Make sure field is not overwritten
-                     Frm_SMBusWrStr(buf);
+                     Frm_SMBusWrStr((U8 const*)buf);
                }
             }
       }     // end: Item display

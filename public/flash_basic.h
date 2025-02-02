@@ -15,9 +15,11 @@
 #ifndef CODE_SPACE_IS
    #error "CODE_SPACE_IS must be defined"
 #else
-    #if CODE_SPACE_IS == CODE_SPACE_20BIT || CODE_SPACE_IS == CODE_SPACE_32BIT
-        typedef U32 T_FlashAddr;
-    #elif CODE_SPACE_IS == CODE_SPACE_STDPTR
+   #if CODE_SPACE_IS == CODE_SPACE_20BIT || CODE_SPACE_IS == CODE_SPACE_32BIT
+      typedef U32 T_FlashAddr;
+   #elif CODE_SPACE_IS == CODE_SPACE_16BIT
+      typedef U16 T_FlashAddr;
+   #elif CODE_SPACE_IS == CODE_SPACE_STDPTR
         // For Test Harnesses use the system pointer size.
         typedef uintptr_t T_FlashAddr;
     #else
