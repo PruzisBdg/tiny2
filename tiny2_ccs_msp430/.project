@@ -26,11 +26,6 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>GenericTypes</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
 			<name>private</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
@@ -49,11 +44,6 @@
 			<name>src</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>GenericTypes/GenericTypeDefs.h</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/GenericTypes/GenericTypeDefs.h</locationURI>
 		</link>
 		<link>
 			<name>private/libs_support.h</name>

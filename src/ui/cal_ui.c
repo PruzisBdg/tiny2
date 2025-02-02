@@ -165,7 +165,7 @@ PUBLIC U8 Cal_HandleUI( U8 *args )
                case action_Report:
  
                   if( !(gotStored = Cal_ReadStored(cal, &n)))     // failed attempt to read stored?
-                     { strcpy( b2, "none" ); }                    // then will report "stored = none"
+                     { strcpy( (char*)b2, "none" ); }                    // then will report "stored = none"
 
                   if( doRaw || !io)                               // raw print OR no io format for this variable?
                   {                                               // then print values raw
@@ -190,7 +190,7 @@ PUBLIC U8 Cal_HandleUI( U8 *args )
                         sprintf( (C8*)b2, (C8*)b1, io->outScale*(float)n );// and converted stored value to foramtted string
                      }
 
-                     strcpy( b1, _StrLit("%s: hdl = %i\r\n"));
+                     strcpy( (char*)b1, _StrLit("%s: hdl = %i\r\n"));
                      Cal_AppendFormatSpec(b1, _StrLit("   val = "),     io);
                      Cal_AppendFormatSpec(b1, _StrLit("  stored = %s\r\n   min = "), io);  // stored value is string, created above
                      Cal_AppendFormatSpec(b1, _StrLit("  max = "),   io);

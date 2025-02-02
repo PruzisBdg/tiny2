@@ -39,10 +39,26 @@
    #endif
 #endif
 
-
 #ifndef _TOOL_IS
    #error "_TOOL_IS must be defined"
 #endif
+
+// ----------------------------------------- Targets --------------------------------------------
+
+#define _TARGET_8051_LIB_LGE_NANO         1
+#define _TARGET_LIB_ARM                   2
+#define _TARGET_LIB_XC32                  3
+#define _TARGET_LIB_MSP430_SMALL          4
+#define _TARGET_LIB_MSP430X_SMALL_DATA    5
+
+//#define _TARGET_IS _TARGET_LIB_ARM
+
+#ifdef __TARGET_IS_LIB_MSP430_SMALL
+   #define _TARGET_IS _TARGET_LIB_MSP430_SMALL
+#else
+   #error "_TARGET_IS must be defined"
+#endif
+
 
 #include "spj_stdint.h"		// Redirect to typedefs
 
@@ -70,8 +86,12 @@
 #define DATA_SPACE_STDPTR  3
 
    #if _TOOL_IS == TOOL_CC430
-// MSP430 has 20bit code addresses.
-#define CODE_SPACE_IS CODE_SPACE_20BIT
+// MSP430 has 16bit or 20bit (MSP430X) code addresses.
+#if _TARGET_IS == _TARGET_LIB_MSP430_SMALL
+   #define CODE_SPACE_IS CODE_SPACE_16BIT
+#else
+   #define CODE_SPACE_IS CODE_SPACE_20BIT
+#endif
 #define DATA_SPACE_IS DATA_SPACE_16BIT
 
    #elif _TOOL_IS == TOOL_GCC_ARM
@@ -89,12 +109,6 @@
    #endif
 
 #define BOOLEAN BOOL
-
-#define _TARGET_8051_LIB_LGE_NANO   1
-#define _TARGET_LIB_ARM             2
-#define _TARGET_LIB_XC32            3
-
-#define _TARGET_IS _TARGET_LIB_ARM
 
 #define _HAS_TEXT_UI 1
 
