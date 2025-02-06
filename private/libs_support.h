@@ -12,6 +12,8 @@
 #ifndef LIBS_SUPPORT_H
 #define LIBS_SUPPORT_H
 
+#include "spj_stdint.h"    // Sized types.
+
 // ------------------------------------------ Tools ----------------------------------------------
 
 #define TOOL_Z8_ENCORE 1
@@ -56,7 +58,11 @@
 #ifdef __TARGET_IS_LIB_MSP430_SMALL
    #define _TARGET_IS _TARGET_LIB_MSP430_SMALL
 #else
-   #error "_TARGET_IS must be defined"
+   #ifdef __TARGET_IS_LIB_X86_GCC
+      #define _TARGET_IS _TARGET_LIB_X86_GCC
+   #else
+      #error "_TARGET_IS must be defined"
+   #endif
 #endif
 
 

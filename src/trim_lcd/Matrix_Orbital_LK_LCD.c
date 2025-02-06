@@ -341,7 +341,7 @@ PUBLIC void LkLcd_ShowItems(LkLcd_S_ItemDisplaySpec CONST *l, U8 listSize, U8 ro
                            break;
 
                         case E_ObjID:
-                           UI_SPrintScalarObject((U8*)buf, GetObjByIdx(di.asWord), _UI_PrintObject_AppendUnits);
+                           UI_SPrintScalarObject(buf, GetObjByIdx(di.asWord), _UI_PrintObject_AppendUnits);
                            break;
 
                      }

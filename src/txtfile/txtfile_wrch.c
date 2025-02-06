@@ -34,7 +34,7 @@
 
 PUBLIC S_TxtFileBank CONST * file_getFlashBanks(void);
 PUBLIC U8 File_GetNumBanks(void);
-PUBLIC U8 CONST * File_GetBankNames(void);
+PUBLIC C8 CONST * File_GetBankNames(void);
 PUBLIC U16 File_BankSize(void);
 PUBLIC T_FlashAddr File_BankStart(void);
 

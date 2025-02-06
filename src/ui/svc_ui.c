@@ -46,20 +46,20 @@ extern U8 CurrentPassword[_MaxPasswordStr];
 --------------------------------------------------------------------------------------------*/
 
    #ifdef INCLUDE_HELP_TEXT
-PUBLIC U8 CONST Svc_Help[] = 
+PUBLIC C8 CONST Svc_Help[] =
 "svc [mode = 'on' password | 'off' |'setpass' new_password (8 letters max)\r\n\
     Sets user or service mode. With no args, returns current settings";
    #endif // INCLUDE_HELP_TEXT
 
 
 typedef enum { action_On, action_Off, action_SetPassword } E_Actions;
-PRIVATE U8 CONST actionList[] = "on off setpass";
+PRIVATE C8 CONST actionList[] = "on off setpass";
 
 PUBLIC U8 Svc_HandleUI( U8 *args )
 {
    U8 argCnt,
-      action,
-      actionStr[10];
+      action;
+   C8 actionStr[10];
    C8 newPassword[20];
 
    argCnt = sscanf( (C8*)args, "%s %s", actionStr, newPassword );

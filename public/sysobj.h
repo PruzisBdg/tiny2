@@ -127,7 +127,7 @@ PUBLIC S_ObjIO CONST * GetObjIO( C8 GENERIC const *name );
 
 typedef struct
 {
-   U8 CONST **names;
+   C8 CONST **names;
    U8       cnt;
 } S_ObjNames;
 

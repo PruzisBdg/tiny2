@@ -24,10 +24,10 @@
 |
 ------------------------------------------------------------------------------------------*/
 
-PRIVATE U8 CONST vectorOps[] = "min max mean avg";
+PRIVATE C8 CONST vectorOps[] = "min max mean avg";
 typedef enum { E_Min, E_Max, E_Mean, E_Avg } E_VecOps;
 
-PUBLIC S16 UI_GetIntFromObject(S_Obj CONST *obj, U8 *p)
+PUBLIC S16 UI_GetIntFromObject(S_Obj CONST *obj, C8 *p)
 {
    float    f;
    U8       idx;

@@ -32,7 +32,7 @@ PUBLIC U8 Objs_NumObjs(void);
 
 PUBLIC U8 CONST UI_ListObjs_Help[] = "Lists objects";
 
-PUBLIC U8 UI_ListObjs( U8 *args )
+PUBLIC U8 UI_ListObjs( C8 *args )
 {
    U8 c, lineLen;
    S_Obj CONST * p;

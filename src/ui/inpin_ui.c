@@ -18,12 +18,12 @@
 |
 -----------------------------------------------------------------------------------*/
 
-PUBLIC U8 CONST UI_InPin_Help[]  = "Usage: InPin <pin name> <action = 'read'> ";
+PUBLIC C8 CONST UI_InPin_Help[]  = "Usage: InPin <pin name> <action = 'read'> ";
 
-PRIVATE U8 CONST actionList[] = "read";
+PRIVATE C8 CONST actionList[] = "read";
 typedef enum { action_Read } E_Actions;
 
-PUBLIC U8 InPin_HandleUI( U8 *args )
+PUBLIC U8 InPin_HandleUI( C8 *args )
 {
    S_InPin *pin;
    S_Obj CONST * obj;

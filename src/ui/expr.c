@@ -29,7 +29,7 @@ typedef enum
    op_And, op_Or,
    op_Min, op_Max
 } E_Operators;
-PRIVATE U8 CONST operators[] = "n = += -= *= + - == != > >= < <= * / && || min max";
+PRIVATE C8 CONST operators[] = "n = += -= *= + - == != > >= < <= * / && || min max";
 
 #define _OpIsAssignment(op)  ((op) >= op_Assign && (op) <= op_AssignMul)
 
@@ -63,7 +63,7 @@ PRIVATE BIT resultIsBoolean(U8 op)
 
 
 
-extern float GetArgScale(U8 *args);
+extern float GetArgScale(C8 *args);
 
 /*-----------------------------------------------------------------------------------------
 |
@@ -141,11 +141,11 @@ PRIVATE S16 eval2(S16 left, S16 right, U8 operator)
 |
 ------------------------------------------------------------------------------------------*/
 
-PRIVATE float binaryExprScale(U8 *expr)
+PRIVATE float binaryExprScale(C8 *expr)
 {
    return
       GetArgScale(                           // Return the scale of the the arg...
-         (U8*)Str_GetNthWord(                // which is the nth word of ...
+         Str_GetNthWord(                     // which is the nth word of ...
             expr,                            // 'expr', and 'nth' is..
             GetArgScale(expr) == 1.0         // If the scale of the 1st arg is 1.0
                ? 2                           // the 3rd word of 'expr' (i.e the 2nd arg)
@@ -162,7 +162,7 @@ PRIVATE float binaryExprScale(U8 *expr)
 |
 ------------------------------------------------------------------------------------------*/
 
-PRIVATE U8 getBinaryOperator(U8 *expr)
+PRIVATE U8 getBinaryOperator(C8 *expr)
 {
    U8 op;
 
@@ -180,9 +180,9 @@ PRIVATE U8 getBinaryOperator(U8 *expr)
 |
 ------------------------------------------------------------------------------------------*/
 
-extern S_ObjIO CONST * GetArgIO(U8 *args);
+extern S_ObjIO CONST * GetArgIO(C8 *args);
 
-PRIVATE S_ObjIO CONST * GetExprIO(U8 *expr)
+PRIVATE S_ObjIO CONST * GetExprIO(C8 *expr)
 {
    S_ObjIO CONST * io;
    U8 c;
@@ -193,7 +193,7 @@ PRIVATE S_ObjIO CONST * GetExprIO(U8 *expr)
    {
       for(c = 0; c <= 4; c += 2)                            // For each operand, 0th, 2nd, 4th args
       {
-         if( (io = GetArgIO((U8*)Str_GetNthWord(expr,c))) )   // This operand has an IO spec?
+         if( (io = GetArgIO(Str_GetNthWord(expr,c))) )   // This operand has an IO spec?
             { return io; }                                  // then return with this IO spec.
       }
       return 0;
@@ -244,7 +244,7 @@ PRIVATE S16 mulDiv2Float(float a, float b, U8 operator)
 |
 ------------------------------------------------------------------------------------------*/
 
-PRIVATE S16 evalExpr2(U8 *expr, float scale)
+PRIVATE S16 evalExpr2(C8 *expr, float scale)
 {
    U8 operator, argCnt;
    float s1, s2;
@@ -268,14 +268,14 @@ PRIVATE S16 evalExpr2(U8 *expr, float scale)
 
          if( !ReadASCIIToFloat(expr, &s1 ) )
          {
-            if( !ReadASCIIToFloat((U8*)Str_GetNthWord(expr, 2), &s2) )
+            if( !ReadASCIIToFloat(Str_GetNthWord(expr, 2), &s2) )
                { return 0; }
             else
                { s1 = Obj_ReadScalar(GetObj(expr)); }
          }
          else
          {
-            if( !ReadASCIIToFloat((U8*)Str_GetNthWord(expr, 2), &s2) )
+            if( !ReadASCIIToFloat(Str_GetNthWord(expr, 2), &s2) )
                { s2 = Obj_ReadScalar(GetObj(Str_GetNthWord(expr, 2))); }
          }
          return mulDiv2Float(s1, s2, operator);
@@ -287,8 +287,8 @@ PRIVATE S16 evalExpr2(U8 *expr, float scale)
 
          return
             eval2(
-               UI_GetScalarArg((U8*)expr, 0, scale),
-               UI_GetScalarArg((U8*)expr, 2, scale),
+               UI_GetScalarArg(expr, 0, scale),
+               UI_GetScalarArg(expr, 2, scale),
                operator);                 // return result.
       }
    }
@@ -300,7 +300,7 @@ PRIVATE S16 evalExpr2(U8 *expr, float scale)
 |
 ------------------------------------------------------------------------------------------*/
 
-PRIVATE S16 evalExpr2SelfScale(U8 *expr)
+PRIVATE S16 evalExpr2SelfScale(C8 *expr)
 {
    return evalExpr2(expr, 1.0);
 }
@@ -316,14 +316,14 @@ PRIVATE S16 evalExpr2SelfScale(U8 *expr)
 |
 ------------------------------------------------------------------------------------------*/
 
-PUBLIC S16 EvalExpr(U8 *expr)
+PUBLIC S16 EvalExpr(C8 *expr)
 {
-   U8 op1, op2, argCnt;
+   U8 op1, op2;
    float scale, f1, f2;
    S_Obj CONST *obj;
    S16 n;
 
-   if( (argCnt = Str_WordCnt(expr)) == 0 )               // An empty expression?
+   if( Str_WordCnt(expr) == 0 )                          // An empty expression?
    {
       return 0;                                          // An empty expression always returns false
    }
@@ -342,7 +342,7 @@ PUBLIC S16 EvalExpr(U8 *expr)
       else                                               // else 1st arg is valid l-value
       {
          n = evalExpr2(                                  // Get the 2nd arg, which is the eval of...
-               (U8*)Str_GetNthWord(expr,2),              // ...the remainder of the expression
+               Str_GetNthWord(expr,2),                   // ...the remainder of the expression
                GetArgScale(expr));
 
          if(op1 == op_AssignPlus)                        // '+=" ?
@@ -359,7 +359,7 @@ PUBLIC S16 EvalExpr(U8 *expr)
    }
    else                                                  // else 1st arg isn't assignment
    {
-      if( !(op2 = getBinaryOperator((U8*)Str_GetNthWord(expr,2)))  )  // No 2nd operator?
+      if( !(op2 = getBinaryOperator(Str_GetNthWord(expr,2)))  )  // No 2nd operator?
       {
          return evalExpr2SelfScale(expr);                    // then its a binary expression - evaluate it
       }
@@ -370,13 +370,13 @@ PUBLIC S16 EvalExpr(U8 *expr)
             scale =                                         // Scale for the whole expression is....
                GetObj(expr) != 0                            // If 1st arg is an object
                   ? GetArgScale(expr)                       // then that object determines the scale
-                  : binaryExprScale((U8*)Str_GetNthWord(expr,2));    // else remaining 2 terms determine the scale
+                  : binaryExprScale(Str_GetNthWord(expr,2));    // else remaining 2 terms determine the scale
 
             return                                          // Return the ternary expression result which is....
                eval2(                                       // the binary combination of...
-                  UI_GetScalarArg((U8*)expr, 0, scale),     // the value of the 1st arg
+                  UI_GetScalarArg(expr, 0, scale),     // the value of the 1st arg
                   evalExpr2(                                // with the result of binary combination of
-                     (U8*)Str_GetNthWord(expr,2),           // the 2nd, 3rd args with their operator
+                     Str_GetNthWord(expr,2),                // the 2nd, 3rd args with their operator
                      scale),
                      op1);                                  // all combined using the 1st operator
          }
@@ -384,7 +384,7 @@ PUBLIC S16 EvalExpr(U8 *expr)
          {                                                  // so evaluate left-to-right
             if(op2 == op_Mul || op2 == op_Div)              // Multiply or divide?
             {
-               if( ReadASCIIToFloat((U8*)Str_GetNthWord(expr, 4), &f1) )   // 3rd arg is a literal number
+               if( ReadASCIIToFloat(Str_GetNthWord(expr, 4), &f1) )   // 3rd arg is a literal number
                {
 
                   /* ****** COMPILER BUG
@@ -444,7 +444,7 @@ Usage: eval <expr>  prints ""= expression_value""\r\n\
    v1 = v2 - 3\r\n\
 ";
 
-PUBLIC U8 UI_Eval( U8 *args )
+PUBLIC U8 UI_Eval( C8 *args )
 {
    UI_PrintScalar(EvalExpr(args), GetExprIO(args), _UI_PrintScalar_AppendUnits );
    return 1;

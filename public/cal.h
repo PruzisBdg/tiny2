@@ -27,7 +27,7 @@ typedef struct
 } S_Cal;
 
 
-PUBLIC U8   Cal_HandleUI( U8 *args );
+PUBLIC U8   Cal_HandleUI( C8 *args );
 PUBLIC U8   Cal_Init( T_ObjAddr obj, T_CodeAddr init);
 PUBLIC S16  Cal_Read( S_Cal RAM_IS *cal );
 PUBLIC U8   Cal_ReadStored( S_Cal RAM_IS *cal, S16 *out );

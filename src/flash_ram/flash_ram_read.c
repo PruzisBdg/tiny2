@@ -27,7 +27,7 @@ extern S_FlashBlock RAM_IS BasicFlashBlock;
 
 PUBLIC U8 FlashBlock_Read(U8 RAM_IS *out, U8 ofs, U8 cnt)
 {
-   CopyConstBytesU8( (U8 const CODE *)(B.addr + ofs), out, cnt);
+   CopyConstBytesU8( (U8 CODE *)(B.addr + ofs), out, cnt);
    return cnt;
 }
 

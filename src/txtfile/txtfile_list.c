@@ -44,7 +44,7 @@ PUBLIC void File_List(void)
          Comms_WrBuf( (U8 CONST*)File_BankStart()+c, 100 );    // Print 100 chars
           c += 100;                                // Move ahead
       }
-      WrStrConst((U8 CONST*)File_BankStart()+c);   // Print remaining text up to the '\0'
+      WrStrConst((C8 CONST*)File_BankStart()+c);   // Print remaining text up to the '\0'
       File_LeaveTextBank();                        // and leave the bank once it's printed.
       WrStrLiteral("\r\n");                        // Drop to next line after printout.
    }

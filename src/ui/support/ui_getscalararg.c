@@ -16,7 +16,7 @@
 
 
 
-extern U8 * skipUnaryPrefix(U8 * p);
+extern C8 * skipUnaryPrefix(C8 * p);
 
 /* To read arguments of the form 'MyVec.min', include this file directly in your
    project and define 'PARSE_COMPOSITE_VECS'. in RIDE 8051 projects at least, the local
@@ -67,14 +67,14 @@ PRIVATE S16 applyUnaryPrefix(S16 n, U8 prefix)
 ------------------------------------------------------------------------------------------*/
 
 
-PUBLIC S16 UI_GetScalarArg(U8 *args, U8 idx, float scale )
+PUBLIC S16 UI_GetScalarArg(C8 *args, U8 idx, float scale )
 {
    S_Obj CONST * obj;
    float    f;
-   U8       *p;
+   C8       *p;
    U16      n;
 
-   p = (U8*)Str_GetNthWord(args, idx);                            // Get the arg
+   p = Str_GetNthWord(args, idx);                                 // Get the arg
 
    if( Str_EndOfLineOrString(*p))                                 // no nth arg?
    {
@@ -86,19 +86,19 @@ PUBLIC S16 UI_GetScalarArg(U8 *args, U8 idx, float scale )
          with a '-' (minus) or '!' (not) then skip past these to the start of
          the name proper.
       */
-      if( NULL != (obj = GetObj((U8 GENERIC *)skipUnaryPrefix(p))) )        // Is an object of some kind?
+      if( NULL != (obj = GetObj((C8 GENERIC *)skipUnaryPrefix(p))) )        // Is an object of some kind?
       {
          return applyUnaryPrefix(UI_GetIntFromObject(obj, p), *p); // Get it's value, apply '-' or '!' if that prefix exists
       }
       else                                                        // else not an object... see if it's its a literal number
       {
-         if( ReadDirtyBinaryWord((U8 const *)p, &n))              // Read e.g 0x1000_1100?
+         if( ReadDirtyBinaryWord(p, &n))                          // Read e.g 0x1000_1100?
          {
             return n;                                             // then return that, no scale applied
          }
          else                                                     // else try demincal or hex.
          {
-            if( !ReadASCIIToFloat((U8 const *)p, &f) )            // Try reading decimal or hex, failed?
+            if( !ReadASCIIToFloat(p, &f) )                        // Try reading decimal or hex, failed?
             {
                return 0;                                          // then say failed
             }

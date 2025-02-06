@@ -40,11 +40,11 @@ Help syntax is:\r\n\
   () = grouping      '|' = OR (choices)";
    #endif // INCLUDE_HELP_TEXT
 
-PUBLIC U8 UI_DoHelp( U8 * args )
+PUBLIC U8 UI_DoHelp( C8 * args )
 {
    U8 c, lineLen;
    S_Obj CONST *obj;
-   U8 buf[15];
+   C8 buf[15];
 
    if( Scanf_NoArgs(sscanf( (C8*)args, "%s", buf )) )                            // No args? (user typed just "help")
    {

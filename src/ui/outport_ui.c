@@ -24,7 +24,7 @@ extern void OutPort_Update(S_OutPort *p, U16 n);
 -----------------------------------------------------------------------------------*/
 
    #ifdef INCLUDE_HELP_TEXT
-PUBLIC U8 CONST UI_OutPort_Help[]  = 
+PUBLIC C8 CONST UI_OutPort_Help[]  =
 "Usage:\r\n\
     <port name> <action = 'read' | 'write' val | 'reset' | 'lock' | 'free' | 'report' >\r\n\
 \r\n\
@@ -38,10 +38,10 @@ PUBLIC U8 CONST UI_OutPort_Help[]  =
 ";
    #endif // INCLUDE_HELP_TEXT
 
-PRIVATE U8 CONST actionList[] = "read write reset lock free report";
+PRIVATE C8 CONST actionList[] = "read write reset lock free report";
 typedef enum { action_Read, action_Write, action_Reset, action_Lock, action_Free, action_Report } E_Actions;
 
-PUBLIC U8 OutPort_HandleUI( U8 *args )
+PUBLIC U8 OutPort_HandleUI( C8 *args )
 {
    S_OutPort *port;
    S_Obj CONST * obj;
@@ -67,7 +67,7 @@ PUBLIC U8 OutPort_HandleUI( U8 *args )
                break;
                
             case action_Write:
-               if( Str_FindWord(args, (U8 CONST *)_StrLit("off")) == 0 )
+               if( Str_FindWord(args, (C8 CONST *)_StrLit("off")) == 0 )
                {
                   OutPort_Update(port, 0);
                }

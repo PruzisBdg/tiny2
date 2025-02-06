@@ -30,15 +30,15 @@
 PUBLIC U8 CONST UI_Thread_Help[] = "thread <thread_name> ['run' | 'stop' | 'restart' | 'report' ]";
 
 typedef enum { threadAction_Run, threadAction_Stop, threadAction_Restart, threadAction_Report } E_threadActions;
-PRIVATE U8 CONST threadActions[] = "run stop restart report";
+PRIVATE C8 CONST threadActions[] = "run stop restart report";
 
-PRIVATE CONST U8 runStr[] = "run";
-PRIVATE CONST U8 stopStr[] = "stop";
+PRIVATE CONST C8 runStr[] = "run";
+PRIVATE CONST C8 stopStr[] = "stop";
 
-PUBLIC U8 UI_Thread( U8 * args )
+PUBLIC U8 UI_Thread( C8 * args )
 {
    U8          action;
-   U8 CONST    *p;
+   C8 CONST    *p;
    S_TinySM    *sm;
    S_Obj CONST * obj;
 

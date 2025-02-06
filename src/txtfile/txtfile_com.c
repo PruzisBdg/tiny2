@@ -95,7 +95,7 @@ PUBLIC U8 File_GetNumBanks(void) { return File_GetStructure()->numBanks; }
 |
 ------------------------------------------------------------------------------------------*/
 
-PUBLIC U8 CONST * File_GetBankNames(void) { return File_GetStructure()->bankNames; }
+PUBLIC C8 CONST * File_GetBankNames(void) { return File_GetStructure()->bankNames; }
 
 /*-----------------------------------------------------------------------------------------
 |
@@ -169,7 +169,7 @@ PUBLIC BIT file_wrCharToStore(U8 ch)
    {
       if( TxtF.cnt >= File_BankSize() - 1 )        // Check for room. No! store has just one byte left (to write terminating '\0')?
       {
-         Comms_WrStrConst((U8 CONST *)"Too many chars\r\n");
+         Comms_WrStrConst((C8 CONST *)"Too many chars\r\n");
          overflowedStore = 1;
          return 0;
       }
@@ -308,7 +308,7 @@ PUBLIC BIT File_IsOpen(void)
 |
 ------------------------------------------------------------------------------------------*/
 
-PUBLIC U8 CONST * File_Read( U8 fileNum )
+PUBLIC C8 CONST * File_Read( U8 fileNum )
 {
     T_FlashAddr start;
 
@@ -323,7 +323,7 @@ PUBLIC U8 CONST * File_Read( U8 fileNum )
       if( File_GetCh((U8 CONST *)start) == 0xFF )  // OxFF? -> then is erased / empty
          { return 0; }                             // so return 0
       else
-         { return (U8 CONST *)start; }             // else return start of (presumed) string
+         { return (C8 CONST *)start; }             // else return start of (presumed) string
    }
 }
 

@@ -27,7 +27,7 @@
 |
 ------------------------------------------------------------------------------------------*/
 
-PUBLIC void UI_SPrintScalarObject( U8 *out, S_Obj CONST *obj, U8 flags )
+PUBLIC void UI_SPrintScalarObject( C8 *out, S_Obj CONST *obj, U8 flags )
 {
    S_ObjIO CONST * io;
    U8 idx;

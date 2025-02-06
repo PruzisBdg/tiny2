@@ -31,7 +31,7 @@ PUBLIC BIT  OutPort_Write( S_OutPort *p, U16 n );
 PUBLIC U16  OutPort_Read( S_OutPort *p );
 PUBLIC S16 OutPort_ReadInt( S_OutPort *p );
 #define  OutPort_ReadInt OutPort_Read        // for class read functions, which expect S16
-PUBLIC U8   OutPort_HandleUI( U8 *args );
+PUBLIC U8   OutPort_HandleUI( C8 *args );
 
 #endif // OUTPIN_H
  

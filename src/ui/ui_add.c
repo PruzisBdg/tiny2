@@ -22,7 +22,7 @@ PRIVATE void tellBad1stArg(void)
 }
 
 
-PUBLIC float UI_GetScaleForLiteralArgs(U8 *args)
+PUBLIC float UI_GetScaleForLiteralArgs(C8 *args)
 {
    S_ObjIO CONST * io;
 
@@ -57,7 +57,7 @@ PUBLIC float UI_GetScaleForLiteralArgs(U8 *args)
 |
 ------------------------------------------------------------------------------------------*/
 
-PUBLIC U8 CONST Add_Help[] =
+PUBLIC C8 CONST Add_Help[] =
 "Usage:\r\n\
     add <item to add to> <value to add>\r\n\
 \r\n\
@@ -65,7 +65,7 @@ PUBLIC U8 CONST Add_Help[] =
    add Pump1Vdrv 1400 raw     - adds 1.4V, expressed as raw value to 'Pump1Vdrv'\r\n\
 ";
 
-PUBLIC U8 UI_Add(U8 *args)
+PUBLIC U8 UI_Add(C8 *args)
 {
    S_Obj CONST * dest;
    S_Obj CONST * src;

@@ -21,7 +21,7 @@
 |
 ------------------------------------------------------------------------------------------*/
 
-PUBLIC BIT File_LegalBank_MsgIfNot(U8 *args, U8 *bank)
+PUBLIC BIT File_LegalBank_MsgIfNot(C8 *args, U8 *bank)
 {
    if( (*bank = Str_FindWord(_StrConst(File_GetBankNames()), Str_GetNthWord(args,0))) == _Str_NoMatch)    // file number wasn't legal
    {

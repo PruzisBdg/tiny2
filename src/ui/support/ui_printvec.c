@@ -37,7 +37,7 @@ PRIVATE void newVecLine(void)
 |
 ------------------------------------------------------------------------------------------*/
 
-PUBLIC void UI_PrintVec( S_Vec *v, U8 CONST *format, float scale )
+PUBLIC void UI_PrintVec( S_Vec *v, C8 CONST *format, float scale )
 {
    U8    r,c;           // vector row, col indices
    S16   n;

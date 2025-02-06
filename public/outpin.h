@@ -29,7 +29,7 @@ PUBLIC BIT  OutPin_Write( S_OutPin RAM_IS *p, U8 n );
 PUBLIC void OutPin_WriteInt( S_OutPin RAM_IS *p, S16 n );
 PUBLIC BIT  OutPin_Read( S_OutPin RAM_IS *p );
 PUBLIC S16  OutPin_ReadInt( S_OutPin RAM_IS *p );       // does the same as _Read() but is the read function for the class
-PUBLIC U8   OutPin_HandleUI( U8 *args );
+PUBLIC U8   OutPin_HandleUI( C8 *args );
 
 #endif // OUTPIN_H
  

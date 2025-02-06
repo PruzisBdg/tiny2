@@ -256,11 +256,6 @@
 			<locationURI>PARENT-1-PROJECT_LOC/public/vec.h</locationURI>
 		</link>
 		<link>
-			<name>public/wordlist.h</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/public/wordlist.h</locationURI>
-		</link>
-		<link>
 			<name>public_from_small_utils/systime.h</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/public_from_small_utils/systime.h</locationURI>

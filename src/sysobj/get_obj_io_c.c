@@ -41,7 +41,7 @@ PUBLIC U8 Objs_NumIOFormats(void);
 |
 ------------------------------------------------------------------------------------------*/
 
-PUBLIC S_ObjIO CONST * GetObjIO_C( U8 CONST *name )
+PUBLIC S_ObjIO CONST * GetObjIO_C( C8 CONST *name )
 {
    U8              rIDATA c;
    S_ObjIO CONST * rIDATA p;

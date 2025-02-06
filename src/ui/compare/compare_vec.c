@@ -17,8 +17,8 @@
 
 //  Routines common to UI_Compare_Vec() and UI_Compare_NoVec() are in compare.c
 
-extern CONST U8 listOfCompareTypes[];
-extern float GetArgScale(U8 *args);
+extern CONST C8 listOfCompareTypes[];
+extern float GetArgScale(C8 *args);
 extern U8 compare_Ints( S16 *nums, U8 compareType );
 extern void compare_PrintLimitError( S_Obj CONST * obj, S16 *nums, U8 errNum );
 
@@ -104,7 +104,7 @@ PRIVATE U8 compareVecElement( S_Obj CONST * obj, S16 *nums, U8 compareType, U8 i
 |
 ------------------------------------------------------------------------------------------*/
 
-extern float GetArgScale(U8 *args);
+extern float GetArgScale(C8 *args);
 
 
 PUBLIC U8 CONST Compare_Vec_Help[] =
@@ -133,7 +133,7 @@ typedef enum
 
 
 
-PUBLIC U8 UI_Compare_Vec(U8 *args)
+PUBLIC U8 UI_Compare_Vec(C8 *args)
 {
    U8    c,
          numCompares,

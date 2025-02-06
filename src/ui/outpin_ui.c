@@ -24,7 +24,7 @@ extern void OutPin_UpdatePin(S_OutPin *p, U8 n);
 -----------------------------------------------------------------------------------*/
 
    #ifdef INCLUDE_HELP_TEXT
-PUBLIC U8 CONST UI_OutPin_Help[]  = 
+PUBLIC C8 CONST UI_OutPin_Help[]  =
 "Usage:\r\n\
     <pin name> <action = 'read' | ['write' [0|1|on|off |'toggle']] | 'reset' | 'lock' | 'free' | 'report' >\r\n\
 \r\n\
@@ -39,15 +39,15 @@ PUBLIC U8 CONST UI_OutPin_Help[]  =
 ";
    #endif // INCLUDE_HELP_TEXT
 
-PRIVATE U8 CONST actionList[] = "read write reset lock free report";
+PRIVATE C8 CONST actionList[] = "read write reset lock free report";
 typedef enum { action_Read, action_Write, action_Reset, action_Lock, action_Free, action_Report } E_Actions;
 
-PRIVATE U8 CONST writeActions[] = "0 off clear 1 on set toggle";
+PRIVATE C8 CONST writeActions[] = "0 off clear 1 on set toggle";
 #define _IdxFirstWordForOn 3     // off actions are indices 0,1,2
 #define _IdxToggle         6     // 'toggle' is index = 6
 
 
-PUBLIC U8 OutPin_HandleUI( U8 *args )
+PUBLIC U8 OutPin_HandleUI( C8 *args )
 {
    S_OutPin *pin;
    S_Obj CONST * obj;

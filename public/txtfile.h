@@ -50,15 +50,15 @@ typedef struct
    S_TxtFileBank CONST  *flashBanks;   // the text store, each one or more contiguous flash sectors
    U8                   numBanks;      // the number of 'flashBanks'
    U16                  sectorBytes;   // flash sector size
-   U8 CONST *           bankNames;     // space delimited string of names, one for each bank
+   C8 CONST *           bankNames;     // space delimited string of names, one for each bank
 } S_TxtFiles;
 
 // Gets the start of 'fileNum', if that is a legal file.
-PUBLIC U8 CONST * File_Read( U8 fileNum );
+PUBLIC C8 CONST * File_Read( U8 fileNum );
 // Checks that a file has some content
 PUBLIC BIT File_NotEmpty(U8 fileNum);
 // Check that bank name / number is legal
-PUBLIC BIT File_LegalBank_MsgIfNot(U8 *args, U8 *bank);
+PUBLIC BIT File_LegalBank_MsgIfNot(C8 *args, U8 *bank);
 
 // Operations on the currently open file, specified by the global 'TxtF.currentBank'.
 PUBLIC BIT  File_IsOpen(void);

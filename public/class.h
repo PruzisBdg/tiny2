@@ -51,7 +51,7 @@ PUBLIC U8 Obj_IsWritableScalar( S_Obj CONST * obj);
 PUBLIC U8 Obj_IsAVector( S_Obj CONST * obj);
 PUBLIC U8 Obj_IsWritableVector( S_Obj CONST * obj);
 
-PUBLIC U8 CONST * GetClassName(U8 classID);
+PUBLIC C8 CONST * GetClassName(U8 classID);
 
 
 /* Every application has this list of classes which it uses

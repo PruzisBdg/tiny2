@@ -32,7 +32,7 @@ PUBLIC U8 Objs_NumIOFormats(void);
 
 
 // To print an error message if desired.
-extern void PrintMakeObjErr(U8 CONST *objName);
+extern void PrintMakeObjErr(C8 CONST *objName);
 
 /*-----------------------------------------------------------------------------------------
 |

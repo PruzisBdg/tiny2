@@ -20,11 +20,11 @@ extern BIT quiet;
 |
 ------------------------------------------------------------------------------------------*/
 
-PUBLIC U8 CONST UI_Quiet_Help[]  = "quiet 1|on |0|off - block unprompted prints to Host";
+PUBLIC C8 CONST UI_Quiet_Help[]  = "quiet 1|on |0|off - block unprompted prints to Host";
 
-PRIVATE U8 CONST actionList[] = "0 off 1 on";
+PRIVATE C8 CONST actionList[] = "0 off 1 on";
 
-PUBLIC U8 UI_Quiet( U8 * args )
+PUBLIC U8 UI_Quiet( C8 * args )
 {
    U8 action;
 

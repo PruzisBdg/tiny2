@@ -48,7 +48,7 @@ PUBLIC U16         File_BankSize(void);
 PUBLIC T_FlashAddr File_BankStart(void);
 PUBLIC U16         File_BytesInBank(void);
 
-PUBLIC U8 CONST * File_GetBankNames(void);
+PUBLIC C8 CONST * File_GetBankNames(void);
 
 /* ----------------------- Numeric Store Identifer --------------------------------
 
