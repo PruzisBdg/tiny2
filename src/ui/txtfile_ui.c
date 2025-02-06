@@ -26,11 +26,6 @@
 #include "romstring.h"
 #include "txtfile_hide.h"
 
-extern T_FlashAddr File_BankStart(void);
-extern U16 File_BankSize(void);
-extern U8 File_GetNumBanks(void);
-extern void File_EraseBank(void);
-
 extern BIT inFileMode;
 extern BIT overflowedStore;
 extern BIT terminalMode;
@@ -49,7 +44,7 @@ PRIVATE void reportOnBank(U8 bank)
    TxtF.currentBank = bank;
 
    sprintf(PrintBuf.buf,
-         sizeof(T_FlashAddr) == 2                              // Flash space is 16bit?
+         sizeof(T_TxtFileAddr) == 2                              // Flash space is 16bit?
             ? "Bank %d start 0x%X size %u contains %u\r\n"     // then print addresses as 2-digit hex
             : "Bank %d start 0x%lX size %u contains %u\r\n",   // else print as 4-digits.
       bank,

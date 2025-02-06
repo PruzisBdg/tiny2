@@ -75,9 +75,9 @@ PUBLIC void TrimMenu_StepBacklightMode(U8 fwd)
    backlight.mode =
    (fwd)
    ?
-      ((backlight.mode >= E_DimWhenUnused) ? E_AlwaysOn : backlight.mode+1)
+      ((backlight.mode >= E_DimWhenUnused) ? E_AlwaysOn : (T_BacklightMode)((U8)backlight.mode+1)  )
    :
-      ((backlight.mode == E_AlwaysOn) ? E_DimWhenUnused : backlight.mode-1);
+      ((backlight.mode == E_AlwaysOn) ? E_DimWhenUnused : (T_BacklightMode)((U8)backlight.mode-1)  );
 
    // Update the backlight from the new mode
    if( backlight.mode == E_AlwaysOff )          // Always off?

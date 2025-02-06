@@ -24,7 +24,6 @@
 
 #include "libs_support.h"
 #include "common.h"
-//#include "firm.h"
 #include "flash_basic.h"
 #include "hostcomms.h"
 #include "wordlist.h"
@@ -37,12 +36,6 @@
 #include "txtfile_hide.h"
 #include "util.h"          // ReadDirtyASCIIInt_ByCh_Init()
 #include "arith.h"         // MinS16()
-
-extern T_FlashAddr File_BankStart(void);
-extern U16 File_BankSize(void);
-extern U8 File_GetNumBanks(void);
-extern C8 CONST * File_GetBankNames(void);
-extern void File_EraseBank(void);
 
 extern BIT inFileMode;        // Tells UI that we are working with a file
 extern BIT overflowedStore;

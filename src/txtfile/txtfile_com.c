@@ -238,7 +238,7 @@ PUBLIC void File_EraseBank(void)
 |
 ------------------------------------------------------------------------------------------*/
 
-PUBLIC T_FlashAddr File_BankStart(void)
+PUBLIC T_TxtFileAddr File_BankStart(void)
 {
    return getFlashBanks()[TxtF.currentBank].start;
 }
@@ -310,7 +310,7 @@ PUBLIC BIT File_IsOpen(void)
 
 PUBLIC C8 CONST * File_Read( U8 fileNum )
 {
-    T_FlashAddr start;
+    T_TxtFileAddr start;
 
    if(fileNum > File_GetNumBanks() - 1)            // Not a legal bank number?
    {
