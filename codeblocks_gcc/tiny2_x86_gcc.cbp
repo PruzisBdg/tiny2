@@ -61,11 +61,12 @@
 		</Build>
 		<Compiler>
 			<Add option="-D__TOOL_IS_GCC_X86" />
+			<Add option="-D__TARGET_IS_LIB_X86_GCC" />
 			<Add directory="../private" />
 			<Add directory="../public" />
 			<Add directory="../../libs_common/public" />
-			<Add directory="../../libs_common/libs_only" />
 			<Add directory="../../arith/public" />
+			<Add directory="../../util/public" />
 		</Compiler>
 		<Unit filename="../../libs_common/public/spj_stdint.h" />
 		<Unit filename="../../unity_tdd/tdd_common.c">

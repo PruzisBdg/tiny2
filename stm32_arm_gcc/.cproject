@@ -37,13 +37,14 @@
 								<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.optimization.level.1042147898" name="Optimization level" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.optimization.level" useByScannerDiscovery="false"/>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.includepaths.225163413" name="Include paths (-I)" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.includepaths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/../private&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/../GenericTypes&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/../public&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${SPJ_SWR_LOC}/arith/public&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${SPJ_SWR_LOC}/util/public&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/../../libs_common/public&quot;"/>
 								</option>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.definedsymbols.237974355" name="Define symbols (-D)" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.definedsymbols" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="__TOOL_IS_GCC_ARM__"/>
+									<listOptionValue builtIn="false" value="__TARGET_IS_LIB_GCC_ARM"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c.1426409536" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c"/>
 							</tool>
@@ -63,9 +64,6 @@
 							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.symbolsrec.1999258713" name="MCU Output Converter Motorola S-rec with symbols" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.symbolsrec"/>
 						</toolChain>
 					</folderInfo>
-					<fileInfo id="com.st.stm32cube.ide.mcu.gnu.managedbuild.config.lib.debug.502985643.1745792749" name="flashblk_old.c" rcbsApplicability="disable" resourcePath="src/flashblk_neq/flashblk_old.c" toolsToInvoke="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.2122928582.1519805642">
-						<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.2122928582.1519805642" name="MCU GCC Compiler" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.2122928582"/>
-					</fileInfo>
 					<sourceEntries>
 						<entry excluding="src/flashblk_neq/flashblk_old.c|src/sysobj/get_obj_nano.c|src/sysobj/objio_exists_nano.c|src/sysobj/get_obj_io_nano.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>

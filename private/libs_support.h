@@ -61,7 +61,11 @@
    #ifdef __TARGET_IS_LIB_X86_GCC
       #define _TARGET_IS _TARGET_LIB_X86_GCC
    #else
-      #error "_TARGET_IS must be defined"
+      #ifdef __TARGET_IS_LIB_GCC_ARM
+         #define _TARGET_IS _TARGET_LIB_ARM
+      #else
+         #error "_TARGET_IS must be defined"
+      #endif
    #endif
 #endif
 
