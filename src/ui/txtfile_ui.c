@@ -26,11 +26,6 @@
 #include "romstring.h"
 #include "txtfile_hide.h"
 
-extern T_FlashAddr File_BankStart(void);
-extern U16 File_BankSize(void);
-extern U8 File_GetNumBanks(void);
-extern void File_EraseBank(void);
-
 extern BIT inFileMode;
 extern BIT overflowedStore;
 extern BIT terminalMode;
@@ -49,7 +44,7 @@ PRIVATE void reportOnBank(U8 bank)
    TxtF.currentBank = bank;
 
    sprintf(PrintBuf.buf,
-         sizeof(T_FlashAddr) == 2                              // Flash space is 16bit?
+         sizeof(T_TxtFileAddr) == 2                              // Flash space is 16bit?
             ? "Bank %d start 0x%X size %u contains %u\r\n"     // then print addresses as 2-digit hex
             : "Bank %d start 0x%lX size %u contains %u\r\n",   // else print as 4-digits.
       bank,
@@ -63,7 +58,7 @@ PRIVATE void reportOnBank(U8 bank)
    {
       WrStrLiteral("   ---- ");
       File_EnterTextBank();
-      Comms_WrLine(Str_GetNthWord(_StrConst((U8 CONST *)File_BankStart()), 0));  // then quote the 1st line with any text.
+      Comms_WrLine((U8 CONST*)Str_GetNthWord(_StrConst((C8 CONST *)File_BankStart()), 0));  // then quote the 1st line with any text.
       File_LeaveTextBank();
    }
 }
@@ -91,7 +86,7 @@ PRIVATE void reportOnBank(U8 bank)
 ------------------------------------------------------------------------------------------*/
 
    #ifdef INCLUDE_HELP_TEXT
-PUBLIC U8 CONST UI_File_Help[] =
+PUBLIC C8 CONST UI_File_Help[] =
 "\
   Syntax:\r\n\
 \r\n\
@@ -112,13 +107,13 @@ PUBLIC U8 CONST UI_File_Help[] =
    #endif // INCLUDE_HELP_TEXT
 
 typedef enum { action_Write, action_List, action_Clear } E_Actions;
-PRIVATE U8 CONST actionList[] = "write list clear";
+PRIVATE C8 CONST actionList[] = "write list clear";
 
-PUBLIC U8 UI_File(U8 *args)
+PUBLIC U8 UI_File(C8 *args)
 {
    U8 c, bank, action;
 
-   if( Str_WordInStr(args, _U8Ptr("report")) )
+   if( Str_WordInStr(args, "report") )
    {
       for( c = 0; c < File_GetNumBanks(); c++ )
          { reportOnBank(c); }
@@ -142,7 +137,7 @@ PUBLIC U8 UI_File(U8 *args)
                case action_Write:
                   if( InServiceMode_MsgIfNot() )               // In service mode? then can write
                   {                                            // If 'term' specified, then will echo incoming chars                                                                  
-                     terminalMode = Str_WordInStr(args, _U8Ptr("term"));
+                     terminalMode = Str_WordInStr(args, "term");
                      File_SetupWrite();
                   }
                   break;

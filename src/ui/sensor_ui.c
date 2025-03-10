@@ -23,7 +23,7 @@ extern U8 Sensor_GetCfgFlags(S_Sensor *s);
 |
 -----------------------------------------------------------------------------------*/
 
-PRIVATE void printCalOrConst( U8 CONST *name, S_CalOrConst CONST *k, U8 printCtl )
+PRIVATE void printCalOrConst( C8 CONST *name, S_CalOrConst CONST *k, U8 printCtl )
 {
    if( k->isCal )
    {
@@ -49,7 +49,7 @@ PRIVATE void printCalOrConst( U8 CONST *name, S_CalOrConst CONST *k, U8 printCtl
 extern void UI_PrintObject( S_Obj CONST *obj, U8 printRaw );
 
    #ifdef INCLUDE_HELP_TEXT
-PUBLIC U8 CONST UI_Sensor_Help[]  = 
+PUBLIC C8 CONST UI_Sensor_Help[]  =
 "Usage:\r\n\
     <sensor name> <action = ('read' [src] | 'report') [raw] >\r\n\
 \r\n\
@@ -60,10 +60,10 @@ PUBLIC U8 CONST UI_Sensor_Help[]  =
 ";
    #endif // INCLUDE_HELP_TEXT
 
-PRIVATE U8 CONST actionList[] = "read report";
+PRIVATE C8 CONST actionList[] = "read report";
 typedef enum { action_Read, action_Report } E_Actions;
 
-PUBLIC U8 Sensor_HandleUI( U8 *args )
+PUBLIC U8 Sensor_HandleUI( C8 *args )
 {
    S_Obj CONST *obj;
    S_Sensor *s;
@@ -86,7 +86,7 @@ PUBLIC U8 Sensor_HandleUI( U8 *args )
          switch(action)
          {
             case action_Read:
-               if( Str_WordInStr(args, _U8Ptr("src")) )           // read raw input to sensor?
+               if( Str_WordInStr(args, "src") )                   // read raw input to sensor?
                   { UI_PrintScalar( Sensor_ReadRaw(s), 0, 0); }   // then return that.
                else
                   { UI_PrintObject(obj, printArgs); }             // else return conditioned output

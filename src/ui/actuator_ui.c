@@ -26,7 +26,7 @@ extern void Actuator_WrAlways(S_Actuator *a, S16 n);
 -----------------------------------------------------------------------------------*/
 
    #ifdef INCLUDE_HELP_TEXT
-PUBLIC U8 CONST UI_Actuator_Help[]  = 
+PUBLIC C8 CONST UI_Actuator_Help[]  =
 "Usage:\r\n\
     <actuator name> <action = 'read' [raw]| 'write' value [raw ]| 'reset' | 'lock' | 'free' |'report' >\r\n\
 \r\n\
@@ -41,11 +41,11 @@ PUBLIC U8 CONST UI_Actuator_Help[]  =
 ";
    #endif // INCLUDE_HELP_TEXT
 
-PRIVATE U8 CONST actionList[] = "read write reset lock free report";
+PRIVATE C8 CONST actionList[] = "read write reset lock free report";
 typedef enum E_Actions { action_Read, action_Write, action_Reset, action_Lock, action_Free, action_Report } E_T_Actions;
 
 
-PUBLIC U8 Actuator_HandleUI( U8 *args )
+PUBLIC U8 Actuator_HandleUI( C8 *args )
 {
    S_Actuator *a;
    S_Obj CONST * obj;

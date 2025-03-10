@@ -36,7 +36,7 @@
     #elif _TOOL_IS == TOOL_CC430
        #define _StrConst(s) (s)
        #define _StrLit(s) s
-       #define _RomStr(s) ((U8 const *)(s))
+       #define _RomStr(s) ((C8 const *)(s))
     #else
        #define _StrConst(s) (s)
        #define _StrLit(s) s

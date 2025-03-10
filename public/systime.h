@@ -126,7 +126,8 @@ extern T_Time SysTime;     // Up to 10,000hrs at 10msecs.
 
 // Short constant times
 #define _TicksMSec_S(t) (T_ShortTime)((t)/_SystemTick_msec)
-#define _TicksSec_S(t) (T_ShortTime)( 1000.0 * (t) / _SystemTick_msec)
+#define _TicksSec_S(t)  (T_ShortTime)( 1000.0 * (t) / _SystemTick_msec)
+#define _TicksMin_S(t)  (T_ShortTime)_TicksMin((t))
 
 #endif // SYSTIME_H
 

@@ -22,7 +22,7 @@
 |
 ------------------------------------------------------------------------------------------*/
 
-PUBLIC void UI_SPrintScalar( U8 *out, S16 n, S_ObjIO CONST * io, U8 appendUnits )
+PUBLIC void UI_SPrintScalar( C8 *out, S16 n, S_ObjIO CONST * io, U8 appendUnits )
 {
    if( !io )                                                      // no IO format supplied?
    { 

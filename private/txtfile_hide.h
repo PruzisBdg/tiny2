@@ -5,18 +5,6 @@
 |              Non-public stuff common to the txtfile group
 |
 |
-|  $Workfile:   txtfile_hide.h  $                                  
-|                                                 
-|  $Header:   Q:/Software/Archive/CSI_Software_DataBase/archives/Common/spj/tiny1/txtfile/txtfile_hide.h-arc   1.1   Jan 26 2011 12:05:56   spruzina  $                                  
-|
-|  $Log:   Q:/Software/Archive/CSI_Software_DataBase/archives/Common/spj/tiny1/txtfile/txtfile_hide.h-arc  $
-|   
-|      Rev 1.1   Jan 26 2011 12:05:56   spruzina
-|   Add  file_WhenGotLastChar'. This timer used to finish up streaming data frm a Host fiel to Flash.
-|   
-|      Rev 1.0   Jan 17 2011 12:53:16   spruzina
-|   Initial revision.
-|
 |--------------------------------------------------------------------------*/
 
 #ifndef TXTFILE_HIDE_H
@@ -45,10 +33,11 @@ extern BIT storeBinaryInts;
 
 
 PUBLIC U16         File_BankSize(void);
-PUBLIC T_FlashAddr File_BankStart(void);
+PUBLIC T_TxtFileAddr File_BankStart(void);
 PUBLIC U16         File_BytesInBank(void);
-
-PUBLIC U8 CONST * File_GetBankNames(void);
+PUBLIC U8         File_GetNumBanks(void);
+PUBLIC void       File_EraseBank(void);
+PUBLIC C8 CONST * File_GetBankNames(void);
 
 /* ----------------------- Numeric Store Identifer --------------------------------
 

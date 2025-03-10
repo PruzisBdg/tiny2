@@ -96,7 +96,7 @@ PUBLIC void compare_PrintLimitError( S_Obj CONST * obj, S16 *nums, U8 errNum )
 
 // Types of comparision
 
-PUBLIC CONST U8 listOfCompareTypes[] = "inside greater > less < equal == notEqual <> !=";
+PUBLIC CONST C8 listOfCompareTypes[] = "inside greater > less < equal == notEqual <> !=";
 
 // *** Duplicated in compare_vec.c
 typedef enum  

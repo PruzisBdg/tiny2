@@ -14,12 +14,12 @@
    #error "CODE_SPACE_IS must be defined"
 #else
    #if CODE_SPACE_IS == CODE_SPACE_16BIT
-      typedef U16 T_FlashAddr;
+      typedef U16 T_TxtFileAddr;
    #elif CODE_SPACE_IS == CODE_SPACE_20BIT || CODE_SPACE_IS == CODE_SPACE_32BIT
-      typedef U32 T_FlashAddr;
+      typedef U32 T_TxtFileAddr;
    #elif CODE_SPACE_IS == CODE_SPACE_STDPTR
       // For test Harnesses use the system pointer size.
-      typedef uintptr_t T_FlashAddr;
+      typedef uintptr_t T_TxtFileAddr;
    #else
       #error "CODE_SPACE_IS must be one of these choices"
    #endif
@@ -30,7 +30,7 @@
 
 typedef struct
 {
-   T_FlashAddr start;        // start address of the 1st flash sector in the bank
+   T_TxtFileAddr start;        // start address of the 1st flash sector in the bank
    U8          sectors;      // number of (e.g 1024 byte) sectors
 } S_TxtFileBank;
 
@@ -50,15 +50,15 @@ typedef struct
    S_TxtFileBank CONST  *flashBanks;   // the text store, each one or more contiguous flash sectors
    U8                   numBanks;      // the number of 'flashBanks'
    U16                  sectorBytes;   // flash sector size
-   U8 CONST *           bankNames;     // space delimited string of names, one for each bank
+   C8 CONST *           bankNames;     // space delimited string of names, one for each bank
 } S_TxtFiles;
 
 // Gets the start of 'fileNum', if that is a legal file.
-PUBLIC U8 CONST * File_Read( U8 fileNum );
+PUBLIC C8 CONST * File_Read( U8 fileNum );
 // Checks that a file has some content
 PUBLIC BIT File_NotEmpty(U8 fileNum);
 // Check that bank name / number is legal
-PUBLIC BIT File_LegalBank_MsgIfNot(U8 *args, U8 *bank);
+PUBLIC BIT File_LegalBank_MsgIfNot(C8 *args, U8 *bank);
 
 // Operations on the currently open file, specified by the global 'TxtF.currentBank'.
 PUBLIC BIT  File_IsOpen(void);

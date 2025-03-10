@@ -15,7 +15,7 @@
 typedef struct
 {
    S_CalCfg  cfg;
-   U8 CONST  *vecName;
+   C8 CONST  *vecName;
 } S_CalVCfg;
 
 typedef struct
@@ -25,7 +25,7 @@ typedef struct
    U8              valid;      // 1 = valid
 } S_CalV;
 
-PUBLIC U8   CalV_HandleUI( U8 *args );
+PUBLIC U8   CalV_HandleUI( C8 *args );
 PUBLIC U8   CalV_Init( T_ObjAddr obj, T_CodeAddr init);
 PUBLIC S16  CalV_Read1( S_CalV *cal, T_VecRows row, T_VecCols col );
 PUBLIC U8   CalV_ReadStored( S_CalV *cal, S16 *out );

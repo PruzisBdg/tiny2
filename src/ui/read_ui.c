@@ -29,7 +29,7 @@
 PRIVATE void printList(S_Obj CONST *obj, U8 flags)
 {
    U8       c;
-   U8 CONST * name;
+   C8 CONST * name;
 
    for( c = 0; c < ((S_ObjNames CONST *)(obj->addr))->cnt; c++ )  // For each list element
    {
@@ -56,27 +56,27 @@ PRIVATE void printList(S_Obj CONST *obj, U8 flags)
 |
 ------------------------------------------------------------------------------------------*/
 
-PUBLIC U8 CONST UI_ReadObj_Help[] =
+PUBLIC C8 CONST UI_ReadObj_Help[] =
 "Reads the value of Scalars, Vectors or Calibrations\r\n\
 Usage: read <object_name> ['raw' = print raw numbers] ['numsOnly' = no names or units]";
 
-PUBLIC U8 UI_ReadObj( U8 *args )
+PUBLIC U8 UI_ReadObj( C8 *args )
 {
    S_Obj CONST    *obj;
    U8             flags;      // Flags controlling the print format
 
    flags = 0;
 
-   if(UI_RawInArgList(args))                          // 2nd (or last) arg is 'raw'
-      { SETB(flags, _UI_PrintObject_Raw); }           // then will print raw numbers, else formatted.
+   if(UI_RawInArgList(args))                             // 2nd (or last) arg is 'raw'
+      { SETB(flags, _UI_PrintObject_Raw); }              // then will print raw numbers, else formatted.
 
-   if( !Str_WordInStr( args, _U8Ptr("numsOnly")) )    // Add name and units?
+   if( !Str_WordInStr( args, "numsOnly") )               // Add name and units?
       { SETB(flags, _UI_PrintObject_AppendUnits | _UI_PrintObject_PrependName); }
 
-   while(NULL != (obj = UI_GetAnyObj_MsgIfFail(args)))  // Get object named by current arg...
-   {                                                  // ... continue until get something which isn't an object
-      if( obj->type == _Class_List )                  // Object is a list?
-         { printList(obj, flags); }                   // then will print all list members
+   while(NULL != (obj = UI_GetAnyObj_MsgIfFail(args)))   // Get object named by current arg...
+   {                                                     // ... continue until get something which isn't an object
+      if( obj->type == _Class_List )                     // Object is a list?
+         { printList(obj, flags); }                      // then will print all list members
       else if( Str_1stWordHasChar(args, '.') != _Str_NoMatch )
       {
          if(BSET(flags, _UI_PrintObject_PrependName))
@@ -96,7 +96,7 @@ PUBLIC U8 UI_ReadObj( U8 *args )
       else
          { UI_PrintObject(obj, flags); }              // else just a single object, print it.
 
-      args = (U8*)Str_GetNthWord(args,1);             // Get next arg
+      args = Str_GetNthWord(args,1);                  // Get next arg
 
       if( Str_EndOfLineOrString(args[0]) )            // Break if end-of-line or string
          { break; }

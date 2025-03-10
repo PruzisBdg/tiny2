@@ -75,10 +75,10 @@ PRIVATE float getGainOutScale(void)  { return  getSensorScale() / (_Servo_PGainS
    which has been associated with the servo; the output set point is scaled from the
    actuator io scale.
 */
-PRIVATE void getInPoint( U8 *args, U8 pos)
+PRIVATE void getInPoint( C8 *args, U8 pos)
    { ui->theServo.cfg.setPoint = UI_GetScalarArg(args, pos, getSensorScale() ); }
 
-PRIVATE void getOutPoint( U8 *args, U8 pos)
+PRIVATE void getOutPoint( C8 *args, U8 pos)
    { ui->theServo.cfg.actuatorOfs = UI_GetScalarArg(args, pos, getActuatorScale() ); }
 
 
@@ -116,7 +116,7 @@ PUBLIC U8 Servo_UIInit(S_ServoUI *obj, S_ServoCfg CONST *init)
 -----------------------------------------------------------------------------------*/
 
    #ifdef INCLUDE_HELP_TEXT
-PUBLIC U8 CONST UI_Servo_Help[]  =
+PUBLIC C8 CONST UI_Servo_Help[]  =
 "Usage:\r\n\
     <servo name> <action =\r\n\
     (\r\n\
@@ -131,11 +131,11 @@ PUBLIC U8 CONST UI_Servo_Help[]  =
     )\r\n";
    #endif // INCLUDE_HELP_TEXT
 
-PRIVATE U8 CONST actionList[] = "make run stop inPoint outPoint pgain igain runIntvl report showRun";
+PRIVATE C8 CONST actionList[] = "make run stop inPoint outPoint pgain igain runIntvl report showRun";
 typedef enum { action_Make, action_Run, action_Stop,
    action_InPoint, action_OutPoint, action_PGain, action_IGain, action_RunIntvl, action_Report, action_ShowRun } E_Actions;
 
-PUBLIC U8 UI_Servo(U8 *args)
+PUBLIC U8 UI_Servo(C8 *args)
 {
    S_Obj CONST *obj;
    S_Servo     *sv;

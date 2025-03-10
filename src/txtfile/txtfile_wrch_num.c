@@ -82,7 +82,7 @@ PRIVATE BIT wrS16ToStore(S16 n)
    {
       if( TxtF.cnt >= File_BankSize() - 2 )        // Check for room. No! store has just 1 or 2 bytes left
       {
-         Comms_WrStrConst((U8 CONST *)"Too many numbers for store\r\n");
+         Comms_WrStrConst("Too many numbers for store\r\n");
          overflowedStore = 1;
          return 0;
       }

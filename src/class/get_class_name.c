@@ -16,7 +16,7 @@
 |
 ------------------------------------------------------------------------------------------*/
 
-PUBLIC U8 CONST * GetClassName(U8 classID)
+PUBLIC C8 CONST * GetClassName(U8 classID)
 {
    if( !GetClass(classID) )
    {

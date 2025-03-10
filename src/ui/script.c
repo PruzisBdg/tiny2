@@ -52,7 +52,7 @@
 
 typedef S16 T_LineNum;
 
-extern S16 EvalExpr(U8 *expr);
+extern S16 EvalExpr(C8 *expr);
 
 // ============================== PRIVATE ============================================
 
@@ -75,7 +75,7 @@ typedef struct
    T_LineNum lineNum;         // the current line number
    U8        flags;           // quit if fail etc
    S_LoopCtl loop;            // controls script loops
-   U8        callArgs[_MaxArgListChars+1];   // the current arg list (for a subroutine)
+   C8        callArgs[_MaxArgListChars+1];   // the current arg list (for a subroutine)
 } S_State;
 
 #define _SubNameMaxChars 21
@@ -84,7 +84,7 @@ typedef struct
 // Tags a subroutine
 typedef struct
 {
-   U8          name[_SubNameMaxChars+1];
+   C8          name[_SubNameMaxChars+1];
    T_LineNum   startLine;                 // The 1st line after the subroutine header
 } S_Sub;
 
@@ -92,12 +92,12 @@ typedef struct
 
 typedef struct
 {
-   U8 CONST    *script;                // the script text (in a Flash text store)
+   C8 CONST    *script;                // the script text (in a Flash text store)
    U8          mode;                   // execute verbose etc.
    T_Timer     dlyTimer,               // delay timer
                started;                // when the script started, used for 'doat' and 'doafter'
-   U8          *args;                  // arguments to the current script line
-   U8 CONST    *linePtr;               // Start of current line in the ROM script text.
+   C8          *args;                  // arguments to the current script line
+   C8 CONST    *linePtr;               // Start of current line in the ROM script text.
    S_State     curr, pushed, pushed2;  // Contexts, stacked up to two deep
    U8          paused,                 // Script execution paused.
                numSubs,                // the number of subroutines declared in the current script
@@ -109,7 +109,7 @@ typedef struct
 PRIVATE S_ScriptEngine s;
 
 #define _MaxCmdLineChars 100
-PRIVATE U8 lineBuf[_MaxCmdLineChars+4];      // holds the current script line
+PRIVATE C8 lineBuf[_MaxCmdLineChars+4];      // holds the current script line
 
 #define _Flags_LastUserCmdFailed _BitM(0)
 #define _Flags_AnyUserCmdFailed  _BitM(1)
@@ -138,7 +138,7 @@ PRIVATE BIT printMoreOnCurrentLine;
 |
 ------------------------------------------------------------------------------------------*/
 
-PRIVATE T_LineNum getSub1stLine(U8 *name)
+PRIVATE T_LineNum getSub1stLine(C8 *name)
 {
    U8 c;
 
@@ -160,7 +160,7 @@ PRIVATE T_LineNum getSub1stLine(U8 *name)
 |
 ------------------------------------------------------------------------------------------*/
 
-PRIVATE void scriptErrorMsg( U8 CONST *msg )
+PRIVATE void scriptErrorMsg( C8 CONST *msg )
 {
    sprintf( PrintBuf.buf, "err line %d: %s \"%s\"\r\n", s.curr.lineNum+1, msg, lineBuf );     // in code lines are counted from 0 upwards
    PrintBuffer();
@@ -222,10 +222,10 @@ PRIVATE void pushScriptContext(void)
 |
 ------------------------------------------------------------------------------------------*/
 
-PRIVATE U8 CONST condFlags[] = "lastFailed anyFailed noneFailed true false";
+PRIVATE C8 CONST condFlags[] = "lastFailed anyFailed noneFailed true false";
 typedef enum {expr_LastFailed, expr_AnyFailed, expr_NoneFailed, expr_True, expr_False} E_ExprArgs;
 
-PRIVATE BIT evalCondition( U8 *expr )
+PRIVATE BIT evalCondition( C8 *expr )
 {
    switch(Str_FindWord(_StrConst(condFlags), expr))                // Look for one of 'condFlags[]' in 'expr'
    {
@@ -284,7 +284,7 @@ typedef enum
    cmd_DoOnQuit            // Actions on quit.
 } E_Actions;
 
-PRIVATE U8 CONST scriptCmds[] =
+PRIVATE C8 CONST scriptCmds[] =
 "wait print $ $$ quit repeat endrepeat until while wend break continue "
 "if endif else elif < pause beep waitfor clrfail doat doafter sub endsub call return repeatIntvl doOnQuit";
 
@@ -327,9 +327,9 @@ PRIVATE BIT isConditionalCmd(U8 cmd)
 |
 ------------------------------------------------------------------------------------------*/
 
-PRIVATE BIT readFloat(U8 *str, float *f)
+PRIVATE BIT readFloat(C8 *str, float *f)
 {
-   return !Scanf_NoArgs(sscanf( (C8*)str, "%f", f ));
+   return !Scanf_NoArgs(sscanf( str, "%f", f ));
 }
 
 /*-----------------------------------------------------------------------------------------
@@ -341,9 +341,9 @@ PRIVATE BIT readFloat(U8 *str, float *f)
 |
 ------------------------------------------------------------------------------------------*/
 
-PRIVATE BIT readInt(U8 *str, S16 *n)
+PRIVATE BIT readInt(C8 *str, S16 *n)
 {
-   return !Scanf_NoArgs(sscanf( (C8*)str, "%d", n ));
+   return !Scanf_NoArgs(sscanf( str, "%d", n ));
 }
 
 /*-----------------------------------------------------------------------------------------
@@ -358,10 +358,10 @@ PRIVATE BIT readInt(U8 *str, S16 *n)
 |
 ------------------------------------------------------------------------------------------*/
 
-PRIVATE U8 CONST minuteWords[] = "min mins minute minutes";
-PRIVATE U8 CONST hourWords[]   = "hr hrs hour hours";
+PRIVATE C8 CONST minuteWords[] = "min mins minute minutes";
+PRIVATE C8 CONST hourWords[]   = "hr hrs hour hours";
 
-PRIVATE T_LTime getTimeFromStr( U8 *timeStr )
+PRIVATE T_LTime getTimeFromStr( C8 *timeStr )
 {
    float f;
 
@@ -394,15 +394,15 @@ PRIVATE T_LTime getTimeFromStr( U8 *timeStr )
 |
 ------------------------------------------------------------------------------------------*/
 
-PRIVATE T_AnyAddr getDoAtArg( U8 CONST * theLine )
+PRIVATE T_AnyAddr getDoAtArg( C8 CONST * theLine )
 {
    U8 c;
    T_AnyAddr p;
 
    File_EnterTextBank();
 
-   c = Str_FindWord(_StrConst(theLine), _U8Ptr(":"));    // Get index to ':'
-   if( c < _Str_NoMatch ) c += 1;                        // Bump index to next word
+   c = Str_FindWord(_StrConst(theLine), ":");                  // Get index to ':'
+   if( c < _Str_NoMatch ) c += 1;                              // Bump index to next word
    p = (T_AnyAddr)Str_GetNthWord(_StrConst(theLine), c);       // Use U16 so works with CONST and non-const pointers
 
    File_LeaveTextBank();
@@ -430,7 +430,7 @@ PRIVATE void oneBeep(void) { OutPin_Write(&Beeper, 1); Timer_RunShort(_TicksSec_
 PRIVATE void doBeeps(U8 n) { Timer_RunRepeat(_TicksSec_S(1.0), (void(*)(U16,U8))oneBeep, 0, n); }
 
 
-PRIVATE void doScriptLine( U8 CONST *theLine );
+PRIVATE void doScriptLine( C8 CONST *theLine );
 
 /*-----------------------------------------------------------------------------------------
 |
@@ -443,7 +443,7 @@ PRIVATE void doScriptLine( U8 CONST *theLine );
 |
 ------------------------------------------------------------------------------------------*/
 
-PRIVATE void doScriptLineUntil( U8 CONST *scriptLine, U8 cnt )
+PRIVATE void doScriptLineUntil( C8 CONST *scriptLine, U8 cnt )
 {
    doScriptLine(scriptLine);
 
@@ -497,7 +497,7 @@ PRIVATE void sendScriptLineToTimer(T_LTime delay)
 
 #define InsideLimitsS16(n, l, u)  ((n) >= (l) && (n) <= (u))
 
-PRIVATE BIT fetchScriptLine( U8 *out, U8 CONST *txt, T_LineNum lineNum );
+PRIVATE BIT fetchScriptLine( C8 *out, C8 CONST *txt, T_LineNum lineNum );
 
 #define _cmd_NoMatch 0
 #define _cmd_OK      1
@@ -505,7 +505,7 @@ PRIVATE BIT fetchScriptLine( U8 *out, U8 CONST *txt, T_LineNum lineNum );
 #define _cmd_Quit    3
 
 
-PRIVATE U8 doScriptCmd( U8 *theLine, U8 autoAdvance )
+PRIVATE U8 doScriptCmd( C8 *theLine, U8 autoAdvance )
 {
    U8    cmdIdx,
          idx,
@@ -545,7 +545,7 @@ PRIVATE U8 doScriptCmd( U8 *theLine, U8 autoAdvance )
 
          // If a conditional command, preevaluate the condition now - saves code
 
-         s.args = (U8 *)Str_GetNthWord(theLine, 1);      // Get args, everything from 2nd word onward.
+         s.args = Str_GetNthWord(theLine, 1);            // Get args, everything from 2nd word onward.
 
          gotCondition = 0; conditionTrue = 0;            // unless set below
          if( Str_WordCnt(s.args) > 0 && isConditionalCmd(cmdIdx))  // are there args AND comamnd is a conditional?
@@ -736,7 +736,7 @@ PRIVATE U8 doScriptCmd( U8 *theLine, U8 autoAdvance )
                   sprintf(PrintBuf.buf, "paused script at line %d; Ctrl-R to resume\r\n", (S16)s.curr.lineNum);
                   PrintBuffer();
 
-                  if( Str_WordInStr(s.args, _U8Ptr("beep")) )  // Beep too?
+                  if( Str_WordInStr(s.args, "beep") )  // Beep too?
                      { doBeeps(3); }                           // then do 3 beeps
                }
                break;
@@ -748,13 +748,13 @@ PRIVATE U8 doScriptCmd( U8 *theLine, U8 autoAdvance )
             case cmd_WaitFor:
                s.dlyTimer = _Never;
 
-               if( (idx = Str_FindWord(s.args, _U8Ptr("upto"))) != _Str_NoMatch )   // Wait has a timeout?
+               if( (idx = Str_FindWord(s.args, "upto")) != _Str_NoMatch )   // Wait has a timeout?
                {
-                  if( (t = getTimeFromStr( (U8*)Str_GetNthWord(s.args, idx+1))) > 0 ) // Read how long to wait before timeout?
+                  if( (t = getTimeFromStr( Str_GetNthWord(s.args, idx+1))) > 0 )    // Read how long to wait before timeout?
                   {
                      _SetDelay(s.dlyTimer, t);                                      // then set dealy to that time
 
-                     if( Str_WordInStr(s.args, _U8Ptr("quitIfTimeout")) )           // Quit if there's a timeout?
+                     if( Str_WordInStr(s.args, "quitIfTimeout") )                   // Quit if there's a timeout?
                      {
                         SETB(s.curr.flags, _Flags_QuitIfTimeout);                   // then set a flag for that
                      }
@@ -842,19 +842,19 @@ PRIVATE U8 doScriptCmd( U8 *theLine, U8 autoAdvance )
                {
                   if( InsideLimitsS16(n, 1, 254) )                         // Integer is a loop count; must be 1-254
                   {
-                     if( (t = getTimeFromStr((U8*)Str_GetNthWord(theLine, 2))) == 0 )  // Fetch next arg(s), which should be a time?
+                     if( (t = getTimeFromStr(Str_GetNthWord(theLine, 2))) == 0 )  // Fetch next arg(s), which should be a time?
                      {
                         _scriptErrorMsg("2nd arg must be a time");         // Say we didn't get a legal time
                      }
                      else                                                  // else got a legal loop count and time
                      {                                                     // So setup timer to repeat the rest of the script line
-                        Timer_RunRepeat(                             // Run repeatedly...
-                           t,                                        // after this delay and at this interval
-                           (void(*)(U16,U8))doScriptLineUntil,       // Run this function...
-                           getDoAtArg(s.linePtr),                    // which will process whatever is after the ':' colon
-                           n);                                       // Repeat this many times.
+                        Timer_RunRepeat(                                   // Run repeatedly...
+                           t,                                              // after this delay and at this interval
+                           (void(*)(U16,U8))doScriptLineUntil,             // Run this function...
+                           getDoAtArg(s.linePtr),                          // which will process whatever is after the ':' colon
+                           n);                                             // Repeat this many times.
 
-                        if( Str_WordInStr(s.args, _U8Ptr("wait")) )        // Got 'wait'
+                        if( Str_WordInStr(s.args, "wait") )                // Got 'wait'
                         {
                            s.paused = 1;                                   // then pasue script, will be restarted by timer when done
                         }
@@ -895,11 +895,11 @@ PRIVATE U8 doScriptCmd( U8 *theLine, U8 autoAdvance )
 |
 ------------------------------------------------------------------------------------------*/
 
-PRIVATE U8 doUserCmd( U8 *cmdLine )
+PRIVATE U8 doUserCmd( C8 *cmdLine )
 {
    U8 rIDATA c;
    S_UICmdSpec CONST * rIDATA cl;         // to scan legal command list for a match
-   U8          cmd[_UI_MaxCmdChars];      // holds command pulled from text line
+   C8          cmd[_UI_MaxCmdChars];      // holds command pulled from text line
 
    if( sscanf( (C8*)cmdLine, "%s", cmd ) == 1 )             // Get 1st word - the command
    {
@@ -916,7 +916,7 @@ PRIVATE U8 doUserCmd( U8 *cmdLine )
             }
             else if( cl->handler )                          // else enough args AND command has a handler (it always should)?
             {
-               if( (*cl->handler)((U8 *)Str_GetNthWord(cmdLine,1)) == 0)      // handler returned fail
+               if( (*cl->handler)(Str_GetNthWord(cmdLine,1)) == 0)      // handler returned fail
                {
                   _scriptErrorMsg("");                      // then message which line failed
                   return _cmd_Error;
@@ -959,10 +959,10 @@ PRIVATE U8 doUserCmd( U8 *cmdLine )
 |
 ------------------------------------------------------------------------------------------*/
 
-PRIVATE CONST U8 * nextScriptLine( U8 CONST *txt )
+PRIVATE CONST C8 * nextScriptLine( C8 CONST *txt )
 {
    U8 state, ch;
-   U8 CONST * lineStart;
+   C8 CONST * lineStart;
 
    #define _start    0
    #define _line     1
@@ -1050,7 +1050,7 @@ PRIVATE CONST U8 * nextScriptLine( U8 CONST *txt )
 |
 ------------------------------------------------------------------------------------------*/
 
-PRIVATE void copyScriptLineToStr( U8 *str, U8 CONST *txt )
+PRIVATE void copyScriptLineToStr( C8 *str, C8 CONST *txt )
 {
    U8 ch, idx, firstSpace;
    BIT wasAlpha;
@@ -1116,7 +1116,7 @@ PRIVATE void copyScriptLineToStr( U8 *str, U8 CONST *txt )
 |
 ------------------------------------------------------------------------------------------*/
 
-PRIVATE BIT fetchScriptLine( U8 *out, U8 CONST *txt, T_LineNum lineNum )
+PRIVATE BIT fetchScriptLine( C8 *out, C8 CONST *txt, T_LineNum lineNum )
 {
    // For efficiency cache the number and addr of the last-fetched line. Otherwise the script
    // engine must parse from the start of the script for each new line. Very slow if the
@@ -1153,7 +1153,7 @@ PRIVATE BIT fetchScriptLine( U8 *out, U8 CONST *txt, T_LineNum lineNum )
 |
 ------------------------------------------------------------------------------------------*/
 
-PRIVATE void doScriptLine( U8 CONST *theLine )
+PRIVATE void doScriptLine( C8 CONST *theLine )
 {
    copyScriptLineToStr(lineBuf, theLine);
 
@@ -1336,7 +1336,7 @@ PRIVATE U8 stopFunc(S_TinySM_EventList *events)
 #define _MaxSubroutineArgs 6        // Must match argLabels[] below
 
 #if _TOOL_IS == TOOL_RIDE_8051 || _TOOL_IS == TOOL_Z8_ENCORE || _TOOL_IS == TOOL_CC430 || _TOOL_IS == TOOL_GCC_ARM || _TOOL_IS == TOOL_GCC_X86
-PRIVATE U8 CONST * CONST argLabels[] = {"#1", "#2", "#3", "#4", "#5", "#6" };
+PRIVATE C8 CONST * CONST argLabels[] = {"#1", "#2", "#3", "#4", "#5", "#6" };
 #endif
 
 
@@ -1527,10 +1527,10 @@ PUBLIC BIT Script_Running = 0;
 ------------------------------------------------------------------------------------------*/
 
 typedef enum { action_Run, action_Write, action_List } E_Actions_UI;
-PRIVATE U8 CONST actionList[] = "run write list";
+PRIVATE C8 CONST actionList[] = "run write list";
 
    #ifdef INCLUDE_HELP_TEXT
-PUBLIC U8 CONST UI_Script_Help[] = "\
+PUBLIC C8 CONST UI_Script_Help[] = "\
 Usage: <script_number>  <'run' | 'write' | 'list'>\r\n\
 \r\n\
 Examples:  'script 1 run'   Run script in txtfile 1\r\n\
@@ -1546,12 +1546,12 @@ Examples:  'script 1 run'   Run script in txtfile 1\r\n\
 extern void File_SetupWrite(void);
 extern S_TxtFile TxtF;
 
-PUBLIC U8 UI_Script(U8 *args)
+PUBLIC U8 UI_Script(C8 *args)
 {
    U8  action,
        scriptNum;
 
-   if( Str_WordInStr(args, (U8 CONST *)"ver"))
+   if( Str_WordInStr(args, "ver"))
    {
       sprintf( PrintBuf.buf, "Script Engine Rev is %s\r\n", _ScriptEngineRev);
       PrintBuffer();

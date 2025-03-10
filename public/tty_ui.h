@@ -18,7 +18,7 @@
 typedef struct
 {
    C8   CONST  *cmd;                      // command name
-   U8          (*handler)(U8 *parms);     // handler
+   U8          (*handler)(C8 *parms);     // handler
    C8 CONST    *helpStr;                  // help string (optional)
    U8          minArgs;                   // minimum number of arguments
 } S_UICmdSpec;
@@ -36,17 +36,17 @@ typedef struct
 } S_UICmdList;
 
 
-PUBLIC U8   UI_DoHelp( U8 * args );
-PUBLIC U8   UI_EchoHdlr( U8 *args );
-PUBLIC U8   UI_ReadObj( U8 *args );
-PUBLIC U8   UI_WriteObj( U8 *args );
-PUBLIC U8   UI_ListObjs( U8 *args );
-PUBLIC U8   UI_Thread( U8 * args );
+PUBLIC U8   UI_DoHelp( C8 * args );
+PUBLIC U8   UI_EchoHdlr( C8 *args );
+PUBLIC U8   UI_ReadObj( C8 *args );
+PUBLIC U8   UI_WriteObj( C8 *args );
+PUBLIC U8   UI_ListObjs( C8 *args );
+PUBLIC U8   UI_Thread( C8 * args );
 
 PUBLIC BIT UI_BeQuiet(void);
 
 PUBLIC void UI_PrintScalar( S16 n, S_ObjIO CONST * io, U8 appendUnits);
-PUBLIC void UI_SPrintScalar( U8 *out, S16 n, S_ObjIO CONST * io, U8 appendUnits );
+PUBLIC void UI_SPrintScalar( C8 *out, S16 n, S_ObjIO CONST * io, U8 appendUnits );
 #define _UI_PrintScalar_NoUnits     0
 #define _UI_PrintScalar_AppendUnits 1
 
@@ -55,26 +55,26 @@ PUBLIC void UI_PrintVector( S_Vec *vec, S_ObjIO CONST * io, BIT appendUnits);
 #define _UI_PrintVector_AppendUnits 1
 
 PUBLIC void UI_PrintObject( S_Obj CONST *obj, U8 flags );
-PUBLIC void UI_SPrintScalarObject( U8 *out, S_Obj CONST *obj, U8 flags );
+PUBLIC void UI_SPrintScalarObject( C8 *out, S_Obj CONST *obj, U8 flags );
 
 #define _UI_PrintObject_AppendUnits _BitM(0)
 #define _UI_PrintObject_PrependName _BitM(1)
 #define _UI_PrintObject_Raw         _BitM(2)
 
-PUBLIC S16 UI_GetScalarArg(U8 *args, U8 idx, float scale );
-PUBLIC S16 UI_GetIntFromObject(S_Obj CONST *obj, U8 *p);
+PUBLIC S16 UI_GetScalarArg(C8 *args, U8 idx, float scale );
+PUBLIC S16 UI_GetIntFromObject(S_Obj CONST *obj, C8 *p);
 
-PUBLIC void UI_PrintVec( S_Vec *v, U8 CONST *format, float scale );
+PUBLIC void UI_PrintVec( S_Vec *v, C8 CONST *format, float scale );
 
 extern S_UICmdList CONST UICmdList;    // User application must make this command list
 
-PUBLIC BIT UI_RawInArgList(U8 * args);
-PUBLIC S16 UI_IntFromArgs( U8 *args, S_ObjIO CONST *io, U8 idx);
+PUBLIC BIT UI_RawInArgList(C8 * args);
+PUBLIC S16 UI_IntFromArgs( C8 *args, S_ObjIO CONST *io, U8 idx);
 
-PUBLIC S_Obj CONST * UI_GetObj_MsgIfFail(U8 *args, U8 classID);
-PUBLIC S_Obj CONST * UI_GetAnyObj_MsgIfFail(U8 *args);
+PUBLIC S_Obj CONST * UI_GetObj_MsgIfFail(C8 *args, U8 classID);
+PUBLIC S_Obj CONST * UI_GetAnyObj_MsgIfFail(C8 *args);
 
-PUBLIC U8 UI_GetAction_MsgIfFail(U8 *args, U8 CONST * actionList);
+PUBLIC U8 UI_GetAction_MsgIfFail(C8 *args, C8 CONST * actionList);
 #define _UI_NoActionMatched 0xFF
 
 PUBLIC U8 Scanf_NoArgs(U8 scanfRtn );

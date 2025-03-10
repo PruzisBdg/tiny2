@@ -30,7 +30,7 @@ PUBLIC BIT FlashBlock_Write(U8 RAM_IS *src, U8 ofs, U8 cnt)
    }
    else                                // else start address is within block                               
    {                                   // So copy entire block into shadow
-      CopyConstBytesU8( (U8 const CODE *)B.addr, (U8 RAM_IS *)B.shadow, B.size);
+      CopyConstBytesU8( (U8 CODE *)B.addr, (U8 RAM_IS *)B.shadow, B.size);
                                        // and update shadow with new data
       CopyBytesU8( src, B.shadow + ofs, MinU8(cnt, B.size - ofs));
       

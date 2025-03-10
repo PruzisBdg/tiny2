@@ -27,16 +27,16 @@
 |
 --------------------------------------------------------------------------------------*/
 
-PUBLIC U8 CONST FlashBlk_Help[] = "nvstore <action = 'report' | 'clear'>";
+PUBLIC C8 CONST FlashBlk_Help[] = "nvstore <action = 'report' | 'clear'>";
 
 typedef enum { action_Clear, action_Report } E_Actions;
-PRIVATE U8 CONST actionList[] = "clear report";
+PRIVATE C8 CONST actionList[] = "clear report";
 
-PUBLIC U8 FlashBlk_UI( U8 *args )
+PUBLIC U8 FlashBlk_UI( C8 *args )
 {
    U8 action,
-      argCnt,
-      actionStr[10];
+      argCnt;
+   C8 actionStr[10];
 
    argCnt = sscanf( (C8*)args, "%s", actionStr );
 

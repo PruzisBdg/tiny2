@@ -41,12 +41,12 @@ PUBLIC U8 Scanf_NoArgs(U8 scanfRtn )
 |
 -----------------------------------------------------------------------------------*/
 
-PUBLIC S_Obj CONST * UI_GetAnyObj_MsgIfFail(U8 *args)
+PUBLIC S_Obj CONST * UI_GetAnyObj_MsgIfFail(C8 *args)
 {
    #define _MaxChars 15
 
    S_Obj CONST * obj;
-   U8 firstArg[_MaxChars+1];
+   C8 firstArg[_MaxChars+1];
 
    if( NULL != (obj = GetObj(args)) )
    {
@@ -69,12 +69,12 @@ PUBLIC S_Obj CONST * UI_GetAnyObj_MsgIfFail(U8 *args)
 |
 -----------------------------------------------------------------------------------*/
 
-PUBLIC S_Obj CONST * UI_GetObj_MsgIfFail(U8 *args, U8 classID)
+PUBLIC S_Obj CONST * UI_GetObj_MsgIfFail(C8 *args, U8 classID)
 {
    #define _MaxChars 15
 
    S_Obj CONST * obj;
-   U8 firstArg[_MaxChars+1];
+   C8 firstArg[_MaxChars+1];
 
    if( NULL != (obj = GetObjByClass(args, classID)) )
    {
@@ -96,7 +96,7 @@ PUBLIC S_Obj CONST * UI_GetObj_MsgIfFail(U8 *args, U8 classID)
 |
 -----------------------------------------------------------------------------------*/
 
-PUBLIC U8 UI_GetAction_MsgIfFail(U8 *args, U8 CONST * actionList)
+PUBLIC U8 UI_GetAction_MsgIfFail(C8 *args, C8 CONST * actionList)
 {
    U8 action;
 
@@ -170,9 +170,9 @@ PUBLIC void UI_PrintObject( S_Obj CONST *obj, U8 flags )
 |
 ------------------------------------------------------------------------------------------*/
 
-PUBLIC BIT UI_RawInArgList(U8 * args)
+PUBLIC BIT UI_RawInArgList(C8 * args)
 {
-   return Str_WordInStr( args, _U8Ptr("raw"));
+   return Str_WordInStr( args, "raw");
 }
 
 
@@ -189,14 +189,14 @@ PUBLIC BIT UI_RawInArgList(U8 * args)
 |
 ------------------------------------------------------------------------------------------*/
 
-PUBLIC S16 UI_IntFromArgs( U8 *args, S_ObjIO CONST *io, U8 idx)
+PUBLIC S16 UI_IntFromArgs( C8 *args, S_ObjIO CONST *io, U8 idx)
 {
    float f;
-   U8 *p;
+   C8 *p;
 
-   p = (U8*)Str_GetNthWord(args, idx);
+   p = Str_GetNthWord(args, idx);
 
-   if( !sscanf((C8*)p, "%f", &f) )    // not a number?
+   if( !sscanf(p, "%f", &f) )    // not a number?
    {
       sprintf(PrintBuf.buf, _StrLit("arg %d is not a number\r\n"), idx);
       PrintBuffer();
@@ -218,7 +218,7 @@ PUBLIC S16 UI_IntFromArgs( U8 *args, S_ObjIO CONST *io, U8 idx)
 |
 ------------------------------------------------------------------------------------------*/
 
-PUBLIC U8 * skipUnaryPrefix(U8 * p)
+PUBLIC C8 * skipUnaryPrefix(C8 * p)
 {
    return *p == '-' || *p == '!' ? p+1 : p;
 }
@@ -232,7 +232,7 @@ PUBLIC U8 * skipUnaryPrefix(U8 * p)
 |
 ------------------------------------------------------------------------------------------*/
 
-PUBLIC S_ObjIO CONST * GetArgIO(U8 *args)
+PUBLIC S_ObjIO CONST * GetArgIO(C8 *args)
 {
    S_ObjIO CONST * io;
 
@@ -254,7 +254,7 @@ PUBLIC S_ObjIO CONST * GetArgIO(U8 *args)
 |
 ------------------------------------------------------------------------------------------*/
 
-PUBLIC float GetArgScale(U8 *args)
+PUBLIC float GetArgScale(C8 *args)
 {
 
    S_ObjIO CONST * io;

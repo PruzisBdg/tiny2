@@ -23,7 +23,7 @@ PUBLIC void FlashBlk_Delete( T_FlashBlk_Handle hdl );
 PUBLIC U8   FlashBlk_Read( U8 RAM_IS *out, T_FlashBlk_Handle hdl, U8 cnt );
 PUBLIC U8   FlashBlk_ReadOfs( U8 RAM_IS *out, T_FlashBlk_Handle hdl, U8 maxRead, U8 ofs );
 PUBLIC U16  FlashBlk_BytesFree( void );
-PUBLIC U8   FlashBlk_UI( U8 *args );
+PUBLIC U8   FlashBlk_UI( C8 *args );
 PUBLIC U8   FlashBlk_VarExists( T_FlashBlk_Handle hdl );
 PUBLIC U8   FlashBlk_VarCnt( void );
 PUBLIC U16  FlashBlk_BankCapacity(void);

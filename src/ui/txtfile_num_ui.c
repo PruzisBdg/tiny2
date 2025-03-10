@@ -24,7 +24,6 @@
 
 #include "libs_support.h"
 #include "common.h"
-//#include "firm.h"
 #include "flash_basic.h"
 #include "hostcomms.h"
 #include "wordlist.h"
@@ -37,12 +36,6 @@
 #include "txtfile_hide.h"
 #include "util.h"          // ReadDirtyASCIIInt_ByCh_Init()
 #include "arith.h"         // MinS16()
-
-extern T_FlashAddr File_BankStart(void);
-extern U16 File_BankSize(void);
-extern U8 File_GetNumBanks(void);
-extern U8 CONST * File_GetBankNames(void);
-extern void File_EraseBank(void);
 
 extern BIT inFileMode;        // Tells UI that we are working with a file
 extern BIT overflowedStore;
@@ -119,7 +112,7 @@ PRIVATE void reportOnBank(U8 bank)
       {
          WrStrLiteral("   ---- ");
          File_EnterTextBank();
-         Comms_WrLine(Str_GetNthWord(_StrConst((U8 CONST *)File_BankStart()), 0));  // then quote the 1st line with any text.
+         Comms_WrLine((U8 CONST *)Str_GetNthWord(_StrConst((C8 CONST *)File_BankStart()), 0));  // then quote the 1st line with any text.
          File_LeaveTextBank();
       }
    }
@@ -157,7 +150,7 @@ PRIVATE void reportOnBank(U8 bank)
 ------------------------------------------------------------------------------------------*/
 
    #ifdef INCLUDE_HELP_TEXT
-PUBLIC U8 CONST UI_File_Num_Help[] =
+PUBLIC C8 CONST UI_File_Num_Help[] =
 "\
   Syntax:\r\n\
 \r\n\
@@ -179,14 +172,14 @@ PUBLIC U8 CONST UI_File_Num_Help[] =
    #endif // INCLUDE_HELP_TEXT
 
 typedef enum { action_Write, action_WrNum, action_List, action_Clear } E_Actions;
-PRIVATE U8 CONST actionList[] = "write wrNum list clear";
+PRIVATE C8 CONST actionList[] = "write wrNum list clear";
 
-PUBLIC U8 UI_File_Num(U8 *args)
+PUBLIC U8 UI_File_Num(C8 *args)
 {
    U8 c, bank, action;
    S16 idx, n;
 
-   if( Str_WordInStr(args, _U8Ptr("report")) )
+   if( Str_WordInStr(args, "report") )
    {
       for( c = 0; c < File_GetNumBanks(); c++ )
          { reportOnBank(c); }
@@ -210,7 +203,7 @@ PUBLIC U8 UI_File_Num(U8 *args)
                case action_Write:
                   if( InServiceMode_MsgIfNot() )               // in service mode? then can write
                   {                                            // if 'term' specified, then set echo mode   
-                     if( Str_WordInStr(args, _U8Ptr("term"))) { terminalMode = 1; } else {terminalMode = 0;}
+                     if( Str_WordInStr(args, "term")) { terminalMode = 1; } else {terminalMode = 0;}
 
                      storeBinaryInts = 0;                      // Tell File_WrCh() Flash literally what it gets
                      eraseAndSetupWrite();                     // Setup flags for write and erase current contents

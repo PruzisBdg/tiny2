@@ -48,13 +48,13 @@ extern S16 CalV_GetMax( S_CalV *cal );
 --------------------------------------------------------------------------------------*/
 
 typedef enum { action_Read, action_Write, action_Store, action_Recall, action_Dflt, action_Report } E_Actions;
-extern U8 CONST Cal_ActionList[];
-extern U8 CONST Cal_Permissions[];
+extern C8 CONST Cal_ActionList[];
+extern C8 CONST Cal_Permissions[];
 extern BIT Cal_CommandPermitted( U8 action );
 extern void Cal_AppendFormatSpec( U8 *str, U8 CONST *varName, S_ObjIO CONST * io );
 
    #ifdef INCLUDE_HELP_TEXT
-PUBLIC U8 CONST UI_CalV_Help[] = 
+PUBLIC C8 CONST UI_CalV_Help[] =
 "Usage\r\n\
    <cal_vector_name> <action = 'read' | 'write' index_to_write value_to_write | 'store' | 'recall' | 'dflt' | 'report' >  ['raw']\r\n\
 \r\n\
@@ -71,7 +71,7 @@ Examples:\r\n\
 
 
 
-PUBLIC U8 CalV_HandleUI( U8 *args )
+PUBLIC U8 CalV_HandleUI( C8 *args )
 {
    U8    b1[90],
          action,

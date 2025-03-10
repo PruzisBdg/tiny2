@@ -46,7 +46,7 @@ Examples:\r\n\
 ";
    #endif // INCLUDE_HELP_TEXT
 
-PUBLIC U8 UI_WriteObj( U8 *args )
+PUBLIC U8 UI_WriteObj( C8 *args )
 {
    U8    c, 
          numsInArgList,

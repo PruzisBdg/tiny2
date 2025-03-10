@@ -52,7 +52,7 @@ PUBLIC void Cal_AppendFormatSpec( U8 *str, U8 GENERIC *varName, S_ObjIO CONST * 
 --------------------------------------------------------------------------------------*/
 
 typedef enum E_Actions { action_Read, action_Write, action_Store, action_Recall, action_Dflt, action_Report } E_T_Actions;
-PUBLIC U8 CONST Cal_ActionList[] = "read write store recall default report";
+PUBLIC C8 CONST Cal_ActionList[] = "read write store recall default report";
 PUBLIC U8 CONST Cal_Permissions[] = {1,0,0,0,0,1};
 
 PUBLIC BIT Cal_CommandPermitted( U8 action )
@@ -72,7 +72,7 @@ PUBLIC BIT Cal_CommandPermitted( U8 action )
 
 
    #ifdef INCLUDE_HELP_TEXT
-PUBLIC U8 CONST UI_Cal_Help[]  = 
+PUBLIC C8 CONST UI_Cal_Help[]  =
 "Usage:\r\n\
     <calibration name> <action = 'read' | 'write' value_to_write | 'store' | 'recall' | 'dflt' | 'report' > ['raw']\r\n\
 \r\n\
@@ -87,7 +87,7 @@ PUBLIC U8 CONST UI_Cal_Help[]  =
 ";
    #endif // INCLUDE_HELP_TEXT
 
-PUBLIC U8 Cal_HandleUI( U8 *args )
+PUBLIC U8 Cal_HandleUI( C8 *args )
 {
    U8    b1[90],              // must be long enough to hold the 'report' format string
          b2[25],

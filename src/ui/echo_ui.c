@@ -29,9 +29,9 @@ extern BIT EchoOn;     // Defaults to on - for use at terminal
 PUBLIC U8 CONST UI_Echo_Help[] = 
 "Sets echo mode or echos some text\r\nUsage: echo <'on' | 'off' | string to echo>";
 
-PUBLIC U8 UI_EchoHdlr( U8 *args )
+PUBLIC U8 UI_EchoHdlr( C8 *args )
 {
-   if( strlen((C8*)args) == 0 )                  // no args?
+   if( strlen(args) == 0 )                  // no args?
    {
       if( EchoOn )                              // then print current echo setting
          { WrStrLiteral("echo is on"); }
@@ -41,9 +41,9 @@ PUBLIC U8 UI_EchoHdlr( U8 *args )
    else                                         // else got arg string
    {
       // If 'on' or 'off' then set accordingly else echo the string at the terminal
-      if( strcmp((C8*)args, "on") == 0 )
+      if( strcmp(args, "on") == 0 )
          { EchoOn = 1; }
-      else if( strcmp( (C8*)args, "off" ) == 0 )
+      else if( strcmp( args, "off" ) == 0 )
          { EchoOn = 0; }
       else
          { Comms_WrStr( args ); }
