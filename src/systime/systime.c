@@ -112,6 +112,21 @@ PUBLIC T_ShortTime  Elapsed_S(T_Timer const *t)
     return elapsed >= MAX_SHORT_TIME ? MAX_SHORT_TIME : elapsed;
 }
 
+/* --------------------------- Elapsed_ModShortTime -----------------------------------
+
+   Given 't' which is the lower (16bits) of a T_Time, return _Now() - t, assuming
+   _Now() is no more than MAX_SHORT_TIME ticks ahead of 't'.
+
+   This is Elapsed() for intervals which you know will not be longer than
+   MAX_SHORT_TIME == MAX_U16
+*/
+PUBLIC T_ShortTime Elapsed_ModShortTime(T_ShortTime t)
+{
+   U16 n = _Now() & MAX_SHORT_TIME;
+   return (T_ShortTime)(n > t ? n-t : ~(n-t)+1);
+}
+
+
 
 /* --------------------------- ResetIfElapsed -------------------------------
 
