@@ -58,6 +58,7 @@ PUBLIC void        MarkNow(T_Timer *t);
 PUBLIC void        MarkNever(T_Timer *t);
 PUBLIC T_Time      Elapsed(T_Timer const *t);
 PUBLIC T_ShortTime Elapsed_S(T_Timer const *t);
+PUBLIC T_ShortTime Elapsed_ModShortTime(T_ShortTime t);
 PUBLIC BOOL        ResetIfElapsed(T_Timer *t, T_Time intvl);
 PUBLIC BOOL        ResetIfElapsed_S(T_Timer *t, T_ShortTime intvl);
 
