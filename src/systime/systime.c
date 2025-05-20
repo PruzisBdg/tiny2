@@ -177,7 +177,8 @@ PUBLIC U32 T_TimeToSecs(T_Time t)
 }
 
 
-#ifdef __SYSTEM_IS_TDD_HARNESS__
+// For convenience include this always
+//#ifdef __SYSTEM_IS_TDD_HARNESS__
 
 /* --------------------------------- AddToSysTime ------------------------------------
 
@@ -193,11 +194,9 @@ PUBLIC void AddToSysTime(T_Time t)
             : SysTime + t;
 }
 
-/* --------------------------------- SetSysTime ------------------------------------ */
+//#endif
 
-PUBLIC void SetSysTime(T_Time t) { SysTime = t; }
 
-#endif
 
 
 
